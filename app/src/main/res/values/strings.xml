@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RecordNoteBook</string>
+    <string name="login_screen_btn_reset">Reset</string>
+    <string name="login_screen_btn_confirm">Confirm</string>
+    <string name="login_screen_enter_login">Enter login</string>
+    <string name="login_screen_enter_password">Enter password</string>
+    <string name="login_screen_login">Login</string>
 </resources>
