@@ -1,16 +1,17 @@
-package com.example.recordnotebook.ui.loginscreen
+package com.example.recordnotebook.ui.signinscreen
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.domain.models.LoginUserParams
-import com.example.recordnotebook.databinding.FragmentLoginScreenBinding
+import com.example.recordnotebook.databinding.FragmentSigninScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginScreenFragment : BaseFragment<FragmentLoginScreenBinding>() {
+class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
 
-    private val viewModel by viewModel<LoginScreenViewModel>()
+    private val viewModel by viewModel<SignInScreenViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +33,7 @@ class LoginScreenFragment : BaseFragment<FragmentLoginScreenBinding>() {
         }
 
         binding.tvSignUp.setOnClickListener {
-            //todo implement
+            viewModel.navigateToSignUpScreen()
         }
     }
 
@@ -50,6 +51,18 @@ class LoginScreenFragment : BaseFragment<FragmentLoginScreenBinding>() {
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
                         .show()
+                }
+            }
+
+            goToSignUpScreen.observe(viewLifecycleOwner) {
+                if (it) {
+//                    findNavController()
+                    //                    .navigate(R.id.action_loginScreenFragment_to_signUpScreenFragment)//work
+                    findNavController()
+                        .navigate(
+                            SignInScreenFragmentDirections
+                                .actionLoginScreenFragmentToSignUpScreenFragment()
+                        )
                 }
             }
         }

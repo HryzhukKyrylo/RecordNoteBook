@@ -3,11 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginScreenFragment">
+    app:startDestination="@id/signinScreenFragment">
 
     <fragment
-        android:id="@+id/loginScreenFragment"
-        android:name="com.example.recordnotebook.ui.loginscreen.LoginScreenFragment"
+        android:id="@+id/signinScreenFragment"
+        android:name="com.example.recordnotebook.ui.signinscreen.SignInScreenFragment"
         android:label="fragment_login_screen"
-        tools:layout="@layout/fragment_login_screen" />
+        tools:layout="@layout/fragment_signin_screen">
+        <action
+            android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
+            app:destination="@id/signUpScreenFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpScreenFragment"
+        android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
+        android:label="SignUpScreenFragment"
+        tools:layout="@layout/fragment_signup_screen" />
+
 </navigation>
