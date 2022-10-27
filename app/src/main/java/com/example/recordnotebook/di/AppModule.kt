@@ -1,6 +1,7 @@
 package com.example.recordnotebook.di
 
 import com.example.recordnotebook.ui.signinscreen.SignInScreenViewModel
+import com.example.recordnotebook.ui.signupscreen.SignUpScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -13,4 +14,5 @@ val appModule = module {
 //        )
 //    }
     viewModelOf(::SignInScreenViewModel)
+    viewModelOf(::SignUpScreenViewModel)
 }
