@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "RecordNoteBook"
 include ':app'
+include ':data'
+include ':domain'

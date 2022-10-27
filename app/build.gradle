@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-    id 'com.google.dagger.hilt.android'
+//    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+    implementation(project(path: ":data"))
+    implementation(project(path: ":domain"))
+
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -63,12 +66,6 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
-
-    // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
@@ -86,9 +83,14 @@ dependencies {
     // Kotlin
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
-    //Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    //Koin
+    def koin_version = "3.2.2"
+    def koin_android_version= "3.3.0"
+    implementation("io.insert-koin:koin-core:$koin_version")
+    implementation("io.insert-koin:koin-android:$koin_android_version")
+    //testing
+    implementation("io.insert-koin:koin-test:$koin_version")
+
 }
 kapt {
     correctErrorTypes = true
