@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-//    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -62,6 +61,7 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
+    //Room
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     // Kotlin
@@ -87,6 +88,9 @@ dependencies {
     //testing
     implementation("io.insert-koin:koin-test:$koin_version")
 
+    //recyclerview and cardview
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
 kapt {
     correctErrorTypes = true
