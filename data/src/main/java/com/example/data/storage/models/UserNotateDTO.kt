@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.domain.models.UserNotateModel
 
-@Entity
+@Entity(tableName = "my_table")
 data class UserNotateDTO(
     @PrimaryKey(autoGenerate = true)
     val id: Long,

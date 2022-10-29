@@ -14,11 +14,19 @@
             android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
             app:destination="@id/signUpScreenFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_signinScreenFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreenFragment"
         android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
         android:label="SignUpScreenFragment"
         tools:layout="@layout/fragment_signup_screen" />
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.recordnotebook.ui.mainscreen.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen" />
 
 </navigation>

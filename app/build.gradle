@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
 }
 
@@ -61,16 +61,8 @@ dependencies {
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
-    //Room
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-
-    // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$room_version")
-    // To use Kotlin Symbol Processing (KSP)
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-
-    // optional - Kotlin Extensions and Coroutines support for Room
+    kapt "androidx.room:room-compiler:$room_version"
     implementation("androidx.room:room-ktx:$room_version")
 
     //Coroutines
@@ -80,13 +72,7 @@ dependencies {
     // Kotlin
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
-    //Koin
-    def koin_version = "3.2.2"
-    def koin_android_version = "3.3.0"
-    implementation("io.insert-koin:koin-core:$koin_version")
-    implementation("io.insert-koin:koin-android:$koin_android_version")
-    //testing
-    implementation("io.insert-koin:koin-test:$koin_version")
+    implementation "io.insert-koin:koin-android:3.3.0"
 
     //recyclerview and cardview
     implementation 'androidx.recyclerview:recyclerview:1.1.0'

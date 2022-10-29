@@ -4,15 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.models.LoginUserParams
-import com.example.domain.usecases.SaveLoginUserUseCase
-import com.example.domain.usecases.loginscreen.GetLoginUserUseCase
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.recordnotebook.utils.SingleLiveEvent
 
 class SignInScreenViewModel(
-    private val saveLoginUserUseCase: SaveLoginUserUseCase,
-    private val getLoginUserUseCase: GetLoginUserUseCase,
-    private val verifyLoginUserCase: VerifyLoginUserCase
+    private val verifyLoginUserCase: VerifyLoginUserCase,
 ) : ViewModel() {
     private val _isVerifySuccess: MutableLiveData<Boolean> = SingleLiveEvent()
     val isVerifySuccess: LiveData<Boolean> = _isVerifySuccess

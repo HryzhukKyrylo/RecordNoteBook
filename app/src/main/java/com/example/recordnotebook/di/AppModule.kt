@@ -1,8 +1,9 @@
 package com.example.recordnotebook.di
 
+import com.example.recordnotebook.ui.mainscreen.MainScreenViewModel
 import com.example.recordnotebook.ui.signinscreen.SignInScreenViewModel
 import com.example.recordnotebook.ui.signupscreen.SignUpScreenViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -13,6 +14,7 @@ val appModule = module {
 //            getLoginUserUseCase = get()
 //        )
 //    }
-    viewModelOf(::SignInScreenViewModel)
-    viewModelOf(::SignUpScreenViewModel)
+    viewModel { SignInScreenViewModel(get()) }
+    viewModel { SignUpScreenViewModel(get()) }
+    viewModel { MainScreenViewModel(get()) }
 }

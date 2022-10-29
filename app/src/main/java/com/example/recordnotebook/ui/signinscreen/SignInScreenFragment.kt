@@ -48,6 +48,7 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
             isVerifySuccess.observe(viewLifecycleOwner) { isSuccess ->
                 if (isSuccess) {
                     Toast.makeText(requireContext(), "Yess!!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(SignInScreenFragmentDirections.actionSigninScreenFragmentToMainScreenFragment())
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong!!", Toast.LENGTH_SHORT)
                         .show()
@@ -56,8 +57,6 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
 
             goToSignUpScreen.observe(viewLifecycleOwner) {
                 if (it) {
-//                    findNavController()
-                    //                    .navigate(R.id.action_loginScreenFragment_to_signUpScreenFragment)//work
                     findNavController()
                         .navigate(
                             SignInScreenFragmentDirections
