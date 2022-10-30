@@ -30,7 +30,7 @@ class MainScreenAdapter(private val clickListener: ((UserNotateModel) -> Unit)? 
 class MainScreenViewHolder(private val binding: ItemUserNotateBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: UserNotateModel, clickListener: ((item: UserNotateModel) -> Unit)?) {
-        binding.tvUserNotateTitle.text = item.title ?: item.log ?: " "
+        binding.tvUserNotateTitle.text = item.title ?: item.logData ?: " "
         binding.root.setOnClickListener {
             clickListener?.invoke(item)
         }

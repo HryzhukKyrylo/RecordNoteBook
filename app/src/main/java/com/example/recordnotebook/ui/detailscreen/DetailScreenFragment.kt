@@ -21,7 +21,7 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
     }
 
     private fun showUserData(testUserParams: UserNotateModel) {
-        binding.tvDetailLog.text = testUserParams.log
-        binding.tvDetailPass.text = testUserParams.pass
+        binding.tvDetailLog.text = testUserParams.logData
+        binding.tvDetailPass.text = testUserParams.privateInfo
     }
 }

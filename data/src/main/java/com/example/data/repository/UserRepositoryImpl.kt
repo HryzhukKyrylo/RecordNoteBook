@@ -2,9 +2,11 @@ package com.example.data.repository
 
 import com.example.data.storage.localstorage.LocalStorage
 import com.example.data.storage.models.LoginUserDTO
+import com.example.data.storage.models.createDTO
 import com.example.data.storage.models.mapToDomain
 import com.example.data.storage.models.mapToModel
 import com.example.data.storage.preferences.SharedPreferencesStorage
+import com.example.domain.models.CreateUserParams
 import com.example.domain.models.LoginUserModel
 import com.example.domain.models.LoginUserParams
 import com.example.domain.models.UserNotateModel
@@ -28,6 +30,21 @@ class UserRepositoryImpl(
     override fun getUserNotates(userParam: String): List<UserNotateModel> {
         val listDTO = localStorage.getUserNotates(userLogNameParam = userParam)
         return listDTO.map { it.mapToDomain() }
+    }
+
+    override fun saveUserNotate(userParams: CreateUserParams): Boolean {
+        val userDTO = if (userParams.isCreated) {
+            val oldNotate = localStorage.getNotate(userParams.logName!!, userParams.lastTimestamp)
+            val newNotate = oldNotate.copy(
+                logData = userParams.logData,
+                privateInfo = userParams.privateInfo,
+                timeLastChange = userParams.createTimestamp,
+            )
+            newNotate
+        } else {
+            userParams.createDTO()
+        }
+        return localStorage.saveUserNotate(userDTO)
     }
 
     private fun LoginUserParams.mapToDTO(): LoginUserDTO {

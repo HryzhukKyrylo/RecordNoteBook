@@ -18,4 +18,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="detail_screen_your_log_data">Your log data</string>
     <string name="detail_screen_your_pass_data">Your pass data</string>
+    <string name="create_screen_write_your_data_for_log">Write your data for log</string>
+    <string name="create_creen_write_your_data_for">Write your data for ...</string>
 </resources>

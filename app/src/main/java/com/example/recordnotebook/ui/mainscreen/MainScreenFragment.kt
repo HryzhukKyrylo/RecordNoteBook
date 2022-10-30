@@ -23,7 +23,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadData(args.userData)
+        loadData(userData = args.userData)
         initRecycler()
         initClickListener()
         initObservers()
@@ -47,19 +47,29 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     }
 
     private fun initObservers() {
-        viewModel.listUserNotates.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                adapter.submitList(it)
-                noDataVisible(true)
-            } else {
-                noDataVisible(false)
+        with(viewModel) {
+            listUserNotates.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    adapter.submitList(it)
+                    noDataVisible(true)
+                } else {
+                    noDataVisible(false)
+                }
             }
-        }
 
-        viewModel.itemClicked.observe(viewLifecycleOwner) {
-            findNavController().navigate(
-                MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(it)
-            )
+            itemClicked.observe(viewLifecycleOwner) {
+                findNavController().navigate(
+                    MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(it)
+                )
+            }
+            isTransitionToCreate.observe(viewLifecycleOwner) {
+                if (it) {
+                    findNavController().navigate(
+                        MainScreenFragmentDirections
+                            .actionMainScreenFragmentToCreateScreenFragment(args.userData?.loginParam,false)
+                    )
+                }
+            }
         }
     }
 
@@ -69,6 +79,8 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     }
 
     private fun initClickListener() {
-        //todo implement floating btn
+        binding.fabCreate.setOnClickListener {
+            viewModel.transitionToCreate()
+        }
     }
 }

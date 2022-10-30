@@ -3,9 +3,12 @@ package com.example.recordnotebook.ui.signupscreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.models.LoginUserParams
 import com.example.domain.usecases.SaveLoginUserUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpScreenViewModel(private val saveLoginUserUseCase: SaveLoginUserUseCase) : ViewModel() {
 
@@ -20,8 +23,10 @@ class SignUpScreenViewModel(private val saveLoginUserUseCase: SaveLoginUserUseCa
     }
 
     fun saveLoginUser(userParams: LoginUserParams) {
-        val result = saveLoginUserUseCase.execute(userParams)
-        _isSavedSuccessful.value = result
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = saveLoginUserUseCase.execute(userParams)
+            _isSavedSuccessful.postValue(result)
+        }
     }
 
     init {

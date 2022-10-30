@@ -3,9 +3,12 @@ package com.example.recordnotebook.ui.signinscreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.models.LoginUserParams
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.recordnotebook.utils.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignInScreenViewModel(
     private val verifyLoginUserCase: VerifyLoginUserCase,
@@ -30,9 +33,11 @@ class SignInScreenViewModel(
     }
 
     fun verifyUserLogin(userParams: LoginUserParams) {
-        val result = verifyLoginUserCase.execute(userParams = userParams)
-        _userValidData.value = userParams
-        _isVerifySuccess.value = result
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = verifyLoginUserCase.execute(userParams = userParams)
+            _userValidData.postValue(userParams)
+            _isVerifySuccess.postValue(result)
+        }
     }
 
     fun navigateToSignUpScreen() {

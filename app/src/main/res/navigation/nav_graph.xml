@@ -35,6 +35,9 @@
             android:name="userData"
             app:argType="com.example.domain.models.LoginUserParams"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_createScreenFragment"
+            app:destination="@id/createScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailScreenFragment"
@@ -45,6 +48,19 @@
             android:name="userData"
             app:argType="com.example.domain.models.UserNotateModel"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/createScreenFragment"
+        android:name="com.example.recordnotebook.ui.createscreen.CreateScreenFragment"
+        android:label="fragment_create_screen"
+        tools:layout="@layout/fragment_create_screen" >
+        <argument
+            android:name="userLogNameParam"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isCreate"
+            app:argType="boolean" />
     </fragment>
 
 </navigation>
