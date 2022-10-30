@@ -36,6 +36,11 @@
         android:id="@+id/detailScreenFragment"
         android:name="com.example.recordnotebook.ui.detailscreen.DetailScreenFragment"
         android:label="fragment_detail_screen"
-        tools:layout="@layout/fragment_detail_screen" />
+        tools:layout="@layout/fragment_detail_screen" >
+        <argument
+            android:name="userData"
+            app:argType="com.example.domain.models.UserNotateModel"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

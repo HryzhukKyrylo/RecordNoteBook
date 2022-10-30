@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.ItemUserNotateBinding
 
-class MainScreenAdapter :
+class MainScreenAdapter(private val clickListener: ((UserNotateModel) -> Unit)? = null) :
     ListAdapter<UserNotateModel, MainScreenViewHolder>(UserDiffUtilCallBack()) {
     private lateinit var binding: ItemUserNotateBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainScreenViewHolder {
@@ -22,15 +22,18 @@ class MainScreenAdapter :
 
     override fun onBindViewHolder(holder: MainScreenViewHolder, position: Int) {
         val item = currentList[position]
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 
 }
 
 class MainScreenViewHolder(private val binding: ItemUserNotateBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: UserNotateModel) {
+    fun bind(item: UserNotateModel, clickListener: ((item: UserNotateModel) -> Unit)?) {
         binding.tvUserNotateTitle.text = item.title ?: item.log ?: " "
+        binding.root.setOnClickListener {
+            clickListener?.invoke(item)
+        }
     }
 }
 

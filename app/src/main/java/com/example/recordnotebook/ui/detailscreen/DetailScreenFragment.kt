@@ -1,24 +1,26 @@
 package com.example.recordnotebook.ui.detailscreen
 
 import android.os.Bundle
+import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.example.domain.models.LoginUserParams
+import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.FragmentDetailScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 
 class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val testUserParams = LoginUserParams(
-            loginParam = "test1",
-            passwordParam = "test2"
-        )
-        showUserData(testUserParams)
+    private val args: DetailScreenFragmentArgs by navArgs()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        args.userData?.let { data ->
+            showUserData(data)
+
+        }
     }
 
-    private fun showUserData(testUserParams: LoginUserParams) {
-        binding.tvDetailLog.text = testUserParams.loginParam
-        binding.tvDetailPass.text = testUserParams.passwordParam
+    private fun showUserData(testUserParams: UserNotateModel) {
+        binding.tvDetailLog.text = testUserParams.log
+        binding.tvDetailPass.text = testUserParams.pass
     }
-
 }

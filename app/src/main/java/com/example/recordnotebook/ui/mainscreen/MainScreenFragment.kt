@@ -2,6 +2,7 @@ package com.example.recordnotebook.ui.mainscreen
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.LoginUserParams
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
@@ -12,9 +13,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private val viewModel by viewModel<MainScreenViewModel>()
     private lateinit var recyclerUserNotate: RecyclerView
-    private val adapter by lazy {
-        MainScreenAdapter()
-    }
+    private lateinit var adapter: MainScreenAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +26,9 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     }
 
     private fun initRecycler() {
+        adapter = MainScreenAdapter() {
+            viewModel.transitionToDetail(data = it)
+        }
         recyclerUserNotate = binding.rvUserNotate
         recyclerUserNotate.adapter = adapter
     }
@@ -39,6 +41,12 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             } else {
                 noDataVisible(false)
             }
+        }
+
+        viewModel.itemClicked.observe(viewLifecycleOwner) {
+            findNavController().navigate(
+                MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(it)
+            )
         }
     }
 
