@@ -19,12 +19,19 @@ class SignInScreenViewModel(
     private val _isClearFields: MutableLiveData<Boolean> = SingleLiveEvent()
     val isClearFields: LiveData<Boolean> = _isClearFields
 
+    private val _userValidData: MutableLiveData<LoginUserParams> = SingleLiveEvent()
+
+    fun getUserValidData(): LoginUserParams? {
+        return _userValidData.value
+    }
+
     fun clearFields() {
         _isClearFields.value = true
     }
 
     fun verifyUserLogin(userParams: LoginUserParams) {
         val result = verifyLoginUserCase.execute(userParams = userParams)
+        _userValidData.value = userParams
         _isVerifySuccess.value = result
     }
 

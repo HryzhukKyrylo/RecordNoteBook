@@ -7,5 +7,5 @@ import com.example.domain.models.UserNotateModel
 interface UserRepository {
     fun getLoginUser(): LoginUserModel
     fun saveLoginUser(loginUserParams: LoginUserParams): Boolean
-    fun getUserNotates(userParam: LoginUserParams): List<UserNotateModel>
+    fun getUserNotates(userParam: String): List<UserNotateModel>
 }

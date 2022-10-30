@@ -20,7 +20,7 @@ class MainScreenViewModel(
     private val _itemClicked: MutableLiveData<UserNotateModel> = SingleLiveEvent()
     val itemClicked: LiveData<UserNotateModel> = _itemClicked
 
-    fun loadData(userParam: LoginUserParams) {
+    fun loadData(userParam: String) {
         viewModelScope.launch {
             _listUserNotates.value = getUserNotatesUseCase.execute(userParam)
         }

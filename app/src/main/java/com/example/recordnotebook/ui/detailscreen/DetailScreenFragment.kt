@@ -11,6 +11,7 @@ import com.example.recordnotebook.ui.base.BaseFragment
 class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 
     private val args: DetailScreenFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         args.userData?.let { data ->

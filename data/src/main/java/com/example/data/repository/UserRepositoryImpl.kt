@@ -25,8 +25,8 @@ class UserRepositoryImpl(
         return prefStorage.saveLoginUser(userDTO)
     }
 
-    override fun getUserNotates(userParam: LoginUserParams): List<UserNotateModel> {
-        val listDTO = localStorage.getUserNotates(userLogNameParam = userParam.loginParam)
+    override fun getUserNotates(userParam: String): List<UserNotateModel> {
+        val listDTO = localStorage.getUserNotates(userLogNameParam = userParam)
         return listDTO.map { it.mapToDomain() }
     }
 
