@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.LoginUserParams
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
+import com.example.recordnotebook.utils.dp
 import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,6 +45,12 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         }
         recyclerUserNotate = binding.rvUserNotate
         recyclerUserNotate.adapter = adapter
+        recyclerUserNotate.addItemDecoration(
+            MainScreenItemDecoration(
+                verticalSpace = (8.dp).toInt(),
+                horizontalSpace = (8.dp).toInt()
+            )
+        )
     }
 
     private fun initObservers() {
@@ -66,7 +73,10 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 if (it) {
                     findNavController().navigate(
                         MainScreenFragmentDirections
-                            .actionMainScreenFragmentToCreateScreenFragment(args.userData?.loginParam,false)
+                            .actionMainScreenFragmentToCreateScreenFragment(
+                                args.userData?.loginParam,
+                                false
+                            )
                     )
                 }
             }
