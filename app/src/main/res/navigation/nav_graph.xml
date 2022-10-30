@@ -22,7 +22,11 @@
         android:id="@+id/signUpScreenFragment"
         android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
         android:label="SignUpScreenFragment"
-        tools:layout="@layout/fragment_signup_screen" />
+        tools:layout="@layout/fragment_signup_screen" >
+        <action
+            android:id="@+id/action_signUpScreenFragment_to_signinScreenFragment"
+            app:destination="@id/signinScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.recordnotebook.ui.mainscreen.MainScreenFragment"
