@@ -16,4 +16,6 @@
     <string name="signup_screen_sign_up">Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail_screen_your_log_data">Your log data</string>
+    <string name="detail_screen_your_pass_data">Your pass data</string>
 </resources>
