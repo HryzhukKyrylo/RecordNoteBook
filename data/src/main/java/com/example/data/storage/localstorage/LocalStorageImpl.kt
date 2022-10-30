@@ -25,6 +25,16 @@ class LocalStorageImpl(
         return result
     }
 
+    override fun removeNotate(userDTO: UserNotateDTO): Boolean {
+        val result = try {
+            database.userDao().delete(userDTO)
+            true
+        } catch (ex: Exception) {
+            false
+        }
+        return result
+    }
+
     private fun testUserListNotates(name: String): List<UserNotateDTO> {
         val result = List<UserNotateDTO>(10) {
             UserNotateDTO(

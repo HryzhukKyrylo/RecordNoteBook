@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.UserNotateModel
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
+import com.example.domain.usecases.mainscreen.RemoveUserNotateUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(
-    private val getUserNotatesUseCase: GetUserNotatesUseCase
+    private val getUserNotatesUseCase: GetUserNotatesUseCase,
+    private val removeUserNotateUseCase: RemoveUserNotateUseCase
 ) : ViewModel() {
 
     private val _listUserNotates: MutableLiveData<List<UserNotateModel>> = MutableLiveData()
@@ -22,6 +24,9 @@ class MainScreenViewModel(
 
     private val _isTransitionToCreate: MutableLiveData<Boolean> = SingleLiveEvent()
     val isTransitionToCreate: LiveData<Boolean> = _isTransitionToCreate
+
+    private val _isDeleted: MutableLiveData<Boolean> = SingleLiveEvent()
+    val isDeleted: LiveData<Boolean> = _isDeleted
 
     fun loadData(userParam: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,5 +40,11 @@ class MainScreenViewModel(
 
     fun transitionToCreate() {
         _isTransitionToCreate.value = true
+    }
+
+    fun removeNotate(userNotateModel: UserNotateModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            removeUserNotateUseCase.execute(userNotateModel)
+        }
     }
 }

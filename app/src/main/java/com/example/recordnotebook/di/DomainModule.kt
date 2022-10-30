@@ -5,6 +5,7 @@ import com.example.domain.usecases.createscreen.SaveUserNotateUseCase
 import com.example.domain.usecases.loginscreen.GetLoginUserUseCase
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
+import com.example.domain.usecases.mainscreen.RemoveUserNotateUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -13,4 +14,5 @@ val domainModule = module {
     factory { SaveUserNotateUseCase(repository = get()) }
     factory { VerifyLoginUserCase(repository = get()) }
     factory { GetUserNotatesUseCase(repository = get()) }
+    factory { RemoveUserNotateUseCase(repository = get()) }
 }

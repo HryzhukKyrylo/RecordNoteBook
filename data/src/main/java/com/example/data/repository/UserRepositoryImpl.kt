@@ -1,10 +1,7 @@
 package com.example.data.repository
 
 import com.example.data.storage.localstorage.LocalStorage
-import com.example.data.storage.models.LoginUserDTO
-import com.example.data.storage.models.createDTO
-import com.example.data.storage.models.mapToDomain
-import com.example.data.storage.models.mapToModel
+import com.example.data.storage.models.*
 import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.models.CreateUserParams
 import com.example.domain.models.LoginUserModel
@@ -45,6 +42,11 @@ class UserRepositoryImpl(
             userParams.createDTO()
         }
         return localStorage.saveUserNotate(userDTO)
+    }
+
+    override fun removeNotate(userNotateModel: UserNotateModel): Boolean {
+        val userDTO = userNotateModel.mapToDTO()
+        return localStorage.removeNotate(userDTO)
     }
 
     private fun LoginUserParams.mapToDTO(): LoginUserDTO {

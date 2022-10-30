@@ -1,6 +1,7 @@
 package com.example.recordnotebook.ui.mainscreen
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.ItemUserNotateBinding
 
-class MainScreenAdapter(private val clickListener: ((UserNotateModel) -> Unit)? = null) :
+class MainScreenAdapter(
+    private val clickListener: ((UserNotateModel) -> Unit)? = null,
+    private val longClickListener: ((UserNotateModel, View) -> Unit)? = null
+) :
     ListAdapter<UserNotateModel, MainScreenViewHolder>(UserDiffUtilCallBack()) {
     private lateinit var binding: ItemUserNotateBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainScreenViewHolder {
@@ -22,17 +26,25 @@ class MainScreenAdapter(private val clickListener: ((UserNotateModel) -> Unit)? 
 
     override fun onBindViewHolder(holder: MainScreenViewHolder, position: Int) {
         val item = currentList[position]
-        holder.bind(item, clickListener)
+        holder.bind(item, clickListener, longClickListener)
     }
 
 }
 
 class MainScreenViewHolder(private val binding: ItemUserNotateBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: UserNotateModel, clickListener: ((item: UserNotateModel) -> Unit)?) {
+    fun bind(
+        item: UserNotateModel,
+        clickListener: ((item: UserNotateModel) -> Unit)?,
+        longClickListener: ((UserNotateModel, View) -> Unit)?
+    ) {
         binding.tvUserNotateTitle.text = item.title ?: item.logData ?: " "
         binding.root.setOnClickListener {
             clickListener?.invoke(item)
+        }
+        binding.root.setOnLongClickListener {
+            longClickListener?.invoke(item, binding.root)
+            true
         }
     }
 }

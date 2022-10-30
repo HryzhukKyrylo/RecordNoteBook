@@ -24,6 +24,16 @@ fun UserNotateDTO.mapToDomain(): UserNotateModel {
         timeCreate = this.timeCreate
     )
 }
+fun UserNotateModel.mapToDTO(): UserNotateDTO {
+    return UserNotateDTO(
+        userLogName = this.userLogName,
+        title = this.title,
+        logData = this.logData ?: "",
+        privateInfo = this.privateInfo ?: "",
+        timeLastChange = this.timeLastChange,
+        timeCreate = this.timeCreate
+    )
+}
 
 fun CreateUserParams.createDTO(): UserNotateDTO {
     return UserNotateDTO(

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/purple_200"
     android:layout_height="match_parent"
     tools:context=".ui.createscreen.CreateScreenFragment">
 
@@ -13,6 +14,7 @@
         android:layout_margin="8dp"
         android:gravity="start|top"
         app:layout_constraintBottom_toTopOf="@id/glHorizontalCenter"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        android:background="@color/white"
         android:gravity="start|top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +53,7 @@
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/create_creen_write_your_data_for"
+        android:text="@string/create_screen_write_your_data_for"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_200"
     tools:context=".ui.mainscreen.MainScreenFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        app:backgroundTint="?attr/colorPrimary"
         android:src="@drawable/ic_add_24"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

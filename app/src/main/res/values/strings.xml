@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">RecordNoteBook</string>
+
     <string name="signin_screen_btn_reset">Reset</string>
     <string name="signin_screen_btn_confirm">Confirm</string>
     <string name="signin_screen_enter_login">Enter login</string>
@@ -7,17 +8,21 @@
     <string name="signin_screen_login">Login</string>
     <string name="signin_screen_sign_up">Sign Up</string>
 
-
     <string name="signup_screen_btn_reset">Reset</string>
     <string name="signup_screen_btn_confirm">Sign Up</string>
     <string name="signup_screen_enter_login">Enter login</string>
     <string name="signup_screen_enter_password">Enter password</string>
     <string name="signup_screen_login">Sign Up</string>
     <string name="signup_screen_sign_up">Sign Up</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="detail_screen_your_log_data">Your log data</string>
     <string name="detail_screen_your_pass_data">Your pass data</string>
+
     <string name="create_screen_write_your_data_for_log">Write your data for log</string>
-    <string name="create_creen_write_your_data_for">Write your data for ...</string>
+    <string name="create_screen_write_your_data_for">Write your data for ...</string>
+
+
+    <string name="main_screen_delete">Delete</string>
+
+
 </resources>

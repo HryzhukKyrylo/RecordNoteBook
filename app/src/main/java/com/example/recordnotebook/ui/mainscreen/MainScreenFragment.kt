@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.LoginUserParams
+import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.dp
@@ -40,14 +41,28 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     }
 
     private fun initRecycler() {
-        adapter = MainScreenAdapter() {
-            viewModel.transitionToDetail(data = it)
-        }
+        adapter = MainScreenAdapter(
+            clickListener = {
+                viewModel.transitionToDetail(data = it)
+            },
+            longClickListener = { item, view ->
+                MainMenu(this).addElement(
+                    name = R.string.main_screen_delete,
+                    listener = {
+                        val oldList = ArrayList(adapter.currentList)
+                        val index = oldList.indexOf(item)
+                        oldList.removeAt(index)
+                        adapter.submitList(oldList)
+                        viewModel.removeNotate(item)
+                    }
+                ).showAtRight(view)
+            }
+        )
         recyclerUserNotate = binding.rvUserNotate
         recyclerUserNotate.adapter = adapter
         recyclerUserNotate.addItemDecoration(
             MainScreenItemDecoration(
-                verticalSpace = (8.dp).toInt(),
+                verticalSpace = (10.dp).toInt(),
                 horizontalSpace = (8.dp).toInt()
             )
         )
@@ -79,6 +94,9 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                             )
                     )
                 }
+            }
+            isDeleted.observe(viewLifecycleOwner) {
+                requireContext().showToast("Deleted - $it")
             }
         }
     }

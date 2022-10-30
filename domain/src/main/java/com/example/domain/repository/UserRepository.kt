@@ -10,4 +10,5 @@ interface UserRepository {
     fun saveLoginUser(loginUserParams: LoginUserParams): Boolean
     fun getUserNotates(userParam: String): List<UserNotateModel>
     fun saveUserNotate(userParams: CreateUserParams): Boolean
+    fun removeNotate(userNotateModel: UserNotateModel): Boolean
 }
