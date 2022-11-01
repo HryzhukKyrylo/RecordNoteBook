@@ -18,32 +18,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
-    <EditText
-        android:id="@+id/etLogin"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardETLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:hint="@string/signin_screen_enter_login"
-        android:inputType="textPersonName"
-        android:paddingStart="8dp"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login" />
+        app:layout_constraintTop_toBottomOf="@id/login">
 
-    <EditText
-        android:id="@+id/etPassword"
+        <EditText
+            android:id="@+id/etLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="@string/signin_screen_enter_login"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardETPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="@string/signin_screen_enter_password"
-        android:paddingStart="8dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etLogin" />
+        app:layout_constraintTop_toBottomOf="@id/cardETLogin">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="@string/signin_screen_enter_password"
+                android:inputType="textPassword"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <Button
         android:id="@+id/btnReset"
@@ -53,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnConfirm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@id/cardETPassword" />
 
     <Button
         android:id="@+id/btnConfirm"
@@ -79,7 +107,7 @@
         android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="@string/signin_screen_sign_up"
-        android:textColor="@color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

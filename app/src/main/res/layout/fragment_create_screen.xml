@@ -3,21 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/purple_200"
     android:layout_height="match_parent"
+    android:background="@color/purple_200"
     tools:context=".ui.createscreen.CreateScreenFragment">
 
-    <EditText
-        android:id="@+id/etLogData"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:gravity="start|top"
+        app:cardCornerRadius="@dimen/small_corner_radius"
+        app:cardElevation="15dp"
         app:layout_constraintBottom_toTopOf="@id/glHorizontalCenter"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etLogData"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:gravity="start|top" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/tvLogHint"
@@ -25,6 +33,7 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:clickable="false"
+        android:elevation="20dp"
         android:focusableInTouchMode="false"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/create_screen_write_your_data_for_log"
@@ -33,17 +42,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etPassData"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:background="@color/white"
-        android:gravity="start|top"
+        android:elevation="15dp"
+        app:cardCornerRadius="@dimen/small_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/glHorizontalCenter" />
+        app:layout_constraintTop_toBottomOf="@id/glHorizontalCenter">
+
+        <EditText
+            android:id="@+id/etPassData"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="start|top" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/tvPassHint"
@@ -51,6 +68,7 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:clickable="false"
+        android:elevation="20dp"
         android:focusableInTouchMode="false"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/create_screen_write_your_data_for"

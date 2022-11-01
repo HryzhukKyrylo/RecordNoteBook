@@ -18,14 +18,14 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="@dimen/small_corner_radius">
 
             <TextView
                 android:id="@+id/tvDetailLog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="@string/detail_screen_your_log_data" />
         </androidx.cardview.widget.CardView>
 
@@ -33,15 +33,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="@dimen/small_corner_radius">
 
             <TextView
                 android:id="@+id/tvDetailPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="@string/detail_screen_your_pass_data" />
         </androidx.cardview.widget.CardView>
 

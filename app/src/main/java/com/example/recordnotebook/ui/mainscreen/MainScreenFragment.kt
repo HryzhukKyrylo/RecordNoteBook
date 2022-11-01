@@ -54,7 +54,8 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                         oldList.removeAt(index)
                         adapter.submitList(oldList)
                         viewModel.removeNotate(item)
-                    }
+                    },
+
                 ).showAtRight(view)
             }
         )

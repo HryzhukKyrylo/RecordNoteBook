@@ -30,7 +30,7 @@ class MainMenu(val context: Fragment) : PopupWindow() {
         height = parentView.measuredHeight
         contentView = parentView
 
-        showAsDropDown(view, 0, 0, Gravity.END)
+        showAsDropDown(view, 0, 8.dp.toInt(), Gravity.END)
     }
 
     fun addElement(name: Int, listener: () -> Unit): MainMenu {
