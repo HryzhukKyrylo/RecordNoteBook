@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.example.recordnotebook.R
 import com.example.recordnotebook.utils.dp
@@ -34,8 +35,10 @@ class MainMenu(val context: Fragment) : PopupWindow() {
     }
 
     fun addElement(name: Int, listener: () -> Unit): MainMenu {
+        val padding = 8.dp.toInt()
         val text = TextView(context.requireContext())
         text.setText(name)
+        text.setPadding(padding)
         text.setTextColor(Color.parseColor("#ffffff"))
 
         text.setOnClickListener {

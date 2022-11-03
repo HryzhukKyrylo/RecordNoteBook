@@ -25,10 +25,14 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadData(userData = args.userData)
         initRecycler()
         initClickListener()
         initObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadData(userData = args.userData)
     }
 
     private fun loadData(userData: LoginUserParams?) {
@@ -46,17 +50,25 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 viewModel.transitionToDetail(data = it)
             },
             longClickListener = { item, view ->
-                MainMenu(this).addElement(
-                    name = R.string.main_screen_delete,
-                    listener = {
-                        val oldList = ArrayList(adapter.currentList)
-                        val index = oldList.indexOf(item)
-                        oldList.removeAt(index)
-                        adapter.submitList(oldList)
-                        viewModel.removeNotate(item)
-                    },
+                MainMenu(this)
+                    .addElement(
+                        name = R.string.main_screen_delete,
+                        listener = {
+                            val oldList = ArrayList(adapter.currentList)
+                            val index = oldList.indexOf(item)
+                            oldList.removeAt(index)
+                            adapter.submitList(oldList)
+                            viewModel.removeNotate(item)
+                        }
+                    )
+                    .addElement(
+                        name = R.string.main_screen_refactor,
+                        listener = {
+                            viewModel.transitionToRefactor(itemModel = item)
+                        }
+                    )
 
-                ).showAtRight(view)
+                    .showAtRight(view)
             }
         )
         recyclerUserNotate = binding.rvUserNotate
@@ -71,33 +83,43 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private fun initObservers() {
         with(viewModel) {
-            listUserNotates.observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    adapter.submitList(it)
+            listUserNotates.observe(viewLifecycleOwner) { listNotates ->
+                if (listNotates.isNotEmpty()) {
+                    adapter.submitList(listNotates)
                     noDataVisible(true)
                 } else {
                     noDataVisible(false)
                 }
             }
 
-            itemClicked.observe(viewLifecycleOwner) {
+            itemClicked.observe(viewLifecycleOwner) { userModel ->
                 findNavController().navigate(
-                    MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(it)
+                    MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(
+                        userModel
+                    )
                 )
             }
-            isTransitionToCreate.observe(viewLifecycleOwner) {
-                if (it) {
-                    findNavController().navigate(
-                        MainScreenFragmentDirections
-                            .actionMainScreenFragmentToCreateScreenFragment(
-                                args.userData?.loginParam,
-                                false
-                            )
-                    )
-                }
+            isTransitionToCreate.observe(viewLifecycleOwner) { userLogName ->
+                findNavController().navigate(
+                    MainScreenFragmentDirections
+                        .actionMainScreenFragmentToCreateScreenFragment(
+                            userLogName,
+                            false,
+                            null
+                        )
+                )
             }
-            isDeleted.observe(viewLifecycleOwner) {
-                requireContext().showToast("Deleted - $it")
+            isDeleted.observe(viewLifecycleOwner) { isDeleted ->
+                requireContext().showToast("Deleted - $isDeleted")
+            }
+            itemToRefactor.observe(viewLifecycleOwner) { itemModel ->
+                findNavController().navigate(
+                    MainScreenFragmentDirections.actionMainScreenFragmentToCreateScreenFragment(
+                        args.userData?.loginParam,
+                        true,
+                        itemModel
+                    )
+                )
             }
         }
     }
@@ -109,7 +131,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private fun initClickListener() {
         binding.fabCreate.setOnClickListener {
-            viewModel.transitionToCreate()
+            viewModel.transitionToCreate(args.userData?.loginParam)
         }
     }
 }

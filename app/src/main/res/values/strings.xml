@@ -23,6 +23,7 @@
 
 
     <string name="main_screen_delete">Delete</string>
+    <string name="main_screen_refactor">Refactor</string>
 
 
 </resources>

@@ -65,6 +65,10 @@
         <argument
             android:name="isCreate"
             app:argType="boolean" />
+        <argument
+            android:name="userNotateModel"
+            app:argType="com.example.domain.models.UserNotateModel"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

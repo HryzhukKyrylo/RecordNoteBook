@@ -31,7 +31,7 @@ class UserRepositoryImpl(
 
     override fun saveUserNotate(userParams: CreateUserParams): Boolean {
         val userDTO = if (userParams.isCreated) {
-            val oldNotate = localStorage.getNotate(userParams.logName!!, userParams.lastTimestamp)
+            val oldNotate = localStorage.getNotate(userParams.logName!!, userParams.createTimestamp)
             val newNotate = oldNotate.copy(
                 logData = userParams.logData,
                 privateInfo = userParams.privateInfo,

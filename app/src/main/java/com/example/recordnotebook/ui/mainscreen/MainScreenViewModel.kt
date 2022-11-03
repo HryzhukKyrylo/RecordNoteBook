@@ -22,11 +22,15 @@ class MainScreenViewModel(
     private val _itemClicked: MutableLiveData<UserNotateModel> = SingleLiveEvent()
     val itemClicked: LiveData<UserNotateModel> = _itemClicked
 
-    private val _isTransitionToCreate: MutableLiveData<Boolean> = SingleLiveEvent()
-    val isTransitionToCreate: LiveData<Boolean> = _isTransitionToCreate
+
+    private val _isTransitionToCreate: MutableLiveData<String?> = SingleLiveEvent()
+    val isTransitionToCreate: LiveData<String?> = _isTransitionToCreate
 
     private val _isDeleted: MutableLiveData<Boolean> = SingleLiveEvent()
     val isDeleted: LiveData<Boolean> = _isDeleted
+
+    private val _itemToRefactor: MutableLiveData<UserNotateModel> = SingleLiveEvent()
+    val itemToRefactor: LiveData<UserNotateModel> = _itemToRefactor
 
     fun loadData(userParam: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -38,8 +42,12 @@ class MainScreenViewModel(
         _itemClicked.value = data
     }
 
-    fun transitionToCreate() {
-        _isTransitionToCreate.value = true
+    fun transitionToCreate(isCreated: String?) {
+        _isTransitionToCreate.value = isCreated
+    }
+
+    fun transitionToRefactor(itemModel: UserNotateModel) {
+        _itemToRefactor.value = itemModel
     }
 
     fun removeNotate(userNotateModel: UserNotateModel) {

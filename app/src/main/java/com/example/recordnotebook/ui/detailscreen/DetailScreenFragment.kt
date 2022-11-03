@@ -16,7 +16,6 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
         super.onViewCreated(view, savedInstanceState)
         args.userData?.let { data ->
             showUserData(data)
-
         }
     }
 
