@@ -3,10 +3,10 @@ package com.example.recordnotebook.ui.createscreen
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
-import com.example.domain.models.CreateUserParams
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.FragmentCreateScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
+import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
@@ -19,9 +19,22 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUserName(args)
+        setUserData(args)
         userModel?.let {
             showData(it)
+        }
+        initObsorvers()
+    }
+
+    private fun initObsorvers() {
+        with(viewModel) {
+            isDataSaved.observe(viewLifecycleOwner) {
+                if (it) {
+                    requireContext().showToast("Saved")
+                } else {
+                    requireContext().showToast("Something went wrong")
+                }
+            }
         }
     }
 
@@ -30,7 +43,7 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         binding.etPassData.setText(notate.privateInfo)
     }
 
-    private fun setUserName(args: CreateScreenFragmentArgs) {
+    private fun setUserData(args: CreateScreenFragmentArgs) {
         this.userName = args.userLogNameParam
         this.isCreate = args.isCreate
         this.userModel = args.userNotateModel
@@ -42,40 +55,15 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
     }
 
     private fun saveUserData() {
-        if (!isCreate) {
-            val logData = binding.etLogData.text.toString()
-            val passData = binding.etPassData.text.toString()
-            val timeCreated = System.currentTimeMillis()
-            val lastChange = System.currentTimeMillis()
-            val createUserParams = CreateUserParams(
-                logName = userName,
-                title = null, //todo need implement
-                logData = logData,
-                privateInfo = passData,
-                createTimestamp = timeCreated,
-                lastTimestamp = lastChange,
-                isCreated = isCreate,
-            )
-            viewModel.saveUserData(createUserParams)
-        } else {
-            userModel?.let { oldNotate ->
-                val logData = binding.etLogData.text.toString()
-                val passData = binding.etPassData.text.toString()
-                val lastChange = System.currentTimeMillis()
+        val logData = binding.etLogData.text.toString()
+        val passData = binding.etPassData.text.toString()
 
-                val userModel = CreateUserParams(
-                    logName = oldNotate.userLogName,
-                    title = null, //todo need implement
-                    logData = logData,
-                    privateInfo = passData,
-                    createTimestamp = oldNotate.timeCreate,
-                    lastTimestamp = lastChange,
-                    isCreated = isCreate,
-
-                    )
-                viewModel.saveUserData(userModel)
-            }
-        }
-
+        viewModel.saveUserData(
+            create = isCreate,
+            userName = userName,
+            logData = logData,
+            passData = passData,
+            userModel = userModel,
+        )
     }
 }

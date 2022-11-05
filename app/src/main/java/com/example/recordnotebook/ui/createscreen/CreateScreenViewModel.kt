@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.CreateUserParams
+import com.example.domain.models.UserNotateModel
 import com.example.domain.usecases.createscreen.SaveUserNotateUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +15,41 @@ class CreateScreenViewModel(
     private val saveUserNotateUseCase: SaveUserNotateUseCase
 ) : ViewModel() {
 
+
     private val _isDataSaved: MutableLiveData<Boolean> = SingleLiveEvent()
     val isDataSaved: LiveData<Boolean> = _isDataSaved
 
-    fun saveUserData(createUserParams: CreateUserParams) {
+    fun saveUserData(
+        create: Boolean,
+        userName: String?,
+        logData: String,
+        passData: String,
+        userModel: UserNotateModel?
+    ) {
+        val useParams = createUserParams(userName, create, logData, passData, userModel)
         viewModelScope.launch(Dispatchers.IO) {
-            _isDataSaved.postValue(saveUserNotateUseCase.execute(createUserParams))
+            _isDataSaved.postValue(saveUserNotateUseCase.execute(useParams))
         }
+    }
+
+    private fun createUserParams(
+        userName: String?,
+        create: Boolean,
+        logData: String,
+        passData: String,
+        userModel: UserNotateModel?
+    ): CreateUserParams {
+        val currentTime = System.currentTimeMillis()
+
+        val resultUserParams = CreateUserParams(
+            logName = userName,
+            title = null,
+            logData = logData,
+            privateInfo = passData,
+            createTimestamp = if (!create) currentTime else userModel?.timeCreate ?: currentTime,
+            lastTimestamp = currentTime,
+            isCreated = create
+        )
+        return resultUserParams
     }
 }
