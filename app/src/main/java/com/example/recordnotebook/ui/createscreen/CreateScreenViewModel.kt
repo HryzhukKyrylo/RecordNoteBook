@@ -26,9 +26,24 @@ class CreateScreenViewModel(
         passData: String,
         userModel: UserNotateModel?
     ) {
-        val useParams = createUserParams(userName, create, logData, passData, userModel)
-        viewModelScope.launch(Dispatchers.IO) {
-            _isDataSaved.postValue(saveUserNotateUseCase.execute(useParams))
+        val isEmptyOrChangeData = checkEmptyOrChangeData(logData, passData, userModel)
+        if (isEmptyOrChangeData) {
+            val useParams = createUserParams(userName, create, logData, passData, userModel)
+            viewModelScope.launch(Dispatchers.IO) {
+                _isDataSaved.postValue(saveUserNotateUseCase.execute(useParams))
+            }
+        }
+    }
+
+    private fun checkEmptyOrChangeData(
+        logData: String,
+        passData: String,
+        userModel: UserNotateModel?
+    ): Boolean {
+        return if (userModel == null) {
+            logData.trim().isNotEmpty()
+        } else {
+            userModel.logData != logData || userModel.privateInfo != passData
         }
     }
 

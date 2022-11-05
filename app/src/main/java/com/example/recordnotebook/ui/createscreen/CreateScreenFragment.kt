@@ -57,7 +57,6 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
     private fun saveUserData() {
         val logData = binding.etLogData.text.toString()
         val passData = binding.etPassData.text.toString()
-
         viewModel.saveUserData(
             create = isCreate,
             userName = userName,
