@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.LoginUserParams
-import com.example.domain.usecases.SaveLoginUserUseCase
+import com.example.domain.usecases.signupscreen.SaveLoginUserUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

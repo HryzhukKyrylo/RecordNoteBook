@@ -1,4 +1,4 @@
-package com.example.domain.usecases
+package com.example.domain.usecases.signupscreen
 
 import com.example.domain.models.LoginUserParams
 import com.example.domain.repository.UserRepository

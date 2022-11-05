@@ -1,5 +1,6 @@
 package com.example.data.storage.localstorage
 
+import com.example.data.storage.models.UserLoginDTO
 import com.example.data.storage.models.UserNotateDTO
 
 class LocalStorageImpl(
@@ -8,7 +9,6 @@ class LocalStorageImpl(
 
     override fun getUserNotates(userLogNameParam: String): List<UserNotateDTO> {
         return database.userDao().getAllUserNotates(userLogName = userLogNameParam)
-//        return testUserListNotates(name = userLogNameParam)
     }
 
     override fun getNotate(userLogNameParam: String, timeLastChangeParam: Long): UserNotateDTO {
@@ -35,16 +35,17 @@ class LocalStorageImpl(
         return result
     }
 
-    private fun testUserListNotates(name: String): List<UserNotateDTO> {
-        val result = List<UserNotateDTO>(10) {
-            UserNotateDTO(
-                userLogName = "$name -$it",
-                title = "title - $it",
-                logData = "log - $it",
-                privateInfo = "pass - $it",
-                timeCreate = it.toLong(),
-                timeLastChange = it.toLong()
-            )
+    override fun getLoginUser(userLogNameParam: String): UserLoginDTO? {
+        return database.userLoginDao()
+            .getUserLogin(userLogNameParam = userLogNameParam)
+    }
+
+    override fun saveLoginUser(userLogin: UserLoginDTO): Boolean {
+        val result = try {
+            database.userLoginDao().saveUserLogin(userLogin)
+            true
+        } catch (ex: Exception) {
+            false
         }
         return result
     }
