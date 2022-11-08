@@ -13,11 +13,13 @@
         <action
             android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
             app:destination="@id/signUpScreenFragment"
+            app:popUpTo="@id/signinScreenFragment"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_signinScreenFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreenFragment"
@@ -27,7 +29,8 @@
         <action
             android:id="@+id/action_signUpScreenFragment_to_signinScreenFragment"
             app:destination="@id/signinScreenFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/signinScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
