@@ -6,7 +6,7 @@
     <string name="signin_screen_enter_login">Enter login</string>
     <string name="signin_screen_enter_password">Enter password</string>
     <string name="signin_screen_login">Log In</string>
-    <string name="signin_screen_sign_up">Sign Up</string>
+    <string name="signin_screen_sign_up"><u>Sign Up</u></string>
 
     <string name="signup_screen_btn_reset">Reset</string>
     <string name="signup_screen_btn_confirm">Sign Up</string>
@@ -17,14 +17,13 @@
 
     <string name="detail_screen_your_log_data">Your log data</string>
     <string name="detail_screen_your_pass_data">Your pass data</string>
+    <string name="detail_screen_fab_refactor">fab refactor</string>
 
     <string name="create_screen_write_your_data_for_log">Write your data for log</string>
     <string name="create_screen_write_your_data_for">Write your data for ...</string>
 
-
     <string name="main_screen_delete">Delete</string>
     <string name="main_screen_refactor">Refactor</string>
-    <string name="detail_screen_fab_refactor">fab refactor</string>
 
 
 </resources>

@@ -53,7 +53,7 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
                         .navigate(
                             SignInScreenFragmentDirections
                                 .actionSigninScreenFragmentToMainScreenFragment(
-                                   data
+                                    data
                                 )
                         )
                 } else {
