@@ -33,11 +33,21 @@ class SignInScreenViewModel(
     }
 
     fun verifyUserLogin(userParams: LoginUserParams) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = verifyLoginUserCase.execute(userParams = userParams)
-            _userValidData.postValue(userParams)
-            _isVerifySuccess.postValue(result)
+        val isValidLogin = checkLoginFields(userParams)
+        if (isValidLogin) {
+            viewModelScope.launch(Dispatchers.IO) {
+                val result = verifyLoginUserCase.execute(userParams = userParams)
+                _userValidData.postValue(userParams)
+                _isVerifySuccess.postValue(result)
+            }
+        } else {
+            _isVerifySuccess.value = false
         }
+    }
+
+    private fun checkLoginFields(userParams: LoginUserParams): Boolean {
+        return userParams.loginParam.trim().isNotEmpty()
+                && userParams.loginParam.trim().isNotEmpty()
     }
 
     fun navigateToSignUpScreen() {

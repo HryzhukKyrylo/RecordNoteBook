@@ -5,7 +5,7 @@
     <string name="signin_screen_btn_confirm">Confirm</string>
     <string name="signin_screen_enter_login">Enter login</string>
     <string name="signin_screen_enter_password">Enter password</string>
-    <string name="signin_screen_login">Login</string>
+    <string name="signin_screen_login">Log In</string>
     <string name="signin_screen_sign_up">Sign Up</string>
 
     <string name="signup_screen_btn_reset">Reset</string>

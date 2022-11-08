@@ -1,6 +1,8 @@
 package com.example.data.storage.models
 
 import androidx.room.Entity
+import com.example.data.utils.decodeData
+import com.example.data.utils.encodeData
 import com.example.domain.models.LoginUserModel
 import com.example.domain.models.LoginUserParams
 
@@ -13,13 +15,13 @@ data class UserLoginDTO(
 fun UserLoginDTO.mapToDomain(): LoginUserModel {
     return LoginUserModel(
         login = this.login,
-        password = this.privateData,
+        password = this.privateData.decodeData(),
     )
 }
 
 fun LoginUserParams.mapToDTO(): UserLoginDTO {
     return UserLoginDTO(
         login = this.loginParam,
-        privateData = this.passwordParam,
+        privateData = this.passwordParam.encodeData(),
     )
 }

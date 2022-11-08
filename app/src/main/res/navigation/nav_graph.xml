@@ -16,22 +16,24 @@
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_signinScreenFragment_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment" />
+            app:destination="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreenFragment"
         android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
         android:label="SignUpScreenFragment"
-        tools:layout="@layout/fragment_signup_screen" >
+        tools:layout="@layout/fragment_signup_screen">
         <action
             android:id="@+id/action_signUpScreenFragment_to_signinScreenFragment"
-            app:destination="@id/signinScreenFragment" />
+            app:destination="@id/signinScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.recordnotebook.ui.mainscreen.MainScreenFragment"
         android:label="fragment_main_screen"
-        tools:layout="@layout/fragment_main_screen" >
+        tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_detailScreenFragment"
             app:destination="@id/detailScreenFragment" />
@@ -47,7 +49,7 @@
         android:id="@+id/detailScreenFragment"
         android:name="com.example.recordnotebook.ui.detailscreen.DetailScreenFragment"
         android:label="fragment_detail_screen"
-        tools:layout="@layout/fragment_detail_screen" >
+        tools:layout="@layout/fragment_detail_screen">
         <argument
             android:name="userData"
             app:argType="com.example.domain.models.UserNotateModel"
@@ -57,7 +59,7 @@
         android:id="@+id/createScreenFragment"
         android:name="com.example.recordnotebook.ui.createscreen.CreateScreenFragment"
         android:label="fragment_create_screen"
-        tools:layout="@layout/fragment_create_screen" >
+        tools:layout="@layout/fragment_create_screen">
         <argument
             android:name="userLogNameParam"
             app:argType="string"

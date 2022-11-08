@@ -1,6 +1,7 @@
 package com.example.data.repository
 
 import com.example.data.storage.localstorage.LocalStorage
+import com.example.data.storage.models.copyDTOWithNewData
 import com.example.data.storage.models.createDTO
 import com.example.data.storage.models.mapToDTO
 import com.example.data.storage.models.mapToDomain
@@ -33,7 +34,7 @@ class UserRepositoryImpl(
     override fun saveUserNotate(userParams: CreateUserParams): Boolean {
         val userDTO = if (userParams.isCreated) {
             val oldNotate = localStorage.getNotate(userParams.logName!!, userParams.createTimestamp)
-            val newNotate = oldNotate.copy(
+            val newNotate = oldNotate.copyDTOWithNewData(
                 logData = userParams.logData,
                 privateInfo = userParams.privateInfo,
                 timeLastChange = userParams.createTimestamp,
@@ -49,11 +50,4 @@ class UserRepositoryImpl(
         val userDTO = userNotateModel.mapToDTO()
         return localStorage.removeNotate(userDTO)
     }
-
-//    private fun LoginUserParams.mapToDTO(): LoginUserDTO {
-//        return LoginUserDTO(
-//            login = this.loginParam,
-//            password = this.passwordParam
-//        )
-//    }
 }
