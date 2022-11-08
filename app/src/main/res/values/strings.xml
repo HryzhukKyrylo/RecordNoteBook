@@ -24,6 +24,7 @@
 
     <string name="main_screen_delete">Delete</string>
     <string name="main_screen_refactor">Refactor</string>
+    <string name="detail_screen_fab_refactor">fab refactor</string>
 
 
 </resources>

@@ -45,7 +45,7 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     private fun setUserData(args: CreateScreenFragmentArgs) {
         this.userName = args.userLogNameParam
-        this.isCreate = args.isCreate
+        this.isCreate = args.isCreated
         this.userModel = args.userNotateModel
     }
 

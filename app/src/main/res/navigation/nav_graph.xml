@@ -57,6 +57,11 @@
             android:name="userData"
             app:argType="com.example.domain.models.UserNotateModel"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_detailScreenFragment_to_createScreenFragment"
+            app:destination="@id/createScreenFragment"
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/createScreenFragment"
@@ -68,7 +73,7 @@
             app:argType="string"
             app:nullable="true" />
         <argument
-            android:name="isCreate"
+            android:name="isCreated"
             app:argType="boolean" />
         <argument
             android:name="userNotateModel"
