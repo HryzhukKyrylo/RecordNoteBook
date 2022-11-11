@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.domain.models.LoginUserParams
 import com.example.recordnotebook.databinding.FragmentSigninScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
@@ -11,13 +12,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
 
+    private val arg: SignInScreenFragmentArgs by navArgs()
+
     private val viewModel by viewModel<SignInScreenViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val data = arg.passLogData
+        data?.let {
+            setLogData(it)
+        }
+
         initClickListeners()
         initObservers()
+    }
+
+    private fun setLogData(data: String) {
+        binding.etLogin.setText(data)
     }
 
     private fun initClickListeners() {

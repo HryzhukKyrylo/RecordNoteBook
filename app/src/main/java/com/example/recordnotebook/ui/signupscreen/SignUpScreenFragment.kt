@@ -28,8 +28,11 @@ class SignUpScreenFragment : BaseFragment<FragmentSignupScreenBinding>() {
             }
             isSavedSuccessful.observe(viewLifecycleOwner) {
                 if (it) {
+                    val data = binding.etLogin.text.toString()
+                    val action = SignUpScreenFragmentDirections
+                        .actionSignUpScreenFragmentToSigninScreenFragment(data)
                     findNavController().navigate(
-                        SignUpScreenFragmentDirections.actionSignUpScreenFragmentToSigninScreenFragment()
+                        action
                     )
                 }
             }
