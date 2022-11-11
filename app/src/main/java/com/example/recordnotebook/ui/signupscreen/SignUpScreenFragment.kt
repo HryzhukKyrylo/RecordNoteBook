@@ -2,11 +2,11 @@ package com.example.recordnotebook.ui.signupscreen
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.domain.models.LoginUserParams
 import com.example.recordnotebook.databinding.FragmentSignupScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
+import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpScreenFragment : BaseFragment<FragmentSignupScreenBinding>() {
@@ -28,14 +28,13 @@ class SignUpScreenFragment : BaseFragment<FragmentSignupScreenBinding>() {
             }
             isSavedSuccessful.observe(viewLifecycleOwner) {
                 if (it) {
-                    Toast.makeText(requireContext(), "Saved successful", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(
                         SignUpScreenFragmentDirections.actionSignUpScreenFragmentToSigninScreenFragment()
                     )
-                } else {
-                    Toast.makeText(requireContext(), "Save don't successful ", Toast.LENGTH_SHORT)
-                        .show()
                 }
+            }
+            showMessage.observe(viewLifecycleOwner) {
+                requireContext().showToast(it)
             }
         }
     }

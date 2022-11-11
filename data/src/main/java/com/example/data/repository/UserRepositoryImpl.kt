@@ -5,6 +5,7 @@ import com.example.data.storage.models.copyDTOWithNewData
 import com.example.data.storage.models.createDTO
 import com.example.data.storage.models.mapToDTO
 import com.example.data.storage.models.mapToDomain
+import com.example.domain.Response
 import com.example.domain.models.CreateUserParams
 import com.example.domain.models.LoginUserModel
 import com.example.domain.models.LoginUserParams
@@ -21,9 +22,10 @@ class UserRepositoryImpl(
         return user?.mapToDomain()
     }
 
-    override fun saveLoginUser(loginUserParams: LoginUserParams): Boolean {
+    override fun saveLoginUser(loginUserParams: LoginUserParams): Response {
         val userDTO = loginUserParams.mapToDTO()
-        return localStorage.saveLoginUser(userDTO)
+        val result = localStorage.saveLoginUser(userDTO)
+        return result
     }
 
     override fun getUserNotates(userParam: String): List<UserNotateModel> {

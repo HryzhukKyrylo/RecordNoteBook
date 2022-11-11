@@ -2,6 +2,8 @@ package com.example.data.storage.localstorage
 
 import com.example.data.storage.models.UserLoginDTO
 import com.example.data.storage.models.UserNotateDTO
+import com.example.domain.IOResponse
+import com.example.domain.Response
 
 class LocalStorageImpl(
     private val database: UserDatabase,
@@ -40,12 +42,17 @@ class LocalStorageImpl(
             .getUserLogin(userLogNameParam = userLogNameParam)
     }
 
-    override fun saveLoginUser(userLogin: UserLoginDTO): Boolean {
+    override fun saveLoginUser(userLogin: UserLoginDTO): Response {
         val result = try {
-            database.userLoginDao().saveUserLogin(userLogin)
-            true
+            val logs = database.userLoginDao().getUserLogin(userLogNameParam = userLogin.login)
+            if (logs == null) {
+                database.userLoginDao().saveUserLogin(userLogin)
+                IOResponse.Succsess(message = "saved - succsess", data = null)
+            } else {
+                IOResponse.Error(errorMessage = "log is exist. please write another log name")
+            }
         } catch (ex: Exception) {
-            false
+            IOResponse.Error(errorMessage = "saved - error. something went wrong")
         }
         return result
     }
