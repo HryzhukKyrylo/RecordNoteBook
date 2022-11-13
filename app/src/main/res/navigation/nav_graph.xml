@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signinScreenFragment"
         android:name="com.example.recordnotebook.ui.signinscreen.SignInScreenFragment"
-        android:label="fragment_login_screen"
+        android:label="@string/signin_screen_login"
         tools:layout="@layout/fragment_signin_screen">
         <action
             android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/signUpScreenFragment"
         android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
-        android:label="SignUpScreenFragment"
+        android:label="@string/signup_screen_sign_up"
         tools:layout="@layout/fragment_signup_screen">
         <action
             android:id="@+id/action_signUpScreenFragment_to_signinScreenFragment"
@@ -45,7 +45,6 @@
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.recordnotebook.ui.mainscreen.MainScreenFragment"
-        android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_detailScreenFragment"
@@ -61,7 +60,7 @@
     <fragment
         android:id="@+id/detailScreenFragment"
         android:name="com.example.recordnotebook.ui.detailscreen.DetailScreenFragment"
-        android:label="fragment_detail_screen"
+        android:label="@string/detail_screen_detail_screen"
         tools:layout="@layout/fragment_detail_screen">
         <argument
             android:name="userData"
@@ -76,7 +75,7 @@
     <fragment
         android:id="@+id/createScreenFragment"
         android:name="com.example.recordnotebook.ui.createscreen.CreateScreenFragment"
-        android:label="fragment_create_screen"
+        android:label="@string/create_screen_create_screen"
         tools:layout="@layout/fragment_create_screen">
         <argument
             android:name="userLogNameParam"

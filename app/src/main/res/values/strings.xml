@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RecordNoteBook</string>
 
+    <!--    sign in screen ..-->
     <string name="signin_screen_btn_reset">Reset</string>
     <string name="signin_screen_btn_confirm">Confirm</string>
     <string name="signin_screen_enter_login">Enter login</string>
@@ -8,6 +9,7 @@
     <string name="signin_screen_login">Log In</string>
     <string name="signin_screen_sign_up"><u>Sign Up</u></string>
 
+    <!--    sign up screen ..-->
     <string name="signup_screen_btn_reset">Reset</string>
     <string name="signup_screen_btn_confirm">Sign Up</string>
     <string name="signup_screen_enter_login">Enter login</string>
@@ -15,15 +17,19 @@
     <string name="signup_screen_login">Sign Up</string>
     <string name="signup_screen_sign_up">Sign Up</string>
 
+    <!--    detail screen ..-->
     <string name="detail_screen_your_log_data">Your log data</string>
     <string name="detail_screen_your_pass_data">Your pass data</string>
     <string name="detail_screen_fab_refactor">fab refactor</string>
+    <string name="detail_screen_detail_screen">Detail screen</string>
 
+    <!--    create screen ..-->
     <string name="create_screen_write_your_data_for_log">Write your data for log</string>
     <string name="create_screen_write_your_data_for">Write your data for ...</string>
+    <string name="create_screen_create_screen">Create screen</string>
 
+    <!--    main screen ..-->
     <string name="main_screen_delete">Delete</string>
     <string name="main_screen_refactor">Refactor</string>
-
 
 </resources>
