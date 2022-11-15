@@ -9,6 +9,8 @@ import com.example.recordnotebook.databinding.FragmentDetailScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//todo long click - copy element to buffer
+
 class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 
     private val args: DetailScreenFragmentArgs by navArgs()
@@ -16,11 +18,10 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args.userData?.let { data ->
-            showUserData(data)
-        }
+        args.userModel?.let { showUserData(it) }
         initClickListener()
         initObserv()
+
     }
 
     private fun initObserv() {
@@ -37,7 +38,7 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 
     private fun initClickListener() {
         binding.fabRefactor.setOnClickListener {
-            viewModel.transitionToCreate(args.userData)
+            viewModel.transitionToCreate(args.userModel)
         }
     }
 

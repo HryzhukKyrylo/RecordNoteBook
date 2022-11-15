@@ -19,7 +19,7 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = arg.passLogData
+        val data = arg.logName
         data?.let {
             setLogData(it)
         }
@@ -64,8 +64,8 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
                     findNavController()
                         .navigate(
                             SignInScreenFragmentDirections
-                                .actionSigninScreenFragmentToMainScreenFragment(
-                                    data
+                                .actionSignInScreenFragmentToMainGraph(
+                                    data?.loginParam
                                 )
                         )
                 } else {
@@ -79,7 +79,7 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
                     findNavController()
                         .navigate(
                             SignInScreenFragmentDirections
-                                .actionLoginScreenFragmentToSignUpScreenFragment()
+                                .actionSignInScreenFragmentToSignUpScreenFragment()
                         )
                 }
             }

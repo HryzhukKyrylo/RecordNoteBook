@@ -26,6 +26,14 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         initObsorvers()
     }
 
+    private fun setUserData(args: CreateScreenFragmentArgs) {
+        with(args) {
+            userName?.let { this@CreateScreenFragment.userName = it }
+            userModel?.let { this@CreateScreenFragment.userModel = it }
+            isCreate.let { this@CreateScreenFragment.isCreate = it }
+        }
+    }
+
     private fun initObsorvers() {
         with(viewModel) {
             isDataSaved.observe(viewLifecycleOwner) {
@@ -41,12 +49,6 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
     private fun showData(notate: UserNotateModel) {
         binding.etLogData.setText(notate.logData)
         binding.etPassData.setText(notate.privateInfo)
-    }
-
-    private fun setUserData(args: CreateScreenFragmentArgs) {
-        this.userName = args.userLogNameParam
-        this.isCreate = args.isCreated
-        this.userModel = args.userNotateModel
     }
 
     override fun onStop() {

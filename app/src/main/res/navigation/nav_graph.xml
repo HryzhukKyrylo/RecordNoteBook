@@ -3,91 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signinScreenFragment">
-
+    app:startDestination="@id/splashScreenFragment">
     <fragment
-        android:id="@+id/signinScreenFragment"
+        android:id="@+id/signInScreenFragment"
         android:name="com.example.recordnotebook.ui.signinscreen.SignInScreenFragment"
-        android:label="@string/signin_screen_login"
+        android:label="fragment_signup_screen"
         tools:layout="@layout/fragment_signin_screen">
         <action
-            android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
-            app:destination="@id/signUpScreenFragment"
-            app:popUpTo="@id/signinScreenFragment"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_signInScreenFragment_to_signUpScreenFragment"
+            app:destination="@id/signUpScreenFragment" />
         <action
-            android:id="@+id/action_signinScreenFragment_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_signInScreenFragment_to_main_graph"
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/signInScreenFragment"
+            app:popUpToInclusive="true">
+
+            <argument
+                android:name="userLogName"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+
         <argument
-            android:name="passLogData"
+            android:name="logName"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+
     </fragment>
     <fragment
         android:id="@+id/signUpScreenFragment"
         android:name="com.example.recordnotebook.ui.signupscreen.SignUpScreenFragment"
-        android:label="@string/signup_screen_sign_up"
+        android:label="SignUpScreenFragment"
         tools:layout="@layout/fragment_signup_screen">
         <action
-            android:id="@+id/action_signUpScreenFragment_to_signinScreenFragment"
-            app:destination="@id/signinScreenFragment"
-            app:popUpTo="@id/signinScreenFragment"
-            app:popUpToInclusive="true">
+            android:id="@+id/action_signUpScreenFragment_to_signInScreenFragment"
+            app:destination="@id/signInScreenFragment">
             <argument
-                android:name="passLogData"
+                android:name="logName"
                 app:argType="string"
                 app:nullable="true" />
         </action>
     </fragment>
     <fragment
-        android:id="@+id/mainScreenFragment"
-        android:name="com.example.recordnotebook.ui.mainscreen.MainScreenFragment"
-        tools:layout="@layout/fragment_main_screen">
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.recordnotebook.ui.splashscreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen">
         <action
-            android:id="@+id/action_mainScreenFragment_to_detailScreenFragment"
-            app:destination="@id/detailScreenFragment" />
-        <argument
-            android:name="userData"
-            app:argType="com.example.domain.models.LoginUserParams"
-            app:nullable="true" />
+            android:id="@+id/action_splashScreenFragment_to_signInScreenFragment"
+            app:destination="@id/signInScreenFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainScreenFragment_to_createScreenFragment"
-            app:destination="@id/createScreenFragment" />
+            android:id="@+id/action_splashScreenFragment_to_main_graph"
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="userLogName"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/detailScreenFragment"
-        android:name="com.example.recordnotebook.ui.detailscreen.DetailScreenFragment"
-        android:label="@string/detail_screen_detail_screen"
-        tools:layout="@layout/fragment_detail_screen">
-        <argument
-            android:name="userData"
-            app:argType="com.example.domain.models.UserNotateModel"
-            app:nullable="true" />
-        <action
-            android:id="@+id/action_detailScreenFragment_to_createScreenFragment"
-            app:destination="@id/createScreenFragment"
-            app:popUpTo="@id/mainScreenFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
-    <fragment
-        android:id="@+id/createScreenFragment"
-        android:name="com.example.recordnotebook.ui.createscreen.CreateScreenFragment"
-        android:label="@string/create_screen_create_screen"
-        tools:layout="@layout/fragment_create_screen">
-        <argument
-            android:name="userLogNameParam"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="isCreated"
-            app:argType="boolean" />
-        <argument
-            android:name="userNotateModel"
-            app:argType="com.example.domain.models.UserNotateModel"
-            app:nullable="true" />
-    </fragment>
-
+    <include app:graph="@navigation/main_graph" />
 </navigation>

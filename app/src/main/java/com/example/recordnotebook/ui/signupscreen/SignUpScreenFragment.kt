@@ -30,7 +30,7 @@ class SignUpScreenFragment : BaseFragment<FragmentSignupScreenBinding>() {
                 if (it) {
                     val data = binding.etLogin.text.toString()
                     val action = SignUpScreenFragmentDirections
-                        .actionSignUpScreenFragmentToSigninScreenFragment(data)
+                        .actionSignUpScreenFragmentToSignInScreenFragment(data)
                     findNavController().navigate(
                         action
                     )

@@ -1,12 +1,14 @@
 package com.example.recordnotebook.ui.mainscreen
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.models.LoginUserParams
 import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
@@ -19,29 +21,30 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     private val args: MainScreenFragmentArgs by navArgs()
 
     private val viewModel by viewModel<MainScreenViewModel>()
+    private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var recyclerUserNotate: RecyclerView
     private lateinit var adapter: MainScreenAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        loadData(args)
+        initDrawer()
         initRecycler()
         initClickListener()
         initObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        loadData(userData = args.userData)
+    private fun loadData(args: MainScreenFragmentArgs) {
+        args.userLogName?.let { data ->
+            viewModel.loadData(userLogName = data)
+        }
     }
 
-    private fun loadData(userData: LoginUserParams?) {
-        if (userData != null) {
-            viewModel.loadData(userData.loginParam)
-        } else {
-            Log.e("MainScreenFragment", "error: loadData() - no login data")
-            requireContext().showToast("No login data!!")
-        }
+    private fun initDrawer() {
+        mDrawerLayout = binding.drawerLayout
+        val navView = binding.navView
+        navView.setupWithNavController(findNavController())
+        NavigationUI.setupWithNavController(navView, findNavController())
     }
 
     private fun initRecycler() {
@@ -93,11 +96,8 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             }
 
             itemClicked.observe(viewLifecycleOwner) { userModel ->
-                findNavController().navigate(
-                    MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(
-                        userModel
-                    )
-                )
+                val action = MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(userModel)
+                findNavController().navigate(action)
             }
             isTransitionToCreate.observe(viewLifecycleOwner) { userLogName ->
                 findNavController().navigate(
@@ -114,11 +114,12 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             }
             itemToRefactor.observe(viewLifecycleOwner) { itemModel ->
                 findNavController().navigate(
-                    MainScreenFragmentDirections.actionMainScreenFragmentToCreateScreenFragment(
-                        args.userData?.loginParam,
-                        true,
-                        itemModel
-                    )
+                    MainScreenFragmentDirections
+                        .actionMainScreenFragmentToCreateScreenFragment(
+                            itemModel.userLogName,
+                            false,
+                            itemModel
+                        )
                 )
             }
         }
@@ -131,7 +132,19 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private fun initClickListener() {
         binding.fabCreate.setOnClickListener {
-            viewModel.transitionToCreate(args.userData?.loginParam)
+            viewModel.transitionToCreate(args.userLogName)
+        }
+        binding.burgerMenu.setOnClickListener {
+            mDrawerLayout.openDrawer(Gravity.LEFT)
+        }
+        binding.moreMenu.setOnClickListener {
+            MainMenu(this).addElement(
+                R.drawable.ic_baseline_delete_24,
+                R.string.main_menu_delete_all
+            ) {
+                viewModel.deleteAllUserNotate()
+            }
+                .showAtRight(it)
         }
     }
 }

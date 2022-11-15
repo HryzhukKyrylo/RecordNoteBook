@@ -32,9 +32,9 @@ class MainScreenViewModel(
     private val _itemToRefactor: MutableLiveData<UserNotateModel> = SingleLiveEvent()
     val itemToRefactor: LiveData<UserNotateModel> = _itemToRefactor
 
-    fun loadData(userParam: String) {
+    fun loadData(userLogName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _listUserNotates.postValue(getUserNotatesUseCase.execute(userParam))
+            _listUserNotates.postValue(getUserNotatesUseCase.execute(userLogName))
         }
     }
 
@@ -53,6 +53,12 @@ class MainScreenViewModel(
     fun removeNotate(userNotateModel: UserNotateModel) {
         viewModelScope.launch(Dispatchers.IO) {
             removeUserNotateUseCase.execute(userNotateModel)
+        }
+    }
+
+    fun deleteAllUserNotate() {
+        viewModelScope.launch(Dispatchers.IO) {
+            //todo need implement
         }
     }
 }

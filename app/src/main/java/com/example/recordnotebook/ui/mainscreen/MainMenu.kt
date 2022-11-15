@@ -1,17 +1,16 @@
 package com.example.recordnotebook.ui.mainscreen
 
-import android.graphics.Color
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import android.widget.TextView
-import androidx.core.view.setPadding
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.recordnotebook.R
+import com.example.recordnotebook.databinding.ItemMenuBinding
 import com.example.recordnotebook.utils.dp
-import kotlin.math.roundToInt
 
 class MainMenu(val context: Fragment) : PopupWindow() {
     private val parentView: LinearLayout =
@@ -34,18 +33,23 @@ class MainMenu(val context: Fragment) : PopupWindow() {
         showAsDropDown(view, 0, 8.dp.toInt(), Gravity.END)
     }
 
-    fun addElement(name: Int, listener: () -> Unit): MainMenu {
-        val padding = 8.dp.toInt()
-        val text = TextView(context.requireContext())
-        text.setText(name)
-        text.setPadding(padding)
-        text.setTextColor(Color.parseColor("#ffffff"))
+    fun addElement(iconDrawable: Int? = null, name: Int, listener: () -> Unit): MainMenu {
 
-        text.setOnClickListener {
+        val binding = ItemMenuBinding.inflate(LayoutInflater.from(context.requireContext()))
+        binding.tvTittle.setText(name)
+        binding.tvTittle.visibility = View.VISIBLE
+
+        iconDrawable?.let {
+            val drawable = ContextCompat.getDrawable(context.requireContext(), iconDrawable)
+            binding.ivIcon.setImageDrawable(drawable)
+            binding.ivIcon.visibility = View.VISIBLE
+        }
+        binding.root.setOnClickListener {
             listener.invoke()
             this.dismiss()
         }
-        parentView.addView(text)
+
+        parentView.addView(binding.root)
         return this
     }
 }
