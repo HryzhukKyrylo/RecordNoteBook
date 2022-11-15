@@ -12,12 +12,16 @@ import kotlinx.coroutines.launch
 class SplashScreenViewModel : ViewModel() {
 
     private val _goToNextScreen: MutableLiveData<Boolean> = SingleLiveEvent()
-    val goToNextSceen: LiveData<Boolean> = _goToNextScreen
+    val goToNextScreen: LiveData<Boolean> = _goToNextScreen
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(3000)
+            delay(TIME_OUT_SPLASH_SCREEN)
             _goToNextScreen.postValue(true)
         }
+    }
+
+    companion object {
+        const val TIME_OUT_SPLASH_SCREEN = 2000L
     }
 }

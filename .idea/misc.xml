@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/bg_rounded_medium.xml" value="0.141" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/ic_add_24.xml" value="0.1735" />
+        <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.193" />
+        <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/ic_login.xml" value="0.193" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/menu_divider.xml" value="0.141" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -20,6 +22,7 @@
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/layout/menu_main.xml" value="0.1" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/layout/nav_background.xml" value="0.1" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/layout/nav_header_main.xml" value="0.22" />
+        <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/menu/header_drawer_menu.xml" value="0.15177426250534418" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/menu/main_menu.xml" value="0.10009267840593142" />
         <entry key="..\:/StudioProjects/RecordNoteBook/app/src/main/res/menu/nav_drawer_menu.xml" value="0.18" />
       </map>

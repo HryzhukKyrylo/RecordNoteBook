@@ -16,7 +16,7 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding>() {
     }
 
     private fun initListeners() {
-        viewModel.goToNextSceen.observe(viewLifecycleOwner) {
+        viewModel.goToNextScreen.observe(viewLifecycleOwner) {
             if (it) {
                 val action =
                     SplashScreenFragmentDirections.actionSplashScreenFragmentToSignInScreenFragment()
