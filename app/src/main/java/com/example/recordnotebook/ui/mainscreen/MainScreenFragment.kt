@@ -117,7 +117,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                     MainScreenFragmentDirections
                         .actionMainScreenFragmentToCreateScreenFragment(
                             itemModel.userLogName,
-                            false,
+                            true,
                             itemModel
                         )
                 )
