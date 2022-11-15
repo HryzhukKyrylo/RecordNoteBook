@@ -32,10 +32,15 @@
     <string name="main_screen_delete">Delete</string>
     <string name="main_screen_refactor">Refactor</string>
     <string name="main_menu_delete_all">Delete all</string>
-    <string name="nav_draw_menu_about">About</string>
 
     <!--    splash screen ..-->
     <string name="splash_screen_splash_screen">Splash screen</string>
+
+    <!--    menu-->
+    <string name="menu_logout">Logout</string>
+    <string name="menu_settings">Settings</string>
+    <string name="nav_draw_menu_about">About</string>
+
 
     <!--    another -->
 

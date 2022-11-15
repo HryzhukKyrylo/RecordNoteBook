@@ -6,8 +6,8 @@
         <menu>
             <item
                 android:id="@+id/item_menu_login"
-                android:icon="@drawable/ic_login"
-                android:title="Login" />
+                android:icon="@drawable/ic_baseline_logout_24"
+                android:title="@string/menu_logout" />
         </menu>
     </item>
 
@@ -16,7 +16,7 @@
             <item
                 android:id="@+id/item_menu_settings"
                 android:icon="@drawable/ic_baseline_settings_24"
-                android:title="Settings" />
+                android:title="@string/menu_settings" />
         </menu>
     </item>
 

@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
+import com.example.recordnotebook.databinding.NavHeaderMainBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.dp
 import com.example.recordnotebook.utils.showToast
@@ -28,10 +29,18 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadData(args)
+        setUserDrawerData(args.userLogName)
         initDrawer()
         initRecycler()
         initClickListener()
         initObservers()
+    }
+
+    private fun setUserDrawerData(userLogName: String?) {
+        val bindingDrawer = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
+        userLogName?.let {
+            bindingDrawer.tvHeaderName.text = it
+        }
     }
 
     private fun loadData(args: MainScreenFragmentArgs) {
@@ -96,7 +105,10 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             }
 
             itemClicked.observe(viewLifecycleOwner) { userModel ->
-                val action = MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(userModel)
+                val action =
+                    MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(
+                        userModel
+                    )
                 findNavController().navigate(action)
             }
             isTransitionToCreate.observe(viewLifecycleOwner) { userLogName ->
