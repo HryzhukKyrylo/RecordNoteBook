@@ -38,6 +38,16 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_aboutScreenFragment"
+            app:destination="@id/aboutScreenFragment"
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/actionToLogIn"
+            app:destination="@id/signInScreenFragment"
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/createScreenFragment"
@@ -86,4 +96,9 @@
             app:argType="com.example.domain.models.UserNotateModel"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutScreenFragment"
+        android:name="com.example.recordnotebook.ui.aboutscreen.AboutScreenFragment"
+        android:label="fragment_about_screen"
+        tools:layout="@layout/fragment_about_screen" />
 </navigation>

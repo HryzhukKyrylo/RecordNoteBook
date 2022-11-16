@@ -3,11 +3,11 @@ package com.example.recordnotebook.ui.mainscreen
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
@@ -34,12 +34,26 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         initRecycler()
         initClickListener()
         initObservers()
+        initBackPressed()
+    }
+
+    private fun initBackPressed() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    onBackPressed()
+                }
+            })
     }
 
     private fun setUserDrawerData(userLogName: String?) {
         val bindingDrawer = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
         userLogName?.let {
             bindingDrawer.tvHeaderName.text = it
+        }
+        bindingDrawer.itemHeaderMenuChangeTheme.setOnClickListener {
+            //todo implement change theme
         }
     }
 
@@ -52,8 +66,26 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     private fun initDrawer() {
         mDrawerLayout = binding.drawerLayout
         val navView = binding.navView
-        navView.setupWithNavController(findNavController())
-        NavigationUI.setupWithNavController(navView, findNavController())
+
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.itemMenuGoToSignInFragment -> {
+                    val action = MainScreenFragmentDirections.actionToLogIn()
+                    findNavController().navigate(action)
+                }
+                R.id.itemMenuGoToSettings -> {
+                    //todo implement
+                    requireContext().showToast("Go tot settings")
+                }
+                R.id.itemMenuGoToAboutFragment -> {
+                    val action =
+                        MainScreenFragmentDirections.actionMainScreenFragmentToAboutScreenFragment()
+                    findNavController().navigate(action)
+                }
+            }
+            closeDrawer()
+            return@setNavigationItemSelectedListener true
+        }
     }
 
     private fun initRecycler() {
@@ -147,7 +179,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             viewModel.transitionToCreate(args.userLogName)
         }
         binding.burgerMenu.setOnClickListener {
-            mDrawerLayout.openDrawer(Gravity.LEFT)
+            openDrawer()
         }
         binding.moreMenu.setOnClickListener {
             MainMenu(this).addElement(
@@ -157,6 +189,23 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 viewModel.deleteAllUserNotate()
             }
                 .showAtRight(it)
+        }
+    }
+
+    private fun openDrawer() {
+        mDrawerLayout.openDrawer(Gravity.LEFT)
+    }
+
+    private fun closeDrawer() {
+        mDrawerLayout.closeDrawer(GravityCompat.START)
+
+    }
+
+    fun onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            requireActivity().onBackPressed()
         }
     }
 }

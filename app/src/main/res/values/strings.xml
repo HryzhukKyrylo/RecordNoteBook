@@ -40,6 +40,9 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_settings">Settings</string>
     <string name="nav_draw_menu_about">About</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_screen_about_app">About App</string>
 
 
     <!--    another -->
