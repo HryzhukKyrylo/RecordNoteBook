@@ -33,7 +33,7 @@ class SignUpScreenViewModel(private val saveLoginUserUseCase: SaveLoginUserUseCa
             if (isValidLogin && isValidPass) {
                 val result = saveLoginUserUseCase.execute(userParams)
                 when (result) {
-                    is IOResponse.Succsess -> {
+                    is IOResponse.Success -> {
                         _isSavedSuccessful.postValue(true)
                         result.message?.let {
                             _showMessage.postValue(it)

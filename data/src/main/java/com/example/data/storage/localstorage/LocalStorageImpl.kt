@@ -43,17 +43,29 @@ class LocalStorageImpl(
     }
 
     override fun saveLoginUser(userLogin: UserLoginDTO): Response {
-        val result = try {
+        val resVal = try {
             val logs = database.userLoginDao().getUserLogin(userLogNameParam = userLogin.login)
             if (logs == null) {
                 database.userLoginDao().saveUserLogin(userLogin)
-                IOResponse.Succsess(message = "saved - succsess", data = null)
+                IOResponse.Success(message = "saved - succsess", data = null)
             } else {
                 IOResponse.Error(errorMessage = "log is exist. please write another log name")
             }
         } catch (ex: Exception) {
+            ex.printStackTrace()
             IOResponse.Error(errorMessage = "saved - error. something went wrong")
         }
-        return result
+        return resVal
+    }
+
+    override fun removeUserAllNotates(userLogin: String): Response {
+        val resVal = try {
+            database.userDao().deleteUserAllNotates(userLogin)
+            IOResponse.Success(message = "delete - success", data = null)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            IOResponse.Error(errorMessage = "delete - error. something went wrong")
+        }
+        return resVal
     }
 }

@@ -52,4 +52,8 @@ class UserRepositoryImpl(
         val userDTO = userNotateModel.mapToDTO()
         return localStorage.removeNotate(userDTO)
     }
+
+    override fun removeUserAllNotates(userLogName: String): Response {
+        return localStorage.removeUserAllNotates(userLogin = userLogName)
+    }
 }

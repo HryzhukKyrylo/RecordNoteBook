@@ -167,6 +167,9 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                         )
                 )
             }
+            showMessage.observe(viewLifecycleOwner) {
+                requireContext().showToast(it)
+            }
         }
     }
 
@@ -187,7 +190,9 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 R.drawable.ic_baseline_delete_24,
                 R.string.main_menu_delete_all
             ) {
-                viewModel.deleteAllUserNotate()
+                args.userLogName?.let { data ->
+                    viewModel.deleteAllUserNotate(data)
+                }
             }
                 .showAtRight(it)
         }

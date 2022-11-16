@@ -11,4 +11,5 @@ interface LocalStorage {
     fun removeNotate(userDTO: UserNotateDTO): Boolean
     fun getLoginUser(userLogNameParam: String): UserLoginDTO?
     fun saveLoginUser(userLogin: UserLoginDTO): Response
+    fun removeUserAllNotates(userLogin: String): Response
 }

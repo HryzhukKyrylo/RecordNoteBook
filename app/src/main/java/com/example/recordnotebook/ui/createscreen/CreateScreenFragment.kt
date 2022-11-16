@@ -9,6 +9,7 @@ import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//todo add fab menu - add tittle
 class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     private val args: CreateScreenFragmentArgs by navArgs()

@@ -12,4 +12,5 @@ interface UserRepository {
     fun getUserNotates(userParam: String): List<UserNotateModel>
     fun saveUserNotate(userParams: CreateUserParams): Boolean
     fun removeNotate(userNotateModel: UserNotateModel): Boolean
+    fun removeUserAllNotates(userLogName: String): Response
 }

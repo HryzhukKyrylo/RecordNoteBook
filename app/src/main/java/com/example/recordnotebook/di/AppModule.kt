@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val appModule = module {
     viewModel { SignInScreenViewModel(verifyLoginUserCase = get()) }
     viewModel { SignUpScreenViewModel(saveLoginUserUseCase = get()) }
-    viewModel { MainScreenViewModel(getUserNotatesUseCase = get(), get()) }
+    viewModel { MainScreenViewModel(getUserNotatesUseCase = get(), get(), get()) }
     viewModel { CreateScreenViewModel(saveUserNotateUseCase = get()) }
     viewModel { DetailScreenViewModel() }
     viewModel { SplashScreenViewModel() }

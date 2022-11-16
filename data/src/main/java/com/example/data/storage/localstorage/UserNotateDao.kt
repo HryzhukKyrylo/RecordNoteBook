@@ -18,6 +18,9 @@ interface UserNotateDao {
     @Delete
     fun delete(user: UserNotateDTO)
 
+    @Query("DELETE FROM my_table WHERE userLogName=:userLogName")
+    fun deleteUserAllNotates(userLogName: String)
+
     @Query(
         "SELECT * FROM my_table WHERE userLogName LIKE :userLogNameParam AND " +
                 "timeLastChange LIKE :timeLastChangeParam LIMIT 1"
