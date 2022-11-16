@@ -48,6 +48,11 @@
             app:destination="@id/signInScreenFragment"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_settingScreenFragment"
+            app:destination="@id/settingScreenFragment"
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/createScreenFragment"
@@ -101,4 +106,9 @@
         android:name="com.example.recordnotebook.ui.aboutscreen.AboutScreenFragment"
         android:label="fragment_about_screen"
         tools:layout="@layout/fragment_about_screen" />
+    <fragment
+        android:id="@+id/settingScreenFragment"
+        android:name="com.example.recordnotebook.ui.settingscreen.SettingScreenFragment"
+        android:label="fragment_setting_screen"
+        tools:layout="@layout/fragment_setting_screen" />
 </navigation>

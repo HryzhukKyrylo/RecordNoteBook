@@ -74,8 +74,9 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                     findNavController().navigate(action)
                 }
                 R.id.itemMenuGoToSettings -> {
-                    //todo implement
-                    requireContext().showToast("Go tot settings")
+                    val action =
+                        MainScreenFragmentDirections.actionMainScreenFragmentToSettingScreenFragment()
+                    findNavController().navigate(action)
                 }
                 R.id.itemMenuGoToAboutFragment -> {
                     val action =
