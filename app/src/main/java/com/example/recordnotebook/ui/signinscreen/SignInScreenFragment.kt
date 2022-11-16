@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.LoginUserParams
+import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentSigninScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,13 +62,9 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
                 if (isSuccess) {
                     Toast.makeText(requireContext(), "Login success!", Toast.LENGTH_SHORT).show()
                     val data = viewModel.getUserValidData()
-                    findNavController()
-                        .navigate(
-                            SignInScreenFragmentDirections
-                                .actionSignInScreenFragmentToMainGraph(
-                                    data?.loginParam
-                                )
-                        )
+                    val action =
+                        SignInScreenFragmentDirections.actionSignInScreenFragmentToMainGraph(data?.loginParam)
+                    findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT)
                         .show()

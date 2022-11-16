@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     tools:context=".ui.splashscreen.SplashScreenFragment">
 
     <ImageView
@@ -12,7 +11,6 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/splash" />
-
 
     <TextView
         android:layout_width="wrap_content"

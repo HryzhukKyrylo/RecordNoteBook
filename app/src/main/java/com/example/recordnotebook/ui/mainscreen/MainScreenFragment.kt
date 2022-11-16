@@ -2,8 +2,10 @@ package com.example.recordnotebook.ui.mainscreen
 
 import android.os.Bundle
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,10 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private val args: MainScreenFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     private val viewModel by viewModel<MainScreenViewModel>()
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var recyclerUserNotate: RecyclerView
@@ -34,18 +40,19 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         initRecycler()
         initClickListener()
         initObservers()
-        initBackPressed()
+        iniBackPressed()
     }
 
-    private fun initBackPressed() {
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    onBackPressed()
-                }
-            })
+    private fun iniBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                activity?.finish() //todo find another implement
+            }
+        }
     }
+
 
     private fun setUserDrawerData(userLogName: String?) {
         val bindingDrawer = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
@@ -53,7 +60,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             bindingDrawer.tvHeaderName.text = it
         }
         bindingDrawer.itemHeaderMenuChangeTheme.setOnClickListener {
-            //todo implement change theme
+            viewModel.toggleNightMode()
         }
     }
 
@@ -86,6 +93,19 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             }
             closeDrawer()
             return@setNavigationItemSelectedListener true
+        }
+
+        navView.setOnKeyListener { view, keyCode, keyEvent ->
+
+            if (keyEvent.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+                return@setOnKeyListener true
+            }
+
+            return@setOnKeyListener false
         }
     }
 
@@ -170,7 +190,20 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             showMessage.observe(viewLifecycleOwner) {
                 requireContext().showToast(it)
             }
+            isNightMode.observe(viewLifecycleOwner) {
+                setNightModeIcon(it)
+            }
         }
+    }
+
+    private fun setNightModeIcon(isNightModeOn: Boolean) {
+        val bindingHeader: NavHeaderMainBinding = NavHeaderMainBinding.bind(
+            binding.navView.getHeaderView(0)
+        )
+        bindingHeader.itemHeaderMenuChangeTheme.setImageDrawable(
+            if (isNightModeOn) ContextCompat.getDrawable(requireContext(), R.drawable.ic_sun)
+            else ContextCompat.getDrawable(requireContext(), R.drawable.ic_moon)
+        )
     }
 
     private fun noDataVisible(isVisible: Boolean) {
@@ -208,10 +241,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
     }
 
     fun onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            requireActivity().onBackPressed()
-        }
+
     }
+
 }

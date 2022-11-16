@@ -5,7 +5,6 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
     tools:context=".ui.mainscreen.MainScreenFragment"
     tools:openDrawer="start">
 
@@ -35,7 +34,8 @@
                     android:layout_gravity="start|center_vertical"
                     android:layout_marginStart="8dp"
                     android:padding="8dp"
-                    android:src="@drawable/ic_baseline_menu_24" />
+                    android:src="@drawable/ic_baseline_menu_24"
+                    app:tint="@color/iconColorTint" />
 
                 <ImageView
                     android:id="@+id/moreMenu"
@@ -44,7 +44,8 @@
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="10dp"
                     android:padding="8dp"
-                    android:src="@drawable/ic_baseline_more_vert_24" />
+                    android:src="@drawable/ic_baseline_more_vert_24"
+                    app:tint="@color/iconColorTint" />
 
             </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -65,6 +66,7 @@
 
         <TextView
             android:id="@+id/tvNoData"
+            style="@style/MainText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No data"
@@ -84,7 +86,8 @@
             app:backgroundTint="?attr/colorPrimary"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/iconColorTint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,9 +96,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/purple_200"
+        android:background="@color/theme_200"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/drawer_menu" />
-
+        app:itemIconTint="@color/iconColorTint"
+        app:itemTextColor="@color/mainMenuTextColor"
+        app:menu="@menu/drawer_menu"
+        app:subheaderColor="@color/mainMenuTextColor" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

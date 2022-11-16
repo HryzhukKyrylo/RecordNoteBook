@@ -1,5 +1,7 @@
 package com.example.recordnotebook.di
 
+import com.example.domain.usecases.GetNightModeUseCase
+import com.example.domain.usecases.SaveNightModeUseCase
 import com.example.domain.usecases.createscreen.SaveUserNotateUseCase
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
@@ -15,4 +17,6 @@ val domainModule = module {
     factory { GetUserNotatesUseCase(repository = get()) }
     factory { RemoveUserNotateUseCase(repository = get()) }
     factory { RemoveUserAllNotatesUseCase(repository = get()) }
+    factory { SaveNightModeUseCase(repository = get()) }
+    factory { GetNightModeUseCase(repository = get()) }
 }

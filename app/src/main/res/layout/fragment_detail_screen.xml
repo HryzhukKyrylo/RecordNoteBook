@@ -2,10 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
     android:orientation="vertical"
     android:padding="8dp"
     tools:context=".ui.detailscreen.DetailScreenFragment">
@@ -26,9 +24,9 @@
 
                 <TextView
                     android:id="@+id/tvDetailLog"
+                    style="@style/MainText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:padding="16dp"
                     android:text="@string/detail_screen_your_log_data" />
             </androidx.cardview.widget.CardView>
@@ -41,9 +39,9 @@
 
                 <TextView
                     android:id="@+id/tvDetailPass"
+                    style="@style/MainText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:padding="16dp"
                     android:text="@string/detail_screen_your_pass_data" />
 

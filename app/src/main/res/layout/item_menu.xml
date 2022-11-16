@@ -16,10 +16,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/iconColorTint"
         tools:srcCompat="@drawable/ic_baseline_delete_24" />
 
     <TextView
         android:id="@+id/tvTittle"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

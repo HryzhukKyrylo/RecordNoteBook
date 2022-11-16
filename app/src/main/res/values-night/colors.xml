@@ -5,22 +5,18 @@
     <!--    <color name="purple_700">#FF3700B3</color> //colorPrimaryVariant-->
     <!--    <color name="teal_200">#FF03DAC5</color>-->
     <!--    <color name="teal_700">#FF018786</color>-->
-    <color name="orange_200">#FFE082</color>
-    <color name="orange_500">#FFC107</color>
-    <color name="orange_700">#FFA000</color>
-
-    <color name="theme_200">@color/orange_200</color>
-    <color name="theme_500">@color/orange_500</color>
-    <color name="theme_700">@color/orange_700</color>
+    <color name="theme_200">#979797</color>
+    <color name="theme_500">#818181</color>
+    <color name="theme_700">#606060</color>
 
     <color name="teal_200">#FFD740</color>
     <color name="teal_700">#FFAB00</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!--    Main item background-->
-    <color name="mainItemBackground">@color/theme_500</color>
-    <color name="mainMenuTextColor">@color/black</color>
-    <color name="iconColorTint">@color/black</color>
 
+    <!--    Main screen -->
+    <color name="mainItemBackground">@color/theme_500</color>
+    <color name="mainMenuTextColor">@color/orange_500</color>
+    <color name="iconColorTint">@color/orange_500</color>
 </resources>

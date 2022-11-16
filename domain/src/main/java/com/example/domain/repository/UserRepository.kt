@@ -13,4 +13,6 @@ interface UserRepository {
     fun saveUserNotate(userParams: CreateUserParams): Boolean
     fun removeNotate(userNotateModel: UserNotateModel): Boolean
     fun removeUserAllNotates(userLogName: String): Response
+    fun getNightMode(): Int
+    fun saveNightMode(mode: Int)
 }

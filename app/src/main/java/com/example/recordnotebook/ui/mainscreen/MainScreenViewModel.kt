@@ -4,19 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.IOResponse
 import com.example.domain.models.UserNotateModel
+import com.example.domain.usecases.GetNightModeUseCase
+import com.example.domain.usecases.SaveNightModeUseCase
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserAllNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserNotateUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
+import com.example.recordnotebook.utils.setNightMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainScreenViewModel(
     private val getUserNotatesUseCase: GetUserNotatesUseCase,
     private val removeUserNotateUseCase: RemoveUserNotateUseCase,
-    private val removeUserAllNotatesUseCase: RemoveUserAllNotatesUseCase
+    private val removeUserAllNotatesUseCase: RemoveUserAllNotatesUseCase,
+    private val getNightModeUseCase: GetNightModeUseCase,
+    private val saveNightModeUseCase: SaveNightModeUseCase,
 ) : ViewModel() {
 
     private val _listUserNotates: MutableLiveData<List<UserNotateModel>> = MutableLiveData()
@@ -36,6 +43,21 @@ class MainScreenViewModel(
 
     private val _showMessage: MutableLiveData<String> = SingleLiveEvent()
     val showMessage: LiveData<String> = _showMessage
+
+    private val _isNightMode: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isNightMode: LiveData<Boolean> = _isNightMode
+
+    init {
+        checkNightMode()
+    }
+
+    private fun checkNightMode() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val nightMode = getNightModeUseCase.execute()
+            val isNightModeOn = verifyNightModeOn(nightMode)
+            _isNightMode.postValue(isNightModeOn)
+        }
+    }
 
     fun loadData(userLogName: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -78,5 +100,33 @@ class MainScreenViewModel(
                 }
             }
         }
+    }
+
+    fun toggleNightMode() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val isNightModeOn = _isNightMode.value ?: false
+            _isNightMode.postValue(!isNightModeOn)
+            val nightMode = if (!isNightModeOn) SharedPreferencesStorage.NIGHT_MODE_ON
+            else SharedPreferencesStorage.NIGHT_MODE_OFF
+            saveNightModeUseCase.execute(nightMode)
+            withContext(Dispatchers.Main) {
+                setNightMode(nightMode)
+            }
+        }
+    }
+
+    private fun verifyNightModeOn(resVal: Int): Boolean {
+        val resVal = when (resVal) {
+            SharedPreferencesStorage.NIGHT_MODE_ON -> {
+                true
+            }
+            SharedPreferencesStorage.NIGHT_MODE_OFF -> {
+                false
+            }
+            else -> {
+                false
+            }
+        }
+        return resVal
     }
 }

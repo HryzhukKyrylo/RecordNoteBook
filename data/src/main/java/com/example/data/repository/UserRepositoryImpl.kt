@@ -5,6 +5,7 @@ import com.example.data.storage.models.copyDTOWithNewData
 import com.example.data.storage.models.createDTO
 import com.example.data.storage.models.mapToDTO
 import com.example.data.storage.models.mapToDomain
+import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.Response
 import com.example.domain.models.CreateUserParams
 import com.example.domain.models.LoginUserModel
@@ -13,7 +14,8 @@ import com.example.domain.models.UserNotateModel
 import com.example.domain.repository.UserRepository
 
 class UserRepositoryImpl(
-    private val localStorage: LocalStorage
+    private val localStorage: LocalStorage,
+    private val preferencesStorage: SharedPreferencesStorage,
 ) : UserRepository {
 
     override fun getLoginUser(loginParam: String): LoginUserModel? {
@@ -55,5 +57,14 @@ class UserRepositoryImpl(
 
     override fun removeUserAllNotates(userLogName: String): Response {
         return localStorage.removeUserAllNotates(userLogin = userLogName)
+    }
+
+    override fun getNightMode(): Int {
+        val resVal = preferencesStorage.getNightMode()
+        return resVal
+    }
+
+    override fun saveNightMode(mode: Int) {
+        preferencesStorage.saveNightMode(mode = mode)
     }
 }

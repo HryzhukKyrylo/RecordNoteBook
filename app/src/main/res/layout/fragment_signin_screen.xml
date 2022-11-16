@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
     tools:context=".ui.signinscreen.SignInScreenFragment">
 
     <TextView
         android:id="@+id/login"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signin_screen_login"
@@ -30,14 +30,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login">
 
-        <EditText
-            android:id="@+id/etLogin"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:hint="@string/signin_screen_enter_login"
-            android:inputType="textPersonName"
-            android:padding="16dp" />
+            app:endIconTint="@color/iconColorTint"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/etLogin"
+                style="@style/MainText"
+                android:layout_width="match_parent"
+                android:background="@null"
+                android:layout_height="match_parent"
+                android:hint="@string/signin_screen_enter_login"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+               />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.cardview.widget.CardView>
 
 
@@ -54,17 +65,19 @@
         app:layout_constraintTop_toBottomOf="@id/cardETLogin">
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@null"
+            app:endIconTint="@color/iconColorTint"
             app:hintEnabled="false"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/iconColorTint">
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@null"
                 android:hint="@string/signin_screen_enter_password"
                 android:inputType="textPassword"
                 android:padding="16dp" />
@@ -75,6 +88,7 @@
 
     <Button
         android:id="@+id/btnReset"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signin_screen_btn_reset"
@@ -85,6 +99,7 @@
 
     <Button
         android:id="@+id/btnConfirm"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signin_screen_btn_confirm"
@@ -102,12 +117,12 @@
 
     <TextView
         android:id="@+id/tvSignUp"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="@string/signin_screen_sign_up"
-        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
