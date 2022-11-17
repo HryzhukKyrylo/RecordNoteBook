@@ -26,7 +26,7 @@
         android:id="@+id/ivIconApp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_login"
+        android:src="@drawable/ic_kaktus"
         app:layout_constraintBottom_toBottomOf="@id/horizontalGuideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
