@@ -24,19 +24,6 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding>() {
                 findNavController().navigate(action)
             }
         }
-        viewModel.nightMode.observe(viewLifecycleOwner) {
-            when (it) {
-                SharedPreferencesStorage.NIGHT_MODE_ON -> {
-
-                }
-                SharedPreferencesStorage.NIGHT_MODE_OFF -> {
-
-                }
-                SharedPreferencesStorage.NIGHT_MODE_SYSTEM -> {
-
-                }
-            }
-        }
     }
 
 

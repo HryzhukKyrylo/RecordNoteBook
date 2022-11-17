@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.usecases.GetNightModeUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
+import com.example.recordnotebook.utils.setNightMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashScreenViewModel(
     private val getNightModeUseCase: GetNightModeUseCase,
@@ -23,13 +26,16 @@ class SplashScreenViewModel(
     init {
         checkNightMode()
         goToNextScreen()
-
-
     }
 
     private fun checkNightMode() {
         viewModelScope.launch(Dispatchers.IO) {
-            _nightMode.postValue(getNightModeUseCase.execute())
+//            _nightMode.postValue(getNightModeUseCase.execute())
+            val nightMode = getNightModeUseCase.execute()
+
+            withContext(Dispatchers.Main) {
+                setNightMode(nightMode)
+            }
         }
     }
 
