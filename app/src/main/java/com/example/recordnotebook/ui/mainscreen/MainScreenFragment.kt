@@ -81,8 +81,11 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                     findNavController().navigate(action)
                 }
                 R.id.itemMenuGoToSettings -> {
+                    val data = args.userLogName
                     val action =
-                        MainScreenFragmentDirections.actionMainScreenFragmentToSettingScreenFragment()
+                        MainScreenFragmentDirections.actionMainScreenFragmentToSettingScreenFragment(
+                            data
+                        )
                     findNavController().navigate(action)
                 }
                 R.id.itemMenuGoToAboutFragment -> {

@@ -37,9 +37,9 @@ class LocalStorageImpl(
         return result
     }
 
-    override fun getLoginUser(userLogNameParam: String): UserLoginDTO? {
+    override fun getLoginUser(userLogName: String): UserLoginDTO? {
         return database.userLoginDao()
-            .getUserLogin(userLogNameParam = userLogNameParam)
+            .getUserLogin(userLogNameParam = userLogName)
     }
 
     override fun saveLoginUser(userLogin: UserLoginDTO): Response {
@@ -58,14 +58,23 @@ class LocalStorageImpl(
         return resVal
     }
 
-    override fun removeUserAllNotates(userLogin: String): Response {
-        val resVal = try {
+    override fun removeUserAllNotates(userLogin: String) {
+        try {
             database.userDao().deleteUserAllNotates(userLogin)
-            IOResponse.Success(message = "delete - success", data = null)
         } catch (ex: Exception) {
             ex.printStackTrace()
-            IOResponse.Error(errorMessage = "delete - error. something went wrong")
+            throw Exception("delete - error. something went wrong")
         }
-        return resVal
+    }
+
+    override fun removeUserLogin(userLogin: String) {
+        try {
+            val oldUser = database.userLoginDao().getUserLogin(userLogin)
+                ?: throw Exception("User doesn't exist")
+            database.userLoginDao().delete(oldUser)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            throw Exception("Deleted user login - something went wrong")
+        }
     }
 }

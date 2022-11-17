@@ -15,4 +15,5 @@ interface UserRepository {
     fun removeUserAllNotates(userLogName: String): Response
     fun getNightMode(): Int
     fun saveNightMode(mode: Int)
+    fun deleteAccount(userName: String): Response
 }

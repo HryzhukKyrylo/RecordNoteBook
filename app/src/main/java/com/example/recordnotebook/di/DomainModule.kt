@@ -7,6 +7,7 @@ import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserAllNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserNotateUseCase
+import com.example.domain.usecases.settingscreen.DeleteAccountUseCase
 import com.example.domain.usecases.signupscreen.SaveLoginUserUseCase
 import org.koin.dsl.module
 
@@ -19,4 +20,5 @@ val domainModule = module {
     factory { RemoveUserAllNotatesUseCase(repository = get()) }
     factory { SaveNightModeUseCase(repository = get()) }
     factory { GetNightModeUseCase(repository = get()) }
+    factory { DeleteAccountUseCase(repository = get()) }
 }

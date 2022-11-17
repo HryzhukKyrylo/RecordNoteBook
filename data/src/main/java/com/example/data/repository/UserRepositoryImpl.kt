@@ -6,6 +6,7 @@ import com.example.data.storage.models.createDTO
 import com.example.data.storage.models.mapToDTO
 import com.example.data.storage.models.mapToDomain
 import com.example.data.storage.preferences.SharedPreferencesStorage
+import com.example.domain.IOResponse
 import com.example.domain.Response
 import com.example.domain.models.CreateUserParams
 import com.example.domain.models.LoginUserModel
@@ -20,7 +21,7 @@ class UserRepositoryImpl(
 
     override fun getLoginUser(loginParam: String): LoginUserModel? {
         val user =
-            localStorage.getLoginUser(userLogNameParam = loginParam)
+            localStorage.getLoginUser(userLogName = loginParam)
         return user?.mapToDomain()
     }
 
@@ -56,7 +57,13 @@ class UserRepositoryImpl(
     }
 
     override fun removeUserAllNotates(userLogName: String): Response {
-        return localStorage.removeUserAllNotates(userLogin = userLogName)
+        val resVal = try {
+            localStorage.removeUserAllNotates(userLogin = userLogName)
+            IOResponse.Success(message = "delete - success", data = null)
+        } catch (ex: Exception) {
+            IOResponse.Error(errorMessage = "deleted - error")
+        }
+        return resVal
     }
 
     override fun getNightMode(): Int {
@@ -66,5 +73,18 @@ class UserRepositoryImpl(
 
     override fun saveNightMode(mode: Int) {
         preferencesStorage.saveNightMode(mode = mode)
+    }
+
+    override fun deleteAccount(userName: String): Response {
+        val resVal = try {
+            localStorage.removeUserLogin(userLogin = userName)
+            localStorage.removeUserAllNotates(userLogin = userName)
+            IOResponse.Success("Deleted - success", true)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            IOResponse.Error("Deleted - error")
+        }
+        return resVal
+
     }
 }

@@ -52,7 +52,12 @@
             android:id="@+id/action_mainScreenFragment_to_settingScreenFragment"
             app:destination="@id/settingScreenFragment"
             app:popUpTo="@id/mainScreenFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false">
+            <argument
+                android:name="userLogName"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/createScreenFragment"
@@ -110,5 +115,16 @@
         android:id="@+id/settingScreenFragment"
         android:name="com.example.recordnotebook.ui.settingscreen.SettingScreenFragment"
         android:label="fragment_setting_screen"
-        tools:layout="@layout/fragment_setting_screen" />
+        tools:layout="@layout/fragment_setting_screen">
+        <argument
+            android:name="userLogName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/actionGoToLogin"
+            app:destination="@id/signInScreenFragment"
+            app:popUpTo="@id/main_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

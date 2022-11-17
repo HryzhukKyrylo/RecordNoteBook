@@ -3,6 +3,7 @@ package com.example.recordnotebook.di
 import com.example.recordnotebook.ui.createscreen.CreateScreenViewModel
 import com.example.recordnotebook.ui.detailscreen.DetailScreenViewModel
 import com.example.recordnotebook.ui.mainscreen.MainScreenViewModel
+import com.example.recordnotebook.ui.settingscreen.SettingScreenViewModel
 import com.example.recordnotebook.ui.signinscreen.SignInScreenViewModel
 import com.example.recordnotebook.ui.signupscreen.SignUpScreenViewModel
 import com.example.recordnotebook.ui.splashscreen.SplashScreenViewModel
@@ -16,4 +17,5 @@ val appModule = module {
     viewModel { CreateScreenViewModel(saveUserNotateUseCase = get()) }
     viewModel { DetailScreenViewModel() }
     viewModel { SplashScreenViewModel(get()) }
+    viewModel { SettingScreenViewModel(get()) }
 }

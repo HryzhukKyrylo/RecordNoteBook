@@ -9,7 +9,8 @@ interface LocalStorage {
     fun getNotate(userLogNameParam: String, timeLastChangeParam: Long): UserNotateDTO
     fun saveUserNotate(userDTO: UserNotateDTO): Boolean
     fun removeNotate(userDTO: UserNotateDTO): Boolean
-    fun getLoginUser(userLogNameParam: String): UserLoginDTO?
+    fun getLoginUser(userLogName: String): UserLoginDTO?
     fun saveLoginUser(userLogin: UserLoginDTO): Response
-    fun removeUserAllNotates(userLogin: String): Response
+    fun removeUserAllNotates(userLogin: String)
+    fun removeUserLogin(userLogin: String)
 }
