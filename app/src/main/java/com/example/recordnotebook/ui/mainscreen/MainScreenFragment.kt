@@ -23,10 +23,6 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private val args: MainScreenFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     private val viewModel by viewModel<MainScreenViewModel>()
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var recyclerUserNotate: RecyclerView
