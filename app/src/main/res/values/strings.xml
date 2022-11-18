@@ -47,5 +47,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="setting_screen_delete_account">Delete account</string>
     <string name="setting_screen_account">Account</string>
+    <string name="signing_screen_login_field_are_empty">Fields are empty - please write your login</string>
+    <string name="create_screen_saved">Saved</string>
+    <string name="create_screen_something_wrong">Something went wrong</string>
+    <string name="signup_screen_logorpas_empty">Login or pass is empty!!</string>
 
 </resources>

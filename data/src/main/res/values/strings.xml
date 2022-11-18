@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="repository_deleted_error">Deleted - error</string>
+    <string name="repository_deleted_success">Deleted - success</string>
+    <string name="saved_success">saved - success</string>
+    <string name="log_is_exist">log is exist. please write another log name</string>
+    <string name="saved_error">saved - error. something went wrong</string>
+    <string name="delete_error_wrong">delete - error. something went wrong</string>
+    <string name="user_doesnt_exist">User doesn\'t exist</string>
+    <string name="delete_user_wrong">Deleted user login - something went wrong</string>
+</resources>

@@ -35,9 +35,6 @@ class MainScreenViewModel(
     private val _isTransitionToCreate: MutableLiveData<String?> = SingleLiveEvent()
     val isTransitionToCreate: LiveData<String?> = _isTransitionToCreate
 
-    private val _isDeleted: MutableLiveData<Boolean> = SingleLiveEvent()
-    val isDeleted: LiveData<Boolean> = _isDeleted
-
     private val _itemToRefactor: MutableLiveData<UserNotateModel> = SingleLiveEvent()
     val itemToRefactor: LiveData<UserNotateModel> = _itemToRefactor
 

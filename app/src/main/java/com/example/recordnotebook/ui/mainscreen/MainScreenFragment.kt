@@ -177,9 +177,6 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                         )
                 )
             }
-            isDeleted.observe(viewLifecycleOwner) { isDeleted ->
-                requireContext().showToast("Deleted - $isDeleted")
-            }
             itemToRefactor.observe(viewLifecycleOwner) { itemModel ->
                 findNavController().navigate(
                     MainScreenFragmentDirections

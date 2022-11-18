@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.example.data.storage.localstorage.LocalStorage
 import com.example.data.storage.localstorage.LocalStorageImpl
 import com.example.data.storage.localstorage.UserDatabase
+import com.example.data.storage.preferences.SharedPreferencesStorage
+import com.example.data.storage.preferences.SharedPreferencesStorageImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -22,7 +24,12 @@ val userDatabaseModule = module {
     }
 
     single<LocalStorage> {
-        LocalStorageImpl(get())
+        LocalStorageImpl(get(), get())
     }
+
+    single<SharedPreferencesStorage> {
+        SharedPreferencesStorageImpl(context = get())
+    }
+
 
 }

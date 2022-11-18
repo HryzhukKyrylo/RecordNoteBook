@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
+import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentCreateScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.showToast
@@ -39,9 +40,9 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         with(viewModel) {
             isDataSaved.observe(viewLifecycleOwner) {
                 if (it) {
-                    requireContext().showToast("Saved")
+                    requireContext().showToast(getString(R.string.create_screen_saved))
                 } else {
-                    requireContext().showToast("Something went wrong")
+                    requireContext().showToast(getString(R.string.create_screen_something_wrong))
                 }
             }
         }

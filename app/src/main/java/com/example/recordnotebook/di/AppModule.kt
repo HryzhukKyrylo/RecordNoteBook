@@ -11,11 +11,18 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModel { SignInScreenViewModel(verifyLoginUserCase = get()) }
-    viewModel { SignUpScreenViewModel(saveLoginUserUseCase = get()) }
-    viewModel { MainScreenViewModel(getUserNotatesUseCase = get(), get(), get(), get(), get()) }
+    viewModel { SignInScreenViewModel(context = get(), verifyLoginUserCase = get()) }
+    viewModel { SignUpScreenViewModel(context = get(), saveLoginUserUseCase = get()) }
+    viewModel { MainScreenViewModel(
+            getUserNotatesUseCase = get(),
+            removeUserNotateUseCase = get(),
+            removeUserAllNotatesUseCase = get(),
+            getNightModeUseCase = get(),
+            saveNightModeUseCase = get()
+        )
+    }
     viewModel { CreateScreenViewModel(saveUserNotateUseCase = get()) }
     viewModel { DetailScreenViewModel() }
-    viewModel { SplashScreenViewModel(get()) }
-    viewModel { SettingScreenViewModel(get()) }
+    viewModel { SplashScreenViewModel(getNightModeUseCase = get()) }
+    viewModel { SettingScreenViewModel(deleteAccount = get()) }
 }

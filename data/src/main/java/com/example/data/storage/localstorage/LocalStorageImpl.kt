@@ -1,11 +1,15 @@
 package com.example.data.storage.localstorage
 
+import android.app.Application
+import com.example.data.R
 import com.example.data.storage.models.UserLoginDTO
 import com.example.data.storage.models.UserNotateDTO
 import com.example.domain.IOResponse
 import com.example.domain.Response
+import com.example.domain.utils.MessageException
 
 class LocalStorageImpl(
+    private val context: Application,
     private val database: UserDatabase,
 ) : LocalStorage {
 
@@ -47,13 +51,13 @@ class LocalStorageImpl(
             val logs = database.userLoginDao().getUserLogin(userLogNameParam = userLogin.login)
             if (logs == null) {
                 database.userLoginDao().saveUserLogin(userLogin)
-                IOResponse.Success(message = "saved - succsess", data = null)
+                IOResponse.Success(message = context.getString(R.string.saved_success), data = null)
             } else {
-                IOResponse.Error(errorMessage = "log is exist. please write another log name")
+                IOResponse.Error(errorMessage = context.getString(R.string.log_is_exist))
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
-            IOResponse.Error(errorMessage = "saved - error. something went wrong")
+            IOResponse.Error(errorMessage = context.getString(R.string.saved_error))
         }
         return resVal
     }
@@ -63,18 +67,18 @@ class LocalStorageImpl(
             database.userDao().deleteUserAllNotates(userLogin)
         } catch (ex: Exception) {
             ex.printStackTrace()
-            throw Exception("delete - error. something went wrong")
+            throw MessageException(context.getString(R.string.delete_error_wrong))
         }
     }
 
     override fun removeUserLogin(userLogin: String) {
         try {
             val oldUser = database.userLoginDao().getUserLogin(userLogin)
-                ?: throw Exception("User doesn't exist")
+                ?: throw MessageException(context.getString(R.string.user_doesnt_exist))
             database.userLoginDao().delete(oldUser)
         } catch (ex: Exception) {
             ex.printStackTrace()
-            throw Exception("Deleted user login - something went wrong")
+            throw Exception(context.getString(R.string.delete_user_wrong))
         }
     }
 }

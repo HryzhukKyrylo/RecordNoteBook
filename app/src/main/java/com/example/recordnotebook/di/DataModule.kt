@@ -10,12 +10,13 @@ import org.koin.dsl.module
 
 val dataModule = module {
 
-    single<SharedPreferencesStorage> {
-        SharedPreferencesStorageImpl(context = get())
-    }
+//    single<SharedPreferencesStorage> {
+//        SharedPreferencesStorageImpl(context = get())
+//    }
 
     factory<UserRepository> {
         UserRepositoryImpl(
+            context = get(),
             localStorage = get(),
             preferencesStorage = get()
         )
