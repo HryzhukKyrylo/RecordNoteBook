@@ -38,6 +38,7 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
                 //todo implement
 //            val action = SettingScreenFragmentDirection.actionGoToRefactorAccountScreen
 //            findNavController().navigate(action)
+                requireContext().showToast("Sorry - not implemented")
             }
             goToLogIn.observe(viewLifecycleOwner) {
                 if (it) {
@@ -60,6 +61,4 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
 //            viewModel.goToRefactorAccount()
         }
     }
-
-//todo implement
 }
