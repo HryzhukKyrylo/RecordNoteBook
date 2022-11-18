@@ -20,10 +20,10 @@
 
         <EditText
             android:id="@+id/etLogData"
-            android:layout_width="match_parent"
-            android:background="@null"
-            android:layout_height="match_parent"
             style="@style/MainText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
             android:gravity="start|top"
             android:padding="16dp" />
 
@@ -71,11 +71,11 @@
 
     <TextView
         android:id="@+id/tvPassHint"
+        style="@style/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:alpha="0.2"
-        style="@style/MainText"
         android:clickable="false"
         android:elevation="20dp"
         android:focusableInTouchMode="false"
@@ -94,5 +94,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:elevation="16dp"
+        android:src="@drawable/ic_add_24"
+        app:backgroundTint="@color/theme_500"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/iconColorTint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

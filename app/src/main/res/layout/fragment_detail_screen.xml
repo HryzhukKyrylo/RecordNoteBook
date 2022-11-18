@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clipToPadding="false"
     android:padding="8dp"
     tools:context=".ui.detailscreen.DetailScreenFragment">
 
@@ -51,15 +52,15 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabRefactor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="2dp"
-        android:contentDescription="@string/detail_screen_fab_refactor"
-        android:src="@drawable/ic_baseline_border_color_24"
-        app:backgroundTint="?attr/colorPrimary"
-        app:fabSize="normal" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fabRefactor"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="2dp"-->
+<!--        android:contentDescription="@string/detail_screen_fab_refactor"-->
+<!--        android:src="@drawable/ic_baseline_border_color_24"-->
+<!--        app:backgroundTint="?attr/colorPrimary"-->
+<!--        app:fabSize="normal" />-->
 
 </FrameLayout>

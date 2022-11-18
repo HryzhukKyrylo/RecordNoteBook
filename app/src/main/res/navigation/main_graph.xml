@@ -86,7 +86,7 @@
         <action
             android:id="@+id/action_detailScreenFragment_to_createScreenFragment"
             app:destination="@id/createScreenFragment"
-            app:popUpTo="@id/mainScreenFragment"
+            app:popUpTo="@id/detailScreenFragment"
             app:popUpToInclusive="false">
             <argument
                 android:name="userName"

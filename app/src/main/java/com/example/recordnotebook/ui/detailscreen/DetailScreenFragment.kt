@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.FragmentDetailScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
+import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 //todo long click - copy element to buffer
@@ -37,9 +38,22 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
     }
 
     private fun initClickListener() {
-        binding.fabRefactor.setOnClickListener {
+        binding.tvDetailLog.setOnClickListener {
             viewModel.transitionToCreate(args.userModel)
         }
+        binding.tvDetailPass.setOnClickListener {
+            viewModel.transitionToCreate(args.userModel)
+        }
+
+        binding.tvDetailLog.setOnLongClickListener {
+            requireContext().showToast("Copy text - doesn't work")
+            true
+        }
+        binding.tvDetailPass.setOnLongClickListener {
+            requireContext().showToast("Copy text - doesn't work")
+            true
+        }
+
     }
 
     private fun showUserData(testUserParams: UserNotateModel) {
