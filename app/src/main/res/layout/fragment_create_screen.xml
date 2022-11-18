@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     tools:context=".ui.createscreen.CreateScreenFragment">
 
@@ -28,7 +30,6 @@
             android:padding="16dp" />
 
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/tvLogHint"
@@ -68,7 +69,6 @@
             android:padding="16dp" />
     </androidx.cardview.widget.CardView>
 
-
     <TextView
         android:id="@+id/tvPassHint"
         style="@style/MainText"
@@ -95,14 +95,13 @@
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
+        android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:elevation="16dp"
-        android:src="@drawable/ic_add_24"
+        android:src="@drawable/ic_baseline_save_as_24"
         app:backgroundTint="@color/theme_500"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

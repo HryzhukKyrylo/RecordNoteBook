@@ -38,7 +38,7 @@ class MainScreenViewHolder(private val binding: ItemUserNotateBinding) :
         clickListener: ((item: UserNotateModel) -> Unit)?,
         longClickListener: ((UserNotateModel, View) -> Unit)?
     ) {
-        binding.tvUserNotateTitle.text = item.title ?: item.logData ?: " "
+        binding.tvUserNotateTitle.text = item.title ?: item.logData ?: item.privateInfo ?: " "
         binding.root.setOnClickListener {
             clickListener?.invoke(item)
         }

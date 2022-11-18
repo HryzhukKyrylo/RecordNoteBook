@@ -61,16 +61,11 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
             }
             isVerifySuccess.observe(viewLifecycleOwner) { isSuccess ->
                 if (isSuccess) {
-//                    Toast.makeText(requireContext(), "Login success!", Toast.LENGTH_SHORT).show()
                     val data = viewModel.getUserValidData()
                     val action =
                         SignInScreenFragmentDirections.actionSignInScreenFragmentToMainGraph(data?.loginParam)
                     findNavController().navigate(action)
                 }
-//                else {
-//                    Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
             }
 
             goToSignUpScreen.observe(viewLifecycleOwner) {

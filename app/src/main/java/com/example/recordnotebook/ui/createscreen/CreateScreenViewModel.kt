@@ -41,7 +41,7 @@ class CreateScreenViewModel(
         userModel: UserNotateModel?
     ): Boolean {
         return if (userModel == null) {
-            logData.trim().isNotEmpty()
+            logData.trim().isNotEmpty() || passData.trim().isNotEmpty()
         } else {
             userModel.logData != logData || userModel.privateInfo != passData
         }

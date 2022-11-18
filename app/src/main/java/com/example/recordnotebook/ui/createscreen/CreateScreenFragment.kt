@@ -2,6 +2,7 @@ package com.example.recordnotebook.ui.createscreen
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.OvershootInterpolator
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.R
@@ -25,7 +26,14 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         userModel?.let {
             showData(it)
         }
-        initObsorvers()
+        initClickListeners()
+        initObservers()
+    }
+
+    private fun initClickListeners() {
+        binding.fabSave.setOnClickListener {
+            saveUserData()
+        }
     }
 
     private fun setUserData(args: CreateScreenFragmentArgs) {
@@ -36,7 +44,7 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         }
     }
 
-    private fun initObsorvers() {
+    private fun initObservers() {
         with(viewModel) {
             isDataSaved.observe(viewLifecycleOwner) {
                 if (it) {
@@ -55,7 +63,7 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     override fun onStop() {
         super.onStop()
-        saveUserData()
+//        saveUserData()
     }
 
     private fun saveUserData() {
