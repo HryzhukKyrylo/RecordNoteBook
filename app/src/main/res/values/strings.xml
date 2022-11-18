@@ -51,5 +51,6 @@
     <string name="create_screen_saved">Saved</string>
     <string name="create_screen_something_wrong">Something went wrong</string>
     <string name="signup_screen_logorpas_empty">Login or pass is empty!!</string>
+    <string name="splash_screen_my_notebook">My \nNoteBook</string>
 
 </resources>

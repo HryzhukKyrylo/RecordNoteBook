@@ -37,7 +37,7 @@ class VerifyLoginUserCase(private val repository: UserRepository) {
         }
         if (user.passwordParam != oldUser.password) {
 //            false
-            throw Exception(message = "User password wrong")
+            throw Exception( "User password wrong")
 
         } else {
             user.loginParam == oldUser.login &&
