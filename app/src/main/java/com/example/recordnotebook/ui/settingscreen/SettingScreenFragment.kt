@@ -1,9 +1,11 @@
 package com.example.recordnotebook.ui.settingscreen
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentSettingScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.showToast
@@ -25,6 +27,19 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
         }
         initClickListener()
         initObserver()
+    }
+
+    private fun showDeleteAccountDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.setting_screen_delete_account_title))
+        builder.setMessage(getString(R.string.setting_screen_dialog_message))
+        builder.setPositiveButton(
+            getString(R.string.setting_screen_btn_yes)
+        ) { _, _ -> userData?.let { it1 -> viewModel.deleteAccount(it1) } }
+        builder.setNegativeButton(getString(R.string.setting_screen_btn_cancel)) { _, _ ->
+        }
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 
     private fun setUserData(data: String) {
@@ -54,10 +69,11 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
 
     private fun initClickListener() {
         binding.btnDeleteAllData.setOnClickListener {
-            userData?.let { it1 -> viewModel.deleteAccount(it1) }
+            showDeleteAccountDialog()
         }
         binding.ivRefactor.setOnClickListener {
             // todo implement
+            requireContext().showToast("Sorry - not implemented")
 //            viewModel.goToRefactorAccount()
         }
     }

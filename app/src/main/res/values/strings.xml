@@ -6,6 +6,7 @@
     <string name="signin_screen_btn_confirm">Confirm</string>
     <string name="signin_screen_enter_login">Enter login</string>
     <string name="signin_screen_enter_password">Enter password</string>
+    <string name="signing_screen_login_field_are_empty">Fields are empty - please write your login</string>
     <string name="signin_screen_login">Log In</string>
     <string name="signin_screen_sign_up"><u>Sign Up</u></string>
 
@@ -13,6 +14,7 @@
     <string name="signup_screen_btn_reset">Reset</string>
     <string name="signup_screen_btn_confirm">Sign Up</string>
     <string name="signup_screen_enter_login">Enter login</string>
+    <string name="signup_screen_logorpas_empty">Login or pass is empty!!</string>
     <string name="signup_screen_enter_password">Enter password</string>
     <string name="signup_screen_login">Sign Up</string>
     <string name="signup_screen_sign_up">Sign Up</string>
@@ -25,6 +27,8 @@
 
     <!--    create screen ..-->
     <string name="create_screen_write_your_data_for_log">Write your data for log</string>
+    <string name="create_screen_saved">Saved</string>
+    <string name="create_screen_something_wrong">Something went wrong</string>
     <string name="create_screen_write_your_data_for">Write your data for ...</string>
     <string name="create_screen_create_screen">Create screen</string>
 
@@ -35,6 +39,8 @@
 
     <!--    splash screen ..-->
     <string name="splash_screen_splash_screen">Splash screen</string>
+    <string name="splash_screen_my_notebook">My \nNoteBook</string>
+
     <!--    about screen ..-->
     <string name="about_screen_about_app">About App</string>
 
@@ -42,15 +48,16 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_settings">Settings</string>
 
+    <!--    setting screen ..-->
+    <string name="setting_screen_delete_account">Delete account</string>
+    <string name="setting_screen_btn_cancel">Cancel</string>
+    <string name="setting_screen_btn_yes">Yes</string>
+    <string name="setting_screen_delete_account_title">My alert dialog</string>
+    <string name="setting_screen_dialog_message">Are you sure you want to delete your account?</string>
+    <string name="setting_screen_account">Account</string>
+
     <!--    another -->
     <string name="nav_draw_menu_about">About</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="setting_screen_delete_account">Delete account</string>
-    <string name="setting_screen_account">Account</string>
-    <string name="signing_screen_login_field_are_empty">Fields are empty - please write your login</string>
-    <string name="create_screen_saved">Saved</string>
-    <string name="create_screen_something_wrong">Something went wrong</string>
-    <string name="signup_screen_logorpas_empty">Login or pass is empty!!</string>
-    <string name="splash_screen_my_notebook">My \nNoteBook</string>
 
 </resources>
