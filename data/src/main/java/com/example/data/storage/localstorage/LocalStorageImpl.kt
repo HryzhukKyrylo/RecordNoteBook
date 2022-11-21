@@ -31,6 +31,10 @@ class LocalStorageImpl(
         return result
     }
 
+    override fun saveAllUserNotates(userNotates: List<UserNotateDTO>) {
+        database.userDao().saveAllUserNotate(userNotates)
+    }
+
     override fun removeNotate(userDTO: UserNotateDTO): Boolean {
         val result = try {
             database.userDao().delete(userDTO)
@@ -81,4 +85,5 @@ class LocalStorageImpl(
             throw Exception(context.getString(R.string.delete_user_wrong))
         }
     }
+
 }

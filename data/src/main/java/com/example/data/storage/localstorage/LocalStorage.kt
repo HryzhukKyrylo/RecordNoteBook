@@ -7,10 +7,13 @@ import com.example.domain.Response
 interface LocalStorage {
     fun getUserNotates(userLogNameParam: String): List<UserNotateDTO>
     fun getNotate(userLogNameParam: String, timeLastChangeParam: Long): UserNotateDTO
-    fun saveUserNotate(userDTO: UserNotateDTO): Boolean
-    fun removeNotate(userDTO: UserNotateDTO): Boolean
     fun getLoginUser(userLogName: String): UserLoginDTO?
+
     fun saveLoginUser(userLogin: UserLoginDTO): Response
+    fun saveUserNotate(userDTO: UserNotateDTO): Boolean
+    fun saveAllUserNotates(userNotates: List<UserNotateDTO>)
+
+    fun removeNotate(userDTO: UserNotateDTO): Boolean
     fun removeUserAllNotates(userLogin: String)
     fun removeUserLogin(userLogin: String)
 }

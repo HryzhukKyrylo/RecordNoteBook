@@ -7,13 +7,19 @@ import com.example.domain.models.LoginUserParams
 import com.example.domain.models.UserNotateModel
 
 interface UserRepository {
-    fun getLoginUser(loginParam: String): LoginUserModel?
     fun saveLoginUser(loginUserParams: LoginUserParams): Response
-    fun getUserNotates(userParam: String): List<UserNotateModel>
     fun saveUserNotate(userParams: CreateUserParams): Boolean
+    fun saveNightMode(mode: Int)
+    fun saveAllUserNotates(userNotates: List<UserNotateModel>)
+
+
+    fun getUserNotates(userParam: String): List<UserNotateModel>
+    fun getLoginUser(loginParam: String): LoginUserModel?
+    fun getNightMode(): Int
+
+
     fun removeNotate(userNotateModel: UserNotateModel): Boolean
     fun removeUserAllNotates(userLogName: String): Response
-    fun getNightMode(): Int
-    fun saveNightMode(mode: Int)
     fun deleteAccount(userName: String): Response
+    fun deleteUserLogin(userName: String): Response
 }

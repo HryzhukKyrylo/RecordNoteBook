@@ -6,3 +6,4 @@ data class LoginUserParams(
     val loginParam: String,
     val passwordParam: String
 ) :Serializable
+

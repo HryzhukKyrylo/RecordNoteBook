@@ -88,6 +88,11 @@ class UserRepositoryImpl(
         preferencesStorage.saveNightMode(mode = mode)
     }
 
+    override fun saveAllUserNotates(userNotates: List<UserNotateModel>) {
+        val listDto = userNotates.map { item -> item.mapToDTO() }
+        localStorage.saveAllUserNotates(userNotates = listDto)
+    }
+
     override fun deleteAccount(userName: String): Response {
         val resVal = try {
             localStorage.removeUserLogin(userLogin = userName)
@@ -102,5 +107,19 @@ class UserRepositoryImpl(
         }
         return resVal
 
+    }
+
+    override fun deleteUserLogin(userName: String): Response {
+        val resVal = try {
+            localStorage.removeUserLogin(userLogin = userName)
+            IOResponse.Success(
+                message = context.getString(R.string.repository_deleted_success),
+                data = true
+            )
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            IOResponse.Error(ex.message)
+        }
+        return resVal
     }
 }

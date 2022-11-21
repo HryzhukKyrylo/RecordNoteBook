@@ -1,5 +1,6 @@
 package com.example.recordnotebook.di
 
+import com.example.recordnotebook.ui.accountscreen.AccountScreenViewModel
 import com.example.recordnotebook.ui.createscreen.CreateScreenViewModel
 import com.example.recordnotebook.ui.detailscreen.DetailScreenViewModel
 import com.example.recordnotebook.ui.mainscreen.MainScreenViewModel
@@ -13,7 +14,8 @@ import org.koin.dsl.module
 val appModule = module {
     viewModel { SignInScreenViewModel(context = get(), verifyLoginUserCase = get()) }
     viewModel { SignUpScreenViewModel(context = get(), saveLoginUserUseCase = get()) }
-    viewModel { MainScreenViewModel(
+    viewModel {
+        MainScreenViewModel(
             getUserNotatesUseCase = get(),
             removeUserNotateUseCase = get(),
             removeUserAllNotatesUseCase = get(),
@@ -25,4 +27,5 @@ val appModule = module {
     viewModel { DetailScreenViewModel() }
     viewModel { SplashScreenViewModel(getNightModeUseCase = get()) }
     viewModel { SettingScreenViewModel(deleteAccount = get()) }
+    viewModel { AccountScreenViewModel( get(),get()) }
 }
