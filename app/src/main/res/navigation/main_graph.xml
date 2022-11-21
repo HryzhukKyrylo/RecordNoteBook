@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_createScreenFragment"
-            app:destination="@id/createScreenFragment">
+            app:destination="@id/createScreenFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_up">
             <argument
                 android:name="userName"
                 app:argType="string"
@@ -27,7 +31,11 @@
         </action>
         <action
             android:id="@+id/action_mainScreenFragment_to_detailScreenFragment"
-            app:destination="@id/detailScreenFragment">
+            app:destination="@id/detailScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="userModel"
                 app:argType="com.example.domain.models.UserNotateModel"
@@ -41,16 +49,27 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_aboutScreenFragment"
             app:destination="@id/aboutScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="false" />
+
         <action
             android:id="@+id/actionToLogIn"
             app:destination="@id/signInScreenFragment"
+            app:enterAnim="@anim/slide_in_transparent"
+            app:exitAnim="@anim/slide_out_transparent"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainScreenFragment_to_settingScreenFragment"
             app:destination="@id/settingScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="false">
             <argument
@@ -86,6 +105,10 @@
         <action
             android:id="@+id/action_detailScreenFragment_to_createScreenFragment"
             app:destination="@id/createScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/mainScreenFragment"
             app:popUpToInclusive="false">
             <argument

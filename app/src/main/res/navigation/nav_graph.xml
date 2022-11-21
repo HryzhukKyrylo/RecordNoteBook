@@ -11,11 +11,19 @@
         tools:layout="@layout/fragment_signin_screen">
         <action
             android:id="@+id/action_signInScreenFragment_to_signUpScreenFragment"
-            app:destination="@id/signUpScreenFragment" />
+            app:destination="@id/signUpScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" />
+
         <action
             android:id="@+id/action_signInScreenFragment_to_main_graph"
             app:destination="@id/main_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true">
 
@@ -39,7 +47,8 @@
         tools:layout="@layout/fragment_signup_screen">
         <action
             android:id="@+id/action_signUpScreenFragment_to_signInScreenFragment"
-            app:destination="@id/signInScreenFragment">
+            app:destination="@id/signInScreenFragment"
+            app:enterAnim="@anim/slide_in_left">
             <argument
                 android:name="logName"
                 app:argType="string"
@@ -54,11 +63,19 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_signInScreenFragment"
             app:destination="@id/signInScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashScreenFragment_to_main_graph"
             app:destination="@id/main_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true">
             <argument

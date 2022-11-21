@@ -31,12 +31,12 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
 
     private fun showDeleteAccountDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.setting_screen_delete_account_title))
-        builder.setMessage(getString(R.string.setting_screen_dialog_message))
+        builder.setTitle(getString(R.string.setting_screen_dialog_delete_account_title))
+        builder.setMessage(getString(R.string.setting_screen_dialog_dialog_message))
         builder.setPositiveButton(
-            getString(R.string.setting_screen_btn_yes)
+            getString(R.string.setting_screen_dialog_btn_yes)
         ) { _, _ -> userData?.let { it1 -> viewModel.deleteAccount(it1) } }
-        builder.setNegativeButton(getString(R.string.setting_screen_btn_cancel)) { _, _ ->
+        builder.setNegativeButton(getString(R.string.setting_screen_dialog_btn_no)) { _, _ ->
         }
         val alertDialog = builder.create()
         alertDialog.show()

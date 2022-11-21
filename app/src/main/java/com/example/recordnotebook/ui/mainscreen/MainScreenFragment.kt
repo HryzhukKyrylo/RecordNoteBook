@@ -1,5 +1,6 @@
 package com.example.recordnotebook.ui.mainscreen
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.KeyEvent
@@ -37,6 +38,22 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         initClickListener()
         initObservers()
         iniBackPressed()
+    }
+
+    private fun showDialogDeleteAllNotate() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.main_screen_remove_notates))
+        builder.setMessage(getString(R.string.main_screen_dialog_are_you_sure))
+        builder.setPositiveButton(getString(R.string.main_screen_dialog_yes)) { _, _ ->
+            args.userLogName?.let { data ->
+                viewModel.deleteAllUserNotate(data)
+            }
+        }
+        builder.setNegativeButton(getString(R.string.main_screen_dialog_no)) { _, _ ->
+            //todo implement
+        }
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 
     private fun iniBackPressed() {
@@ -219,9 +236,10 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 R.drawable.ic_baseline_delete_24,
                 R.string.main_menu_delete_all
             ) {
-                args.userLogName?.let { data ->
-                    viewModel.deleteAllUserNotate(data)
-                }
+//                args.userLogName?.let { data ->
+//                    viewModel.deleteAllUserNotate(data)
+//                }
+                showDialogDeleteAllNotate()
             }
                 .showAtRight(it)
         }

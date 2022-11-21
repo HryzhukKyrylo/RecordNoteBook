@@ -36,6 +36,10 @@
     <string name="main_screen_delete">Delete</string>
     <string name="main_screen_refactor">Refactor</string>
     <string name="main_menu_delete_all">Delete all</string>
+    <string name="main_screen_remove_notates">Remove all notates</string>
+    <string name="main_screen_dialog_are_you_sure">Are you sure?</string>
+    <string name="main_screen_dialog_yes">Yes</string>
+    <string name="main_screen_dialog_no">No</string>
 
     <!--    splash screen ..-->
     <string name="splash_screen_splash_screen">Splash screen</string>
@@ -50,14 +54,13 @@
 
     <!--    setting screen ..-->
     <string name="setting_screen_delete_account">Delete account</string>
-    <string name="setting_screen_btn_cancel">Cancel</string>
-    <string name="setting_screen_btn_yes">Yes</string>
-    <string name="setting_screen_delete_account_title">My alert dialog</string>
-    <string name="setting_screen_dialog_message">Are you sure you want to delete your account?</string>
+    <string name="setting_screen_dialog_btn_no">No</string>
+    <string name="setting_screen_dialog_btn_yes">Yes</string>
+    <string name="setting_screen_dialog_delete_account_title">Remove account</string>
+    <string name="setting_screen_dialog_dialog_message">Are you sure !?</string>
     <string name="setting_screen_account">Account</string>
 
     <!--    another -->
     <string name="nav_draw_menu_about">About</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
