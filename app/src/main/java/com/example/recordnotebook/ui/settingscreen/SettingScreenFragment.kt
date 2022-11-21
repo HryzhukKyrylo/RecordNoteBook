@@ -51,9 +51,12 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
         with(viewModel) {
             gotToRefactorAccount.observe(viewLifecycleOwner) {
                 //todo implement
-//            val action = SettingScreenFragmentDirection.actionGoToRefactorAccountScreen
-//            findNavController().navigate(action)
-                requireContext().showToast("Sorry - not implemented")
+                val action =
+                    SettingScreenFragmentDirections.actionSettingScreenFragmentToAccountScreenFragment(
+                        userData
+                    )
+                findNavController().navigate(action)
+//                requireContext().showToast("Sorry - not implemented")
             }
             goToLogIn.observe(viewLifecycleOwner) {
                 if (it) {
@@ -73,8 +76,8 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
         }
         binding.ivRefactor.setOnClickListener {
             // todo implement
-            requireContext().showToast("Sorry - not implemented")
-//            viewModel.goToRefactorAccount()
+//            requireContext().showToast("Sorry - not implemented")
+            viewModel.goToRefactorAccount()
         }
     }
 }

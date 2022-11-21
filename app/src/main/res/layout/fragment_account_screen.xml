@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/smallMargin"
+    tools:context=".ui.accountscreen.AccountScreenFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Account log name" />
+
+        <TextView
+            android:id="@+id/tvAccountLogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:textSize="18sp"
+            tools:text="LogName" />
+
+        <EditText
+            style="@style/MainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:background="@null"
+            android:hint="Change log name" />
+
+        <Button
+            android:id="@+id/btnSaveLogName"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Save" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/theme_500" />
+
+        <TextView
+            style="@style/TextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Change Password" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Current password" />
+
+        <EditText
+            style="@style/MainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:hint="write here" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumMarginTop"
+            android:text="New password" />
+
+        <EditText
+            style="@style/MainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:hint="write here" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Confirm new password" />
+
+        <EditText
+            style="@style/MainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:hint="write here" />
+
+        <Button
+            android:id="@+id/btnSavePassword"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/smallMarginTop"
+            android:text="Save" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/theme_500" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

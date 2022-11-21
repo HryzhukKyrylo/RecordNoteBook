@@ -149,5 +149,26 @@
             app:destination="@id/signInScreenFragment"
             app:popUpTo="@id/main_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingScreenFragment_to_accountScreenFragment"
+            app:destination="@id/accountScreenFragment"
+            app:popUpTo="@id/settingScreenFragment">
+            <argument
+                android:name="userLogName"
+                app:argType="string"
+                app:nullable="true" />
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/accountScreenFragment"
+        android:name="com.example.recordnotebook.ui.accountscreen.AccountScreenFragment"
+        android:label="fragment_account_screen"
+        tools:layout="@layout/fragment_account_screen">
+        <argument
+            android:name="userLogName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

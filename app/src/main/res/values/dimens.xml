@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="small_corner_radius">8dp</dimen>
+    <dimen name="mediumMarginTop">16dp</dimen>
+    <dimen name="smallMarginTop">8dp</dimen>
+    <dimen name="smallMargin">8dp</dimen>
 </resources>
