@@ -34,7 +34,7 @@
 
     <!--    main screen ..-->
     <string name="main_screen_delete">Delete</string>
-    <string name="main_screen_refactor">Refactor</string>
+    <string name="main_screen_refactor">Edit</string>
     <string name="main_menu_delete_all">Delete all</string>
     <string name="main_screen_remove_notates">Remove all notates</string>
     <string name="main_screen_dialog_are_you_sure">Are you sure?</string>
