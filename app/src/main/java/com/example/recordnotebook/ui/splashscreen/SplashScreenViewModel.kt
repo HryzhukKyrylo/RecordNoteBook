@@ -20,9 +20,6 @@ class SplashScreenViewModel(
     private val _goToNextScreen: MutableLiveData<Boolean> = SingleLiveEvent()
     val goToNextScreen: LiveData<Boolean> = _goToNextScreen
 
-    private val _nightMode: MutableLiveData<Int> = SingleLiveEvent()
-    val nightMode: LiveData<Int> = _nightMode
-
     init {
         checkNightMode()
         goToNextScreen()
@@ -30,7 +27,6 @@ class SplashScreenViewModel(
 
     private fun checkNightMode() {
         viewModelScope.launch(Dispatchers.IO) {
-//            _nightMode.postValue(getNightModeUseCase.execute())
             val nightMode = getNightModeUseCase.execute()
 
             withContext(Dispatchers.Main) {
@@ -39,7 +35,7 @@ class SplashScreenViewModel(
         }
     }
 
-    fun goToNextScreen() {
+    private fun goToNextScreen() {
         viewModelScope.launch(Dispatchers.IO) {
             delay(TIME_OUT_SPLASH_SCREEN)
             _goToNextScreen.postValue(true)
@@ -47,6 +43,6 @@ class SplashScreenViewModel(
     }
 
     companion object {
-        const val TIME_OUT_SPLASH_SCREEN = 2000L
+        const val TIME_OUT_SPLASH_SCREEN = 1500L
     }
 }
