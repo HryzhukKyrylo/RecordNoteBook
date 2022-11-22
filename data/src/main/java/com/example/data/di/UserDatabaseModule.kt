@@ -19,7 +19,7 @@ val userDatabaseModule = module {
         ).build()
     }
 
-    single<UserDatabase> {
+    single {
         provideDatabase(androidApplication())
     }
 
@@ -30,6 +30,4 @@ val userDatabaseModule = module {
     single<SharedPreferencesStorage> {
         SharedPreferencesStorageImpl(context = get())
     }
-
-
 }

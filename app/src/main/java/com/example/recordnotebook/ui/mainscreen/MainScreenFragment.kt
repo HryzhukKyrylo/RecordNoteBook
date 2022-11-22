@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentMainScreenBinding
@@ -22,8 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
-    private val args: MainScreenFragmentArgs by navArgs()
-
     private val viewModel by viewModel<MainScreenViewModel>()
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var recyclerUserNotate: RecyclerView
@@ -31,8 +28,6 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadData(args)
-        setUserDrawerData(args.userLogName)
         initDrawer()
         initRecycler()
         initClickListener()
@@ -45,9 +40,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         builder.setTitle(getString(R.string.main_screen_remove_notates))
         builder.setMessage(getString(R.string.main_screen_dialog_are_you_sure))
         builder.setPositiveButton(getString(R.string.main_screen_dialog_yes)) { _, _ ->
-            args.userLogName?.let { data ->
-                viewModel.deleteAllUserNotate(data)
-            }
+            viewModel.deleteAllUserNotate()
         }
         builder.setNegativeButton(getString(R.string.main_screen_dialog_no)) { _, _ ->
             //todo implement
@@ -66,20 +59,13 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         }
     }
 
-
     private fun setUserDrawerData(userLogName: String?) {
         val bindingDrawer = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
         userLogName?.let {
             bindingDrawer.tvHeaderName.text = it
         }
         bindingDrawer.itemHeaderMenuChangeTheme.setOnClickListener {
-            viewModel.toggleNightMode()
-        }
-    }
-
-    private fun loadData(args: MainScreenFragmentArgs) {
-        args.userLogName?.let { data ->
-            viewModel.loadData(userLogName = data)
+            viewModel.switchNightMode()
         }
     }
 
@@ -94,10 +80,8 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                     findNavController().navigate(action)
                 }
                 R.id.itemMenuGoToSettings -> {
-                    val data = args.userLogName
                     val action =
                         MainScreenFragmentDirections.actionMainScreenFragmentToSettingScreenFragment(
-                            data
                         )
                     findNavController().navigate(action)
                 }
@@ -130,22 +114,22 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             clickListener = {
                 viewModel.transitionToDetail(data = it)
             },
-            longClickListener = { item, view ->
+            longClickListener = { clickedItemModel, view ->
                 MainMenu(this)
                     .addElement(
                         name = R.string.main_screen_delete,
                         listener = {
                             val oldList = ArrayList(adapter.currentList)
-                            val index = oldList.indexOf(item)
+                            val index = oldList.indexOf(clickedItemModel)
                             oldList.removeAt(index)
                             adapter.submitList(oldList)
-                            viewModel.removeNotate(item)
+                            viewModel.removeNotate(clickedItemModel)
                         }
                     )
                     .addElement(
                         name = R.string.main_screen_refactor,
                         listener = {
-                            viewModel.transitionToRefactor(itemModel = item)
+                            viewModel.transitionToRefactor(itemModel = clickedItemModel)
                         }
                     )
 
@@ -164,6 +148,12 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private fun initObservers() {
         with(viewModel) {
+            sessionData.observe(viewLifecycleOwner) { name ->
+                if (name != null) {
+                    loadData(name)
+                    setUserDrawerData(name)
+                }
+            }
             listUserNotates.observe(viewLifecycleOwner) { listNotates ->
                 if (listNotates.isNotEmpty()) {
                     adapter.submitList(listNotates)
@@ -172,29 +162,28 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                     noDataVisible(false)
                 }
             }
-
-            itemClicked.observe(viewLifecycleOwner) { userModel ->
+            clickedItemNotateModel.observe(viewLifecycleOwner) { userModel ->
                 val action =
                     MainScreenFragmentDirections.actionMainScreenFragmentToDetailScreenFragment(
                         userModel
                     )
                 findNavController().navigate(action)
             }
-            isTransitionToCreate.observe(viewLifecycleOwner) { userLogName ->
-                findNavController().navigate(
-                    MainScreenFragmentDirections
-                        .actionMainScreenFragmentToCreateScreenFragment(
-                            userLogName,
-                            false,
-                            null
-                        )
-                )
+            isTransitionToCreate.observe(viewLifecycleOwner) {
+                if (it) {
+                    findNavController().navigate(
+                        MainScreenFragmentDirections
+                            .actionMainScreenFragmentToCreateScreenFragment(
+                                false,
+                                null
+                            )
+                    )
+                }
             }
             itemToRefactor.observe(viewLifecycleOwner) { itemModel ->
                 findNavController().navigate(
                     MainScreenFragmentDirections
                         .actionMainScreenFragmentToCreateScreenFragment(
-                            itemModel.userLogName,
                             true,
                             itemModel
                         )
@@ -226,7 +215,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
 
     private fun initClickListener() {
         binding.fabCreate.setOnClickListener {
-            viewModel.transitionToCreate(args.userLogName)
+            viewModel.transitionToCreate()
         }
         binding.burgerMenu.setOnClickListener {
             openDrawer()
@@ -236,9 +225,6 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
                 R.drawable.ic_baseline_delete_24,
                 R.string.main_menu_delete_all
             ) {
-//                args.userLogName?.let { data ->
-//                    viewModel.deleteAllUserNotate(data)
-//                }
                 showDialogDeleteAllNotate()
             }
                 .showAtRight(it)
@@ -253,9 +239,4 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
         mDrawerLayout.closeDrawer(GravityCompat.START)
 
     }
-
-    fun onBackPressed() {
-
-    }
-
 }

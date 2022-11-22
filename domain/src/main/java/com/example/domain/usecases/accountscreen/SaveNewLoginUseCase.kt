@@ -6,7 +6,9 @@ import com.example.domain.models.LoginUserModel
 import com.example.domain.models.toParam
 import com.example.domain.repository.UserRepository
 
-class SaveNewLoginUseCase(private val repository: UserRepository) {
+class SaveNewLoginUseCase(
+    private val repository: UserRepository,
+    ) {
     fun execute(oldName: String?, newName: String?): Response {
         try {
             validOldName(oldName)

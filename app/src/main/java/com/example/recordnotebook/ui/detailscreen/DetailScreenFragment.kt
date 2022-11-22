@@ -29,7 +29,6 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
         viewModel.selectUserModel.observe(viewLifecycleOwner) { userModel ->
             findNavController().navigate(
                 DetailScreenFragmentDirections.actionDetailScreenFragmentToCreateScreenFragment(
-                    userModel.userLogName,
                     true,
                     userModel
                 )

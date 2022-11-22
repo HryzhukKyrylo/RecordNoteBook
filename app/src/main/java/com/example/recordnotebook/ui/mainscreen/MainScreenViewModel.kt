@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.sessionapp.SessionApp
 import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.IOResponse
 import com.example.domain.models.UserNotateModel
@@ -24,16 +25,17 @@ class MainScreenViewModel(
     private val removeUserAllNotatesUseCase: RemoveUserAllNotatesUseCase,
     private val getNightModeUseCase: GetNightModeUseCase,
     private val saveNightModeUseCase: SaveNightModeUseCase,
+    private val sessionApp: SessionApp,
 ) : ViewModel() {
 
     private val _listUserNotates: MutableLiveData<List<UserNotateModel>> = MutableLiveData()
     val listUserNotates: LiveData<List<UserNotateModel>> = _listUserNotates
 
-    private val _itemClicked: MutableLiveData<UserNotateModel> = SingleLiveEvent()
-    val itemClicked: LiveData<UserNotateModel> = _itemClicked
+    private val _clickedItemNotateModel: MutableLiveData<UserNotateModel> = SingleLiveEvent()
+    val clickedItemNotateModel: LiveData<UserNotateModel> = _clickedItemNotateModel
 
-    private val _isTransitionToCreate: MutableLiveData<String?> = SingleLiveEvent()
-    val isTransitionToCreate: LiveData<String?> = _isTransitionToCreate
+    private val _isTransitionToCreate: MutableLiveData<Boolean> = SingleLiveEvent()
+    val isTransitionToCreate: LiveData<Boolean> = _isTransitionToCreate
 
     private val _itemToRefactor: MutableLiveData<UserNotateModel> = SingleLiveEvent()
     val itemToRefactor: LiveData<UserNotateModel> = _itemToRefactor
@@ -44,8 +46,15 @@ class MainScreenViewModel(
     private val _isNightMode: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNightMode: LiveData<Boolean> = _isNightMode
 
+    lateinit var sessionData: LiveData<String?>
+
     init {
+        loadSessionData()
         checkNightMode()
+    }
+
+    private fun loadSessionData() {
+        sessionData = sessionApp.sessionName
     }
 
     private fun checkNightMode() {
@@ -63,11 +72,11 @@ class MainScreenViewModel(
     }
 
     fun transitionToDetail(data: UserNotateModel) {
-        _itemClicked.value = data
+        _clickedItemNotateModel.value = data
     }
 
-    fun transitionToCreate(isCreated: String?) {
-        _isTransitionToCreate.value = isCreated
+    fun transitionToCreate() {
+        _isTransitionToCreate.value = true
     }
 
     fun transitionToRefactor(itemModel: UserNotateModel) {
@@ -80,26 +89,29 @@ class MainScreenViewModel(
         }
     }
 
-    fun deleteAllUserNotate(userLogName: String) {
+    fun deleteAllUserNotate() {
         viewModelScope.launch(Dispatchers.IO) {
-            val res = removeUserAllNotatesUseCase.execute(userLogName)
-            when (res) {
-                is IOResponse.Success -> {
-                    res.message?.let {
-                        _showMessage.postValue(it)
+            val userLogName = sessionData.value
+            userLogName?.let {
+                val res = removeUserAllNotatesUseCase.execute(userLogName)
+                when (res) {
+                    is IOResponse.Success -> {
+                        res.message?.let {
+                            _showMessage.postValue(it)
+                        }
+                        _listUserNotates.postValue(emptyList())
                     }
-                    _listUserNotates.postValue(emptyList())
-                }
-                is IOResponse.Error -> {
-                    res.errorMessage?.let {
-                        _showMessage.postValue(it)
+                    is IOResponse.Error -> {
+                        res.errorMessage?.let {
+                            _showMessage.postValue(it)
+                        }
                     }
                 }
             }
         }
     }
 
-    fun toggleNightMode() {
+    fun switchNightMode() {
         viewModelScope.launch(Dispatchers.IO) {
             val isNightModeOn = _isNightMode.value ?: false
             _isNightMode.postValue(!isNightModeOn)

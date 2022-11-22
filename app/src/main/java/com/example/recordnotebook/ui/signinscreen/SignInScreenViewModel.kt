@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.sessionapp.SessionAppMutable
 import com.example.domain.IOResponse
 import com.example.domain.models.LoginUserParams
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class SignInScreenViewModel(
     private val context: Application,
     private val verifyLoginUserCase: VerifyLoginUserCase,
+    private val sessionApp: SessionAppMutable,
 ) : ViewModel() {
     private val _isVerifySuccess: MutableLiveData<Boolean> = SingleLiveEvent()
     val isVerifySuccess: LiveData<Boolean> = _isVerifySuccess
@@ -51,6 +53,7 @@ class SignInScreenViewModel(
                         result.data?.let {
                             _isVerifySuccess.postValue(true)
                         }
+                        sessionApp.setSessionName(userParams.loginParam)
                     }
                     is IOResponse.Error -> {
                         result.errorMessage?.let { _showMessage.postValue(it) }
@@ -59,7 +62,6 @@ class SignInScreenViewModel(
 
             }
         } else {
-//            _isVerifySuccess.value = false
             _showMessage.value = context.getString(R.string.signing_screen_login_field_are_empty)
         }
     }

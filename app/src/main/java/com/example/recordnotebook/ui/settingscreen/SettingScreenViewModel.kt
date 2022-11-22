@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.sessionapp.SessionApp
 import com.example.domain.IOResponse
 import com.example.domain.usecases.settingscreen.DeleteAccountUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class SettingScreenViewModel(
     private val deleteAccount: DeleteAccountUseCase,
+    private val sessionApp: SessionApp,
 ) : ViewModel() {
 
     private val _goToRefactorAccount: MutableLiveData<Boolean> = SingleLiveEvent()
@@ -22,6 +24,16 @@ class SettingScreenViewModel(
 
     private val _showMessage: MutableLiveData<String> = SingleLiveEvent()
     val showMessage: LiveData<String> = _showMessage
+
+    lateinit var sessionName: LiveData<String?>
+
+    init {
+        loadSessionData()
+    }
+
+    private fun loadSessionData() {
+        sessionName = sessionApp.sessionName
+    }
 
     fun deleteAccount(logName: String) {
         viewModelScope.launch(Dispatchers.IO) {

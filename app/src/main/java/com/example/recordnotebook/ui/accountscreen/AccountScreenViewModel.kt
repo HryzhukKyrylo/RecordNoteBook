@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.sessionapp.SessionAppMutable
 import com.example.domain.IOResponse
 import com.example.domain.models.LoginUserModel
 import com.example.domain.usecases.accountscreen.GetUserLoginUseCase
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 class AccountScreenViewModel(
     private val getUserLoginUseCase: GetUserLoginUseCase,
     private val saveNewLoginUseCase: SaveNewLoginUseCase,
+    private val sessionApp: SessionAppMutable,
 ) : ViewModel() {
 
     private val _userLoginData: MutableLiveData<LoginUserModel> =
@@ -23,6 +25,19 @@ class AccountScreenViewModel(
 
     private val _showMessage: MutableLiveData<String> = SingleLiveEvent()
     val showMessage: LiveData<String> = _showMessage
+
+    private val _isLogNameChanged: MutableLiveData<Boolean> = SingleLiveEvent()
+    val isLogNameChanged: LiveData<Boolean> = _isLogNameChanged
+
+    lateinit var sessionName: LiveData<String?>
+
+    init {
+        setSessionData()
+    }
+
+    private fun setSessionData() {
+        sessionName = sessionApp.sessionName
+    }
 
     fun loadData(data: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -61,6 +76,8 @@ class AccountScreenViewModel(
                     resVal.message?.let { message ->
                         _showMessage.postValue(message)
                     }
+                    sessionApp.changeSessionName(data) //todo think how do that better
+                    _isLogNameChanged.postValue(true)
                 }
                 is IOResponse.Error -> {
                     resVal.errorMessage?.let { message ->

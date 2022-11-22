@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.sessionapp.SessionApp
 import com.example.domain.models.CreateUserParams
 import com.example.domain.models.UserNotateModel
 import com.example.domain.usecases.createscreen.SaveUserNotateUseCase
@@ -12,21 +13,31 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CreateScreenViewModel(
-    private val saveUserNotateUseCase: SaveUserNotateUseCase
+    private val saveUserNotateUseCase: SaveUserNotateUseCase,
+    private val sessionApp: SessionApp,
 ) : ViewModel() {
-
 
     private val _isDataSaved: MutableLiveData<Boolean> = SingleLiveEvent()
     val isDataSaved: LiveData<Boolean> = _isDataSaved
 
+    lateinit var sessionName: LiveData<String?>
+
+    init {
+        setSessionData()
+    }
+
+    private fun setSessionData() {
+        sessionName = sessionApp.sessionName
+    }
+
     fun saveUserData(
         create: Boolean,
-        userName: String?,
         logData: String,
         passData: String,
         userModel: UserNotateModel?
     ) {
         val isEmptyOrChangeData = checkEmptyOrChangeData(logData, passData, userModel)
+        val userName = sessionName.value
         if (isEmptyOrChangeData) {
             val useParams = createUserParams(userName, create, logData, passData, userModel)
             viewModelScope.launch(Dispatchers.IO) {

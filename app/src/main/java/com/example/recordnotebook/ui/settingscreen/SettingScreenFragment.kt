@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.recordnotebook.R
 import com.example.recordnotebook.databinding.FragmentSettingScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
@@ -13,18 +12,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
 
-    private val args: SettingScreenFragmentArgs by navArgs()
     private val viewModel: SettingScreenViewModel by viewModel()
     private var userData: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val data = args.userLogName
-        if (data == null) {
-            findNavController().navigateUp()
-        } else {
-            setUserData(data)
-        }
         initClickListener()
         initObserver()
     }
@@ -43,7 +35,6 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
     }
 
     private fun setUserData(data: String) {
-        userData = data
         binding.tvUserLogName.text = data
     }
 
@@ -53,10 +44,8 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
                 //todo implement
                 val action =
                     SettingScreenFragmentDirections.actionSettingScreenFragmentToAccountScreenFragment(
-                        userData
                     )
                 findNavController().navigate(action)
-//                requireContext().showToast("Sorry - not implemented")
             }
             goToLogIn.observe(viewLifecycleOwner) {
                 if (it) {
@@ -67,6 +56,13 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
             showMessage.observe(viewLifecycleOwner) {
                 requireContext().showToast(it)
             }
+            sessionName.observe(viewLifecycleOwner) { data ->
+                if (data != null) {
+                    setUserData(data)
+                } else {
+                    findNavController().navigateUp()
+                }
+            }
         }
     }
 
@@ -75,8 +71,6 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
             showDeleteAccountDialog()
         }
         binding.ivRefactor.setOnClickListener {
-            // todo implement
-//            requireContext().showToast("Sorry - not implemented")
             viewModel.goToRefactorAccount()
         }
     }

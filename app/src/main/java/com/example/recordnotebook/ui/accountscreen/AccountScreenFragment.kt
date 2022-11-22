@@ -2,7 +2,7 @@ package com.example.recordnotebook.ui.accountscreen
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import com.example.domain.models.LoginUserModel
 import com.example.recordnotebook.databinding.FragmentAccountScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
@@ -11,16 +11,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
 
-    private val args: AccountScreenFragmentArgs by navArgs()
     private val viewModel by viewModel<AccountScreenViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        args.userLogName?.let {
-            requireContext().showToast(it)
-            loadData(it)
-        }
 
         initClickListeners()
         initObservers()
@@ -34,7 +28,23 @@ class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
             userLoginData.observe(viewLifecycleOwner) { loginData ->
                 setLoginData(loginData)
             }
+            sessionName.observe(viewLifecycleOwner) { data ->
+                if (data != null) {
+                    loadData(data)
+                } else {
+                    findNavController().navigateUp()
+                }
+            }
+            isLogNameChanged.observe(viewLifecycleOwner) {
+                if (it) {
+                    clearLogNameEdit()
+                }
+            }
         }
+    }
+
+    private fun clearLogNameEdit() {
+        binding.etNewLogName.text = null
     }
 
     private fun setLoginData(loginData: LoginUserModel?) {
@@ -49,9 +59,4 @@ class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
             viewModel.changeUserLogName(data)
         }
     }
-
-    private fun loadData(data: String) {
-        viewModel.loadData(data)
-    }
-
 }

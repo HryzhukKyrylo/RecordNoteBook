@@ -2,7 +2,6 @@ package com.example.recordnotebook.ui.createscreen
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.OvershootInterpolator
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.R
@@ -15,7 +14,6 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     private val args: CreateScreenFragmentArgs by navArgs()
     private val viewModel by viewModel<CreateScreenViewModel>()
-    private var userName: String? = null
     private var userModel: UserNotateModel? = null
     private var isCreate: Boolean = false
 
@@ -37,7 +35,6 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
 
     private fun setUserData(args: CreateScreenFragmentArgs) {
         with(args) {
-            userName?.let { this@CreateScreenFragment.userName = it }
             userModel?.let { this@CreateScreenFragment.userModel = it }
             isCreate.let { this@CreateScreenFragment.isCreate = it }
         }
@@ -60,17 +57,11 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         binding.etPassData.setText(notate.privateInfo)
     }
 
-    override fun onStop() {
-        super.onStop()
-//        saveUserData()
-    }
-
     private fun saveUserData() {
         val logData = binding.etLogData.text.toString()
         val passData = binding.etPassData.text.toString()
         viewModel.saveUserData(
             create = isCreate,
-            userName = userName,
             logData = logData,
             passData = passData,
             userModel = userModel,
