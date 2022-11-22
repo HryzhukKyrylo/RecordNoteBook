@@ -50,7 +50,6 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
     }
 
 
-
     private fun initObservers() {
         with(viewModel) {
             isClearFields.observe(viewLifecycleOwner) { isClear ->
@@ -61,9 +60,8 @@ class SignInScreenFragment : BaseFragment<FragmentSigninScreenBinding>() {
             }
             isVerifySuccess.observe(viewLifecycleOwner) { isSuccess ->
                 if (isSuccess) {
-                    val data = viewModel.getUserValidData()
                     val action =
-                        SignInScreenFragmentDirections.actionSignInScreenFragmentToMainGraph(data?.loginParam)
+                        SignInScreenFragmentDirections.actionSignInScreenFragmentToMainGraph()
                     findNavController().navigate(action)
                 }
             }

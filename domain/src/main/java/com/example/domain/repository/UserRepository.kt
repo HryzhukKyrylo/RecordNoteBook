@@ -11,6 +11,7 @@ interface UserRepository {
     fun saveUserNotate(userParams: CreateUserParams): Boolean
     fun saveNightMode(mode: Int)
     fun saveAllUserNotates(userNotates: List<UserNotateModel>)
+    fun saveNewPassword(loginUserParams: LoginUserParams)
 
 
     fun getUserNotates(userParam: String): List<UserNotateModel>
@@ -22,4 +23,5 @@ interface UserRepository {
     fun removeUserAllNotates(userLogName: String): Response
     fun deleteAccount(userName: String): Response
     fun deleteUserLogin(userName: String): Response
+
 }

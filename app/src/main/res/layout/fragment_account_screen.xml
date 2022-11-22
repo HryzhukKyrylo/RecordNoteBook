@@ -28,8 +28,8 @@
             tools:text="LogName" />
 
         <EditText
-            style="@style/MainText"
             android:id="@+id/etNewLogName"
+            style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallMarginTop"
@@ -66,6 +66,7 @@
             android:text="Current password" />
 
         <EditText
+            android:id="@+id/etCurrentPassword"
             style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
             android:text="New password" />
 
         <EditText
+            android:id="@+id/etNewPassword"
             style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,6 +96,7 @@
             android:text="Confirm new password" />
 
         <EditText
+            android:id="@+id/etConfirmPassword"
             style="@style/MainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

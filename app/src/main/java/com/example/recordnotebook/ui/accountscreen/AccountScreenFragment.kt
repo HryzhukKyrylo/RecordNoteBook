@@ -40,7 +40,18 @@ class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
                     clearLogNameEdit()
                 }
             }
+            isPasswordChanged.observe(viewLifecycleOwner) {
+                if (it) {
+                    clearPasswordFields()
+                }
+            }
         }
+    }
+
+    private fun clearPasswordFields() {
+        binding.etCurrentPassword.text = null
+        binding.etNewPassword.text = null
+        binding.etConfirmPassword.text = null
     }
 
     private fun clearLogNameEdit() {
@@ -57,6 +68,12 @@ class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
         binding.btnSaveLogName.setOnClickListener {
             val data = binding.etNewLogName.text.toString()
             viewModel.changeUserLogName(data)
+        }
+        binding.btnSavePassword.setOnClickListener {
+            val curPass = binding.etCurrentPassword.text.toString()
+            val newPass = binding.etNewPassword.text.toString()
+            val confPass = binding.etConfirmPassword.text.toString()
+            viewModel.saveNewPassword(curPass, newPass, confPass)
         }
     }
 }

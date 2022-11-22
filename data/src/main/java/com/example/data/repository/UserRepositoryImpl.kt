@@ -57,12 +57,6 @@ class UserRepositoryImpl(
     override fun removeNotate(userNotateModel: UserNotateModel): Boolean {
         val userDTO = userNotateModel.mapToDTO()
         return localStorage.removeNotate(userDTO)
-
-        val resVal = try {
-
-        } catch (ex: Exception) {
-
-        }
     }
 
     override fun removeUserAllNotates(userLogName: String): Response {
@@ -91,6 +85,12 @@ class UserRepositoryImpl(
     override fun saveAllUserNotates(userNotates: List<UserNotateModel>) {
         val listDto = userNotates.map { item -> item.mapToDTO() }
         localStorage.saveAllUserNotates(userNotates = listDto)
+    }
+
+    override fun saveNewPassword(loginUserParams: LoginUserParams) {
+        localStorage.removeUserLogin(loginUserParams.loginParam)
+        val userDTO = loginUserParams.mapToDTO()
+        localStorage.saveLoginUser(userDTO)
     }
 
     override fun deleteAccount(userName: String): Response {

@@ -67,7 +67,8 @@ val appModule = module {
         AccountScreenViewModel(
             getUserLoginUseCase = get(),
             saveNewLoginUseCase = get(),
-            sessionApp = get()
+            sessionApp = get(),
+            saveNewPasswordUseCase = get(),
         )
     }
 }

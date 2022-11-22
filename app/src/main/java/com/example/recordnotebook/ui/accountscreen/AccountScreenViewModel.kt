@@ -9,6 +9,7 @@ import com.example.domain.IOResponse
 import com.example.domain.models.LoginUserModel
 import com.example.domain.usecases.accountscreen.GetUserLoginUseCase
 import com.example.domain.usecases.accountscreen.SaveNewLoginUseCase
+import com.example.domain.usecases.accountscreen.SaveNewPasswordUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class AccountScreenViewModel(
     private val getUserLoginUseCase: GetUserLoginUseCase,
     private val saveNewLoginUseCase: SaveNewLoginUseCase,
+    private val saveNewPasswordUseCase: SaveNewPasswordUseCase,
     private val sessionApp: SessionAppMutable,
 ) : ViewModel() {
 
@@ -28,6 +30,9 @@ class AccountScreenViewModel(
 
     private val _isLogNameChanged: MutableLiveData<Boolean> = SingleLiveEvent()
     val isLogNameChanged: LiveData<Boolean> = _isLogNameChanged
+
+    private val _isPasswordChanged: MutableLiveData<Boolean> = SingleLiveEvent()
+    val isPasswordChanged: LiveData<Boolean> = _isPasswordChanged
 
     lateinit var sessionName: LiveData<String?>
 
@@ -82,6 +87,33 @@ class AccountScreenViewModel(
                 is IOResponse.Error -> {
                     resVal.errorMessage?.let { message ->
                         _showMessage.postValue(message)
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun saveNewPassword(curPass: String, newPass: String, confPass: String) {
+        viewModelScope.launch(Dispatchers.IO) { //todo create own impl IO,Main ...
+            userLoginData.value?.login?.let { login ->
+                val resVal = saveNewPasswordUseCase.execute(
+                    login,
+                    curPass,
+                    newPass,
+                    confPass
+                )
+                when (resVal) {
+                    is IOResponse.Success -> {
+                        resVal.message?.let { data ->
+                            _showMessage.postValue(data)
+                        }
+                        _isPasswordChanged.postValue(true)
+                    }
+                    is IOResponse.Error -> {
+                        resVal.errorMessage?.let { data ->
+                            _showMessage.postValue(data)
+                        }
                     }
                 }
             }

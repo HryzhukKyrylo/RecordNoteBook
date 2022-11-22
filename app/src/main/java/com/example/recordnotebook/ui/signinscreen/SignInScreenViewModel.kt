@@ -31,12 +31,6 @@ class SignInScreenViewModel(
     private val _showMessage: MutableLiveData<String> = SingleLiveEvent()
     val showMessage: LiveData<String> = _showMessage
 
-    private val _userValidData: MutableLiveData<LoginUserParams> = SingleLiveEvent()
-
-    fun getUserValidData(): LoginUserParams? {
-        return _userValidData.value
-    }
-
     fun clearFields() {
         _isClearFields.value = true
     }
@@ -48,10 +42,11 @@ class SignInScreenViewModel(
                 val result = verifyLoginUserCase.execute(userParams = userParams)
                 when (result) {
                     is IOResponse.Success -> {
-                        //todo
-                        _userValidData.postValue(userParams)
                         result.data?.let {
                             _isVerifySuccess.postValue(true)
+                        }
+                        result.message?.let { message ->
+                            _showMessage.postValue(message)
                         }
                         sessionApp.setSessionName(userParams.loginParam)
                     }
