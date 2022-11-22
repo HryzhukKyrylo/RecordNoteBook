@@ -78,6 +78,9 @@
             android:defaultValue="@null"
             app:argType="com.example.domain.models.UserNotateModel"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_createScreenFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailScreenFragment"

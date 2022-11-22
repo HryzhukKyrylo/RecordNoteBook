@@ -2,6 +2,7 @@ package com.example.recordnotebook.ui.createscreen
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.R
@@ -45,6 +46,9 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
             isDataSaved.observe(viewLifecycleOwner) {
                 if (it) {
                     requireContext().showToast(getString(R.string.create_screen_saved))
+                    val action =
+                        CreateScreenFragmentDirections.actionCreateScreenFragmentToMainScreenFragment()
+                    findNavController().navigate(action)
                 } else {
                     requireContext().showToast(getString(R.string.create_screen_something_wrong))
                 }
