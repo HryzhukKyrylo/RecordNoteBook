@@ -1,12 +1,17 @@
 package com.example.recordnotebook.ui.detailscreen
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.FragmentDetailScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
+import com.example.recordnotebook.utils.copyToClipboard
 import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,11 +50,13 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
         }
 
         binding.tvDetailLog.setOnLongClickListener {
-            requireContext().showToast("Copy text - doesn't work")
+            val textForCopy = binding.tvDetailLog.text.toString()
+            requireContext().copyToClipboard(textForCopy)
             true
         }
         binding.tvDetailPass.setOnLongClickListener {
-            requireContext().showToast("Copy text - doesn't work")
+            val textForCopy = binding.tvDetailPass.text.toString()
+            requireContext().copyToClipboard(textForCopy)
             true
         }
 
