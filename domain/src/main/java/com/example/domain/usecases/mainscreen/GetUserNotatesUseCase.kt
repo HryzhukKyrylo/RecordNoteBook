@@ -5,6 +5,7 @@ import com.example.domain.repository.UserRepository
 
 class GetUserNotatesUseCase(private val repository: UserRepository) {
     fun execute(userParam: String): List<UserNotateModel> {
-        return repository.getUserNotates(userParam = userParam)
+        val list = repository.getUserNotates(userParam = userParam).sortedByDescending { it.timeLastChange }
+        return list
     }
 }
