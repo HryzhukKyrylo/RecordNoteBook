@@ -42,7 +42,8 @@ val appModule = module {
             removeUserAllNotatesUseCase = get(),
             getNightModeUseCase = get(),
             saveNightModeUseCase = get(),
-            sessionApp = get<SessionApp>()
+            sessionApp = get<SessionApp>(),
+            get(),
         )
     }
     viewModel {
@@ -61,6 +62,7 @@ val appModule = module {
         SettingScreenViewModel(
             deleteAccount = get(),
             sessionApp = get(),
+            get()
         )
     }
     viewModel {
@@ -69,6 +71,7 @@ val appModule = module {
             saveNewLoginUseCase = get(),
             sessionApp = get(),
             saveNewPasswordUseCase = get(),
+            context = get()
         )
     }
 }

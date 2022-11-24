@@ -1,7 +1,6 @@
 package com.example.recordnotebook.ui.signupscreen
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,13 +10,14 @@ import com.example.domain.models.LoginUserParams
 import com.example.domain.usecases.signupscreen.SaveLoginUserUseCase
 import com.example.recordnotebook.R
 import com.example.recordnotebook.utils.SingleLiveEvent
+import com.example.recordnotebook.utils.parseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SignUpScreenViewModel(
     private val context: Application,
     private val saveLoginUserUseCase: SaveLoginUserUseCase
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _isClearFields: MutableLiveData<Boolean> = SingleLiveEvent()
     val isClearFields: LiveData<Boolean> = _isClearFields
@@ -41,14 +41,15 @@ class SignUpScreenViewModel(
                 when (result) {
                     is IOResponse.Success -> {
                         _isSavedSuccessful.postValue(true)
-                        result.message?.let {
+                        parseResult(result.message, context)?.let {
                             _showMessage.postValue(it)
                         }
                     }
                     is IOResponse.Error -> {
-                        result.errorMessage?.let {
-                            _showMessage.postValue(it)
-                        }
+                        parseResult(
+                            result.errorMessage,
+                            context
+                        )?.let { _showMessage.postValue(it) }
                     }
                 }
             } else {

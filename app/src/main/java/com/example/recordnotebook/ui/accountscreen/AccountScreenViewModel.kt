@@ -1,5 +1,6 @@
 package com.example.recordnotebook.ui.accountscreen
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import com.example.domain.usecases.accountscreen.GetUserLoginUseCase
 import com.example.domain.usecases.accountscreen.SaveNewLoginUseCase
 import com.example.domain.usecases.accountscreen.SaveNewPasswordUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
+import com.example.recordnotebook.utils.parseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -19,6 +21,7 @@ class AccountScreenViewModel(
     private val saveNewLoginUseCase: SaveNewLoginUseCase,
     private val saveNewPasswordUseCase: SaveNewPasswordUseCase,
     private val sessionApp: SessionAppMutable,
+    private val context: Application,
 ) : ViewModel() {
 
     private val _userLoginData: MutableLiveData<LoginUserModel> =
@@ -55,13 +58,13 @@ class AccountScreenViewModel(
                             _userLoginData.postValue(loginUserData)
                         }
                     }
-                    resVal.message?.let { message ->
-                        _showMessage.postValue(message)
+                    parseResult(resVal.message, context)?.let {
+                        _showMessage.postValue(it)
                     }
                 }
                 is IOResponse.Error -> {
-                    resVal.errorMessage?.let { message ->
-                        _showMessage.postValue(message)
+                    parseResult(resVal.errorMessage, context)?.let {
+                        _showMessage.postValue(it)
                     }
                 }
             }
@@ -78,15 +81,15 @@ class AccountScreenViewModel(
             )
             when (resVal) {
                 is IOResponse.Success -> {
-                    resVal.message?.let { message ->
-                        _showMessage.postValue(message)
+                    parseResult(resVal.message, context)?.let {
+                        _showMessage.postValue(it)
                     }
                     sessionApp.changeSessionName(data) //todo think how do that better
                     _isLogNameChanged.postValue(true)
                 }
                 is IOResponse.Error -> {
-                    resVal.errorMessage?.let { message ->
-                        _showMessage.postValue(message)
+                    parseResult(resVal.errorMessage, context)?.let {
+                        _showMessage.postValue(it)
                     }
                 }
             }
@@ -105,14 +108,14 @@ class AccountScreenViewModel(
                 )
                 when (resVal) {
                     is IOResponse.Success -> {
-                        resVal.message?.let { data ->
-                            _showMessage.postValue(data)
+                        parseResult(resVal.message, context)?.let {
+                            _showMessage.postValue(it)
                         }
                         _isPasswordChanged.postValue(true)
                     }
                     is IOResponse.Error -> {
-                        resVal.errorMessage?.let { data ->
-                            _showMessage.postValue(data)
+                        parseResult(resVal.errorMessage, context)?.let {
+                            _showMessage.postValue(it)
                         }
                     }
                 }

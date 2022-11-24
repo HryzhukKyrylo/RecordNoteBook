@@ -9,7 +9,6 @@ val dataModule = module {
 
     factory<UserRepository> {
         UserRepositoryImpl(
-            context = get(),
             localStorage = get(),
             preferencesStorage = get(),
         )

@@ -24,7 +24,7 @@ val userDatabaseModule = module {
     }
 
     single<LocalStorage> {
-        LocalStorageImpl(get(), get())
+        LocalStorageImpl(get(), )
     }
 
     single<SharedPreferencesStorage> {

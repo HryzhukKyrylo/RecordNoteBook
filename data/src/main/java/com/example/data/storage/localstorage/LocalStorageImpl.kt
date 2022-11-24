@@ -1,15 +1,9 @@
 package com.example.data.storage.localstorage
 
-import android.app.Application
-import com.example.data.R
 import com.example.data.storage.models.UserLoginDTO
 import com.example.data.storage.models.UserNotateDTO
-import com.example.domain.IOResponse
-import com.example.domain.Response
-import com.example.domain.utils.MessageException
 
 class LocalStorageImpl(
-    private val context: Application,
     private val database: UserDatabase,
 ) : LocalStorage {
 
@@ -45,45 +39,27 @@ class LocalStorageImpl(
         return result
     }
 
-    override fun getLoginUser(userLogName: String): UserLoginDTO? {
+    override fun getUserLogin(userLogName: String): UserLoginDTO? {
         return database.userLoginDao()
             .getUserLogin(userLogNameParam = userLogName)
     }
 
-    override fun saveLoginUser(userLogin: UserLoginDTO): Response {
-        val resVal = try {
-            val logs = database.userLoginDao().getUserLogin(userLogNameParam = userLogin.login)
-            if (logs == null) {
-                database.userLoginDao().saveUserLogin(userLogin)
-                IOResponse.Success(message = context.getString(R.string.saved_success), data = null)
-            } else {
-                IOResponse.Error(errorMessage = context.getString(R.string.log_is_exist))
-            }
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-            IOResponse.Error(errorMessage = context.getString(R.string.saved_error))
-        }
-        return resVal
+    override fun saveLoginUser(userLogin: UserLoginDTO) {
+        database.userLoginDao().saveUserLogin(userNotate = userLogin)
     }
 
-    override fun removeUserAllNotates(userLogin: String) {
-        try {
-            database.userDao().deleteUserAllNotates(userLogin)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-            throw MessageException(context.getString(R.string.delete_error_wrong))
-        }
+    override fun removeUserAllNotates(userLoginName: String) {
+        //todo refactored
+        database.userDao().deleteUserAllNotates(userLoginName)
     }
 
-    override fun removeUserLogin(userLogin: String) {
-        try {
-            val oldUser = database.userLoginDao().getUserLogin(userLogin)
-                ?: throw MessageException(context.getString(R.string.user_doesnt_exist))
+    override fun removeUserLogin(userLoginName: String): Boolean {
+        val oldUser = database.userLoginDao().getUserLogin(userLoginName)
+        val res = oldUser?.let {
             database.userLoginDao().delete(oldUser)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-            throw Exception(context.getString(R.string.delete_user_wrong))
-        }
+            true
+        } ?: false
+        return res
     }
 
 }

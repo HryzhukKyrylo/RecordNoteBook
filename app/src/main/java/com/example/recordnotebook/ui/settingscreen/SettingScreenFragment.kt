@@ -27,7 +27,10 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
         builder.setMessage(getString(R.string.setting_screen_dialog_dialog_message))
         builder.setPositiveButton(
             getString(R.string.setting_screen_dialog_btn_yes)
-        ) { _, _ -> userData?.let { it1 -> viewModel.deleteAccount(it1) } }
+        ) { _, _ ->
+            viewModel.deleteAccount()
+        }
+
         builder.setNegativeButton(getString(R.string.setting_screen_dialog_btn_no)) { _, _ ->
         }
         val alertDialog = builder.create()
@@ -41,7 +44,6 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
     private fun initObserver() {
         with(viewModel) {
             gotToRefactorAccount.observe(viewLifecycleOwner) {
-                //todo implement
                 val action =
                     SettingScreenFragmentDirections.actionSettingScreenFragmentToAccountScreenFragment(
                     )

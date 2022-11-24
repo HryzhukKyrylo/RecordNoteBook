@@ -11,6 +11,7 @@ import com.example.domain.models.LoginUserParams
 import com.example.domain.usecases.loginscreen.VerifyLoginUserCase
 import com.example.recordnotebook.R
 import com.example.recordnotebook.utils.SingleLiveEvent
+import com.example.recordnotebook.utils.parseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -45,13 +46,15 @@ class SignInScreenViewModel(
                         result.data?.let {
                             _isVerifySuccess.postValue(true)
                         }
-                        result.message?.let { message ->
-                            _showMessage.postValue(message)
+                        parseResult(result.message, context)?.let {
+                            _showMessage.postValue(it)
                         }
                         sessionApp.setSessionName(userParams.loginParam)
                     }
                     is IOResponse.Error -> {
-                        result.errorMessage?.let { _showMessage.postValue(it) }
+                        parseResult(result.errorMessage, context)?.let {
+                            _showMessage.postValue(it)
+                        }
                     }
                 }
 
