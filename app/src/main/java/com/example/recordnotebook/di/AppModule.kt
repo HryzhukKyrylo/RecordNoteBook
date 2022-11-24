@@ -25,14 +25,14 @@ val appModule = module {
 
     viewModel {
         SignInScreenViewModel(
-            context = get(),
+            parseResult = get(),
             verifyLoginUserCase = get(),
             sessionApp = get()
         )
     }
     viewModel {
         SignUpScreenViewModel(
-            context = get(), saveLoginUserUseCase = get()
+            parseResult = get(), saveLoginUserUseCase = get()
         )
     }
     viewModel {
@@ -42,8 +42,8 @@ val appModule = module {
             removeUserAllNotatesUseCase = get(),
             getNightModeUseCase = get(),
             saveNightModeUseCase = get(),
-            sessionApp = get<SessionApp>(),
-            get(),
+            sessionApp = get(),
+            parseResult = get(),
         )
     }
     viewModel {
@@ -62,7 +62,7 @@ val appModule = module {
         SettingScreenViewModel(
             deleteAccount = get(),
             sessionApp = get(),
-            get()
+            parseResult = get()
         )
     }
     viewModel {
@@ -71,7 +71,7 @@ val appModule = module {
             saveNewLoginUseCase = get(),
             sessionApp = get(),
             saveNewPasswordUseCase = get(),
-            context = get()
+            parseResult = get()
         )
     }
 }

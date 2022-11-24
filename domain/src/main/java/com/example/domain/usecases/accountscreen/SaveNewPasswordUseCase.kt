@@ -4,8 +4,7 @@ import com.example.domain.IOResponse
 import com.example.domain.Response
 import com.example.domain.models.LoginUserParams
 import com.example.domain.repository.UserRepository
-import com.example.domain.usecases.AccountSavedSuccessResult
-import com.example.domain.usecases.AccountSomethingWentWrongExceptionResult
+import com.example.domain.usecases.*
 
 class SaveNewPasswordUseCase(
     private val repository: UserRepository,
@@ -20,60 +19,72 @@ class SaveNewPasswordUseCase(
         val res = try {
             val login = repository.getUserLogin(login)
             val password = login?.password ?: return IOResponse.Error(
-                AccountSomethingWentWrongExceptionResult("Can't find old password")
+                AccountCantFindOldPasswordResult
             )
             val loginName = login.login
-            verifyEmptyPassword(password, curPass, newPass, confPass)
-            verifyPassword(password, curPass)
-            sheckTheSamePassword(curPass, newPass)
-            confirmPassword(newPass, confPass)
-            if (password == curPass && newPass == confPass) {
-                val param = LoginUserParams(loginName, newPass)
-                repository.saveNewPassword(param)
-            }
-            IOResponse.Success(AccountSavedSuccessResult, null)
+            return verifyEmptyPasswords(curPass, newPass, confPass)
+                ?: verifyPassword(password, curPass)
+                ?: checkTheSamePassword(curPass, newPass)
+                ?: confirmPassword(newPass, confPass)
+                ?: savePassword(password, curPass, newPass, confPass, loginName)
         } catch (ex: Exception) {
             ex.printStackTrace()
             IOResponse.Error(AccountSomethingWentWrongExceptionResult(ex.message))
-        } catch (myEx: IllegalStateException) {
-            myEx.printStackTrace()
-            IOResponse.Error(AccountSomethingWentWrongExceptionResult(myEx.message))
         }
         return res
     }
 
-    private fun sheckTheSamePassword(curPass: String, newPass: String) {
-        if (curPass == newPass) {
-            throw IllegalStateException("The new password matches the current one")
-        }
-    }
-
-    private fun confirmPassword(newPass: String, confPass: String) {
-        if (newPass != confPass) {
-            throw IllegalStateException("Confirm password wrong")
-        }
-    }
-
-    private fun verifyPassword(password: String, curPass: String) {
-        if (password != curPass) {
-            throw IllegalStateException("Current password is wrong")
-        }
-    }
-    //TODO think about that - do better
-    private fun verifyEmptyPassword(
+    private fun savePassword(
         password: String,
         curPass: String,
         newPass: String,
+        confPass: String,
+        loginName: String
+    ): Response {
+        return if (password == curPass && newPass == confPass) {
+            val param = LoginUserParams(loginName, newPass)
+            repository.saveNewPassword(param)
+            IOResponse.Success(AccountSavedSuccessResult, null)
+        } else {
+            IOResponse.Error(AccountSavedErrorResult)
+        }
+    }
+
+    private fun checkTheSamePassword(curPass: String, newPass: String): Response? {
+        if (curPass == newPass) {
+            return IOResponse.Error(AccountNewPasswordMatchesResult)
+        }
+        return null
+    }
+
+    private fun confirmPassword(newPass: String, confPass: String): Response? {
+        if (newPass != confPass) {
+            return IOResponse.Error(AccountConfirmPasswordWrongResult)
+        }
+        return null
+    }
+
+    private fun verifyPassword(password: String, curPass: String): Response? {
+        if (password != curPass) {
+            return IOResponse.Error(AccountCurrentPasswordWrongResult)
+        }
+        return null
+    }
+
+    private fun verifyEmptyPasswords(
+        curPass: String,
+        newPass: String,
         confPass: String
-    ) {
+    ): Response? {
         if (curPass.trim().isEmpty()) {
-            throw IllegalStateException("Current pass is empty - please write current password")
+            return IOResponse.Error(AccountCurrentPasswordEmptyResult)
         }
         if (newPass.trim().isEmpty()) {
-            throw IllegalStateException("Empty field - please write password")
+            return IOResponse.Error(AccountNewEmptyPasswordResult)
         }
         if (confPass.trim().isEmpty()) {
-            throw IllegalStateException("Empty field - please write password")
+            return IOResponse.Error(AccountConfirmEmptyPasswordResult)
         }
+        return null
     }
 }

@@ -1,6 +1,5 @@
 package com.example.recordnotebook.ui.mainscreen
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,13 +8,13 @@ import com.example.data.sessionapp.SessionApp
 import com.example.data.storage.preferences.SharedPreferencesStorage
 import com.example.domain.IOResponse
 import com.example.domain.models.UserNotateModel
+import com.example.domain.parser.ResultParser
 import com.example.domain.usecases.GetNightModeUseCase
 import com.example.domain.usecases.SaveNightModeUseCase
 import com.example.domain.usecases.mainscreen.GetUserNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserAllNotatesUseCase
 import com.example.domain.usecases.mainscreen.RemoveUserNotateUseCase
 import com.example.recordnotebook.utils.SingleLiveEvent
-import com.example.recordnotebook.utils.parseResult
 import com.example.recordnotebook.utils.setNightMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class MainScreenViewModel(
     private val getNightModeUseCase: GetNightModeUseCase,
     private val saveNightModeUseCase: SaveNightModeUseCase,
     private val sessionApp: SessionApp,
-    private val context: Application
+    private val parseResult: ResultParser
 ) : ViewModel() {
 
     private val _listUserNotates: MutableLiveData<List<UserNotateModel>> = MutableLiveData()
@@ -76,7 +75,7 @@ class MainScreenViewModel(
                     _listUserNotates.postValue(result.data as List<UserNotateModel>)
                 }
                 is IOResponse.Error -> {
-                    parseResult(result.errorMessage, context)?.let {
+                    parseResult(result.errorMessage)?.let {
                         _showMessage.postValue(it)
                     }
                 }
@@ -101,12 +100,12 @@ class MainScreenViewModel(
             val result = removeUserNotateUseCase.execute(userNotateModel)
             when (result) {
                 is IOResponse.Success -> {
-                    parseResult(result.message, context)?.let {
+                    parseResult(result.message)?.let {
                         _showMessage.postValue(it)
                     }
                 }
                 is IOResponse.Error -> {
-                    parseResult(result.errorMessage, context)?.let {
+                    parseResult(result.errorMessage)?.let {
                         _showMessage.postValue(it)
                     }
                 }
@@ -121,13 +120,13 @@ class MainScreenViewModel(
                 val result = removeUserAllNotatesUseCase.execute(userLogName)
                 when (result) {
                     is IOResponse.Success -> {
-                        parseResult(result.message, context)?.let {
+                        parseResult(result.message)?.let {
                             _showMessage.postValue(it)
                         }
                         _listUserNotates.postValue(emptyList())
                     }
                     is IOResponse.Error -> {
-                        parseResult(result.errorMessage, context)?.let {
+                        parseResult(result.errorMessage)?.let {
                             _showMessage.postValue(it)
                         }
                     }

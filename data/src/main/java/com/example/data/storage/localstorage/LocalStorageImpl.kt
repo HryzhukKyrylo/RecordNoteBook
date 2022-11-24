@@ -49,7 +49,6 @@ class LocalStorageImpl(
     }
 
     override fun removeUserAllNotates(userLoginName: String) {
-        //todo refactored
         database.userDao().deleteUserAllNotates(userLoginName)
     }
 

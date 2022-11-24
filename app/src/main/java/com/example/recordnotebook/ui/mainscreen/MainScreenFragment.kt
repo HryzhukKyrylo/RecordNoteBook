@@ -43,7 +43,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             viewModel.deleteAllUserNotate()
         }
         builder.setNegativeButton(getString(R.string.main_screen_dialog_no)) { _, _ ->
-            //todo implement
+            //todo
         }
         val alertDialog = builder.create()
         alertDialog.show()
@@ -54,7 +54,7 @@ class MainScreenFragment : BaseFragment<FragmentMainScreenBinding>() {
             if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 mDrawerLayout.closeDrawer(GravityCompat.START)
             } else {
-                activity?.finish() //todo find another implement
+                activity?.finish()
             }
         }
     }

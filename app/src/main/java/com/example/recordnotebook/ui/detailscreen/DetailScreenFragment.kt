@@ -1,21 +1,15 @@
 package com.example.recordnotebook.ui.detailscreen
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.domain.models.UserNotateModel
 import com.example.recordnotebook.databinding.FragmentDetailScreenBinding
 import com.example.recordnotebook.ui.base.BaseFragment
 import com.example.recordnotebook.utils.copyToClipboard
-import com.example.recordnotebook.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//todo long click - copy element to buffer
 
 class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
 

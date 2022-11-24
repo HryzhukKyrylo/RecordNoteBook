@@ -1,3 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="repository_deleted_error">Deleted - error</string>
+    <string name="repository_deleted_success">Deleted - success</string>
+    <string name="saved_success">saved - success</string>
+    <string name="log_is_exist">log is exist. please write another log name</string>
+    <string name="saved_error">saved - error. something went wrong</string>
+    <string name="parse_signup_password_empty">Password is empty</string>
+    <string name="parse_signup_login_empty">Login is empty</string>
+    <string name="delete_error_wrong">delete - error. something went wrong</string>
+    <string name="user_doesnt_exist">User doesn\'t exist</string>
+    <string name="delete_user_wrong">Deleted user login - something went wrong</string>
+    <string name="parse_main_something_went_wrong">Something went wrong</string>
+    <string name="parse_main_delete_success">Delete success</string>
+    <string name="parse_login_login_success">Login Success</string>
+    <string name="parse_login_login_is_empty">Login is empty</string>
+    <string name="parse_login_password_is_empty">Password is empty</string>
+    <string name="parse_login_use_not_registered">This user is not registered</string>
+    <string name="parse_login_login_wrong">User login wrong</string>
+    <string name="parse_login_password_wrong">User password wrong</string>
+    <string name="parse_login_login_fail">Login fail</string>
+    <string name="parse_account_cant_find_user">Can\'t find user</string>
+    <string name="parse_account_saved_success">Saved - success</string>
+    <string name="parse_account_cant_find_old_login">Can\'t find old login</string>
+    <string name="parse_account_something_went_wrong">Something went wrong</string>
+    <string name="parse_account_name_the_same">Name the same</string>
+    <string name="parse_account_old_name_is_empty">Old name is empty</string>
+    <string name="parse_account_old_name_null">Old name is null</string>
+    <string name="parse_account_new_name_null">New name is null</string>
+    <string name="parse_account_new_name_empty">New name is empty</string>
+    <string name="parse_account_cant_find_old_password">Can\'t find old password</string>
+    <string name="parse_account_current_password_empty">Current pass is empty - please write current password</string>
+    <string name="parse_account_new_password_empty">New password is empty - please write password</string>
+    <string name="parse_account_confirm_password_empty">Confirm password empty - please write password</string>
+    <string name="parse_account_current_password_wrong">Current password is wrong</string>
+    <string name="parse_account_new_password_matches">The new password matches the current one</string>
+    <string name="parse_account_confirm_password_wrong">Confirm password wrong</string>
+    <string name="parse_account_saved_error">Saved error</string>
 </resources>

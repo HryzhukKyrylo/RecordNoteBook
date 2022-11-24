@@ -2,39 +2,50 @@ package com.example.domain.usecases.loginscreen
 
 import com.example.domain.IOResponse
 import com.example.domain.Response
-import com.example.domain.models.LoginUserModel
 import com.example.domain.models.LoginUserParams
 import com.example.domain.repository.UserRepository
-import com.example.domain.usecases.LoginSomethingWentWrongResult
-import com.example.domain.usecases.LoginSuccessResult
+import com.example.domain.usecases.*
 
 class VerifyLoginUserCase(private val repository: UserRepository) {
     fun execute(userParams: LoginUserParams): Response {
         val resVal = try {
-            val oldUser = repository.getUserLogin(userParams.loginParam)
-            verifyUser(user = userParams, oldUser = oldUser)
-            IOResponse.Success(LoginSuccessResult, true)
+            return checkLoginFields(userParams)
+                ?: verifyUser(user = userParams)
+                ?: IOResponse.Error(LoginFailResult)
         } catch (ex: Exception) {
             ex.printStackTrace()
             IOResponse.Error(LoginSomethingWentWrongResult(ex.message))
         }
         return resVal
     }
-//TODO think about that - do better
-    private fun verifyUser(user: LoginUserParams, oldUser: LoginUserModel?) {
+
+    private fun checkLoginFields(userParams: LoginUserParams): Response? {
+        if (userParams.loginParam.trim().isEmpty()) {
+            return IOResponse.Error(LoginLoginIsEmptyResult)
+        }
+        if (userParams.passwordParam.trim().isEmpty()) {
+            return IOResponse.Error(LoginPasswordIsEmptyResult)
+        }
+        return null
+    }
+
+    private fun verifyUser(user: LoginUserParams): Response? {
+        val oldUser = repository.getUserLogin(user.loginParam)
+
         if (oldUser == null) {
-            throw Exception("This user is not registered")
+            return IOResponse.Error(LoginIsNotRegisteredResult)
         }
         if (user.loginParam != oldUser.login) {
-            throw Exception("User login wrong")
-
+            return IOResponse.Error(LoginLoginWrongResult)
         }
         if (user.passwordParam != oldUser.password) {
-            throw Exception("User password wrong")
+            return IOResponse.Error(LoginPasswordWrongResult)
 
         } else {
-            user.loginParam == oldUser.login &&
+            val isSuccess = user.loginParam == oldUser.login &&
                     user.passwordParam == oldUser.password
+            if (isSuccess) return IOResponse.Success(LoginSuccessResult, true)
         }
+        return null
     }
 }

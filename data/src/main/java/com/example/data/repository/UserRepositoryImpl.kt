@@ -55,7 +55,6 @@ class UserRepositoryImpl(
     }
 
     override fun removeUserAllNotates(userLogName: String) {
-        //todo refactored
         localStorage.removeUserAllNotates(userLoginName = userLogName)
     }
 
@@ -81,7 +80,6 @@ class UserRepositoryImpl(
 
 
     override fun removeUserLogin(userName: String): Boolean {
-        //todo refactored
         return localStorage.removeUserLogin(userLoginName = userName)
     }
 }

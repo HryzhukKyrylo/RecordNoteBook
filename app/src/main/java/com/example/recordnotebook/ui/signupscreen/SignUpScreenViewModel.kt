@@ -1,21 +1,19 @@
 package com.example.recordnotebook.ui.signupscreen
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.IOResponse
 import com.example.domain.models.LoginUserParams
+import com.example.domain.parser.ResultParser
 import com.example.domain.usecases.signupscreen.SaveLoginUserUseCase
-import com.example.recordnotebook.R
 import com.example.recordnotebook.utils.SingleLiveEvent
-import com.example.recordnotebook.utils.parseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SignUpScreenViewModel(
-    private val context: Application,
+    private val parseResult: ResultParser,
     private val saveLoginUserUseCase: SaveLoginUserUseCase
 ) : ViewModel() {
 
@@ -34,26 +32,20 @@ class SignUpScreenViewModel(
 
     fun saveLoginUser(userParams: LoginUserParams) {
         viewModelScope.launch(Dispatchers.IO) {
-            val isValidLogin = userParams.loginParam.trim().isNotEmpty()
-            val isValidPass = userParams.passwordParam.trim().isNotEmpty()
-            if (isValidLogin && isValidPass) {
-                val result = saveLoginUserUseCase.execute(userParams)
-                when (result) {
-                    is IOResponse.Success -> {
-                        _isSavedSuccessful.postValue(true)
-                        parseResult(result.message, context)?.let {
-                            _showMessage.postValue(it)
-                        }
-                    }
-                    is IOResponse.Error -> {
-                        parseResult(
-                            result.errorMessage,
-                            context
-                        )?.let { _showMessage.postValue(it) }
+
+            val result = saveLoginUserUseCase.execute(userParams)
+            when (result) {
+                is IOResponse.Success -> {
+                    _isSavedSuccessful.postValue(true)
+                    parseResult(result.message)?.let {
+                        _showMessage.postValue(it)
                     }
                 }
-            } else {
-                _showMessage.postValue(context.getString(R.string.signup_screen_logorpas_empty))
+                is IOResponse.Error -> {
+                    parseResult(
+                        result.errorMessage
+                    )?.let { _showMessage.postValue(it) }
+                }
             }
         }
     }
