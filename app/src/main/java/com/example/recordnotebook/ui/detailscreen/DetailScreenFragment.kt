@@ -53,7 +53,9 @@ class DetailScreenFragment : BaseFragment<FragmentDetailScreenBinding>() {
             requireContext().copyToClipboard(textForCopy)
             true
         }
-
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun showUserData(testUserParams: UserNotateModel) {

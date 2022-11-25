@@ -32,6 +32,9 @@ class CreateScreenFragment : BaseFragment<FragmentCreateScreenBinding>() {
         binding.fabSave.setOnClickListener {
             saveUserData()
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setUserData(args: CreateScreenFragmentArgs) {

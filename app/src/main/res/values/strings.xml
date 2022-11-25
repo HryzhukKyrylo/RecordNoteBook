@@ -24,6 +24,7 @@
     <string name="detail_screen_your_pass_data">Your pass data</string>
     <string name="detail_screen_fab_refactor">fab refactor</string>
     <string name="detail_screen_detail_screen">Detail screen</string>
+    <string name="detail_screen_detail_info_tittle">Detail info</string>
 
     <!--    create screen ..-->
     <string name="create_screen_write_your_data_for_log">Write your data for log</string>
@@ -59,12 +60,15 @@
     <string name="setting_screen_dialog_delete_account_title">Remove account</string>
     <string name="setting_screen_dialog_dialog_message">Are you sure !?</string>
     <string name="setting_screen_account">Account</string>
+    <string name="settings_screen_settings_tittle">Settings</string>
+
+    <!--    account screen ..-->
+    <string name="account_screen_account_tittle">Account</string>
 
     <!--    another -->
     <string name="nav_draw_menu_about">About</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 
 </resources>

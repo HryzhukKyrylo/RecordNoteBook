@@ -75,5 +75,8 @@ class SettingScreenFragment : BaseFragment<FragmentSettingScreenBinding>() {
         binding.ivRefactor.setOnClickListener {
             viewModel.goToRefactorAccount()
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

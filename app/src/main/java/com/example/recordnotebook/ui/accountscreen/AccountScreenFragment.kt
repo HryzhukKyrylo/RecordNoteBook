@@ -75,5 +75,8 @@ class AccountScreenFragment : BaseFragment<FragmentAccountScreenBinding>() {
             val confPass = binding.etConfirmPassword.text.toString()
             viewModel.saveNewPassword(curPass, newPass, confPass)
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
